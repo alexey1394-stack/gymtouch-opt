@@ -202,7 +202,8 @@ section{padding:96px 0}
 .jr__fee.is-paid small{color:rgba(22,24,26,.7)}
 .jr__road{position:relative;z-index:2;padding:0 28px 26px;max-width:var(--wrap);width:100%;
   box-sizing:border-box;margin:0 auto}
-.jr__road svg{display:block;width:100%;height:auto;overflow:visible}
+.jr__road svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.jr__bg{transition:transform .6s ease-out;will-change:transform}
 .jr__stops{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
 .jr__stops li{position:relative;padding:14px 26px 12px 12px;cursor:pointer;color:#8B9196;font-family:var(--f-m);
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.35;user-select:none;
@@ -567,6 +568,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
 .lead__status{font-size:12px;color:#8B9196;line-height:1.45}
 .lead__status.ok{color:#8FCB9B}
 .lead__status.warn{color:#E0B45A}
+.lead__status a{color:var(--gold-2);text-decoration:underline}
 @media(max-width:520px){.lead__row{grid-template-columns:1fr}}
 .end .endbox dt{font-family:var(--f-m);font-size:10.5px;letter-spacing:.16em;
   text-transform:uppercase;color:#8B9196;margin-bottom:6px}
@@ -711,7 +713,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
     <svg id="jrRoad" viewBox="0 0 1200 130" aria-hidden="true"></svg>
     <ol class="jr__stops" id="jrStops"></ol>
   </div>
-  <div class="jr__hint">щёлкайте по шагам</div>
+  <div class="jr__hint">тяните тренажёр или щёлкайте по шагам</div>
 </section>
 
 <!-- ═══════════════════════════ конструктор ════════════════════════ -->
@@ -3435,7 +3437,7 @@ svg += '<g id="jrSparks" opacity="0">' + [0, 1, 2, 3, 4].map(function (k) {
 // путешественник: тренажёр → ящик → судно → фура → тренажёр.
 // Внешняя группа едет по дороге, внутренняя подпрыгивает в пути и живёт на месте:
 // у дорожки бежит полотно, у фуры крутятся колёса и идёт дым, судно качает.
-var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1)"><g id="jrBob">' +
+var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1)"><ellipse id="jrShadow" cx="0" cy="2" rx="34" ry="4" fill="rgba(0,0,0,.45)"/><g id="jrBob">' +
   // беговая дорожка: дека с бегущим золотым полотном, стойка, поручень и консоль с экраном
   '<g class="jr__g" data-g="machine">' +
   '<rect x="-46" y="-16" width="70" height="12" rx="3" fill="#2A2E33" stroke="' + MILK + '" stroke-width="2"/>' +
@@ -3473,7 +3475,9 @@ var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1
   '<circle class="jr__puff" cx="-62" cy="-30" r="4" fill="rgba(237,237,231,.35)"/>' +
   '<circle class="jr__puff" cx="-70" cy="-36" r="3" fill="rgba(237,237,231,.25)" style="animation-delay:.4s"/>' +
   '</g>' +
-  '</g></g>';
+  '<text id="jrGrab" x="-34" y="-92" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="2" fill="' + GOLD + '">← ТЯНИТЕ РУКОЙ →</text>' +
+  '</g>' +
+  '<rect id="jrHit" x="-70" y="-100" width="140" height="106" fill="transparent" style="cursor:grab"/></g>';
 svg += car;
 svg += '<style>' +
   '.jr__g{transition:opacity .35s ease,transform .35s ease;transform-origin:0 -10px}' +
@@ -3493,6 +3497,11 @@ svg += '<style>' +
   '@keyframes jrHop{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-16px) rotate(-4deg)}70%{transform:translateY(-14px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}' +
   '.jr__ic{transition:stroke .3s,transform .3s;transform-box:fill-box;transform-origin:center}' +
   '.jr__ic.on{stroke:' + GOLD + ';animation:jrPop .5s ease-out}@keyframes jrPop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1.12)}}' +
+  '#jrGrab{animation:jrGrabA 1.6s ease-in-out infinite;transition:opacity .4s}@keyframes jrGrabA{0%,100%{transform:translateX(-6px)}50%{transform:translateX(6px)}}' +
+  '.is-drag #jrGrab,.grabbed #jrGrab{opacity:0}' +
+  '.is-drag #jrHit{cursor:grabbing!important}.is-drag #jrCar{transition:none!important}' +
+  '.is-drag .jr__belt{animation-duration:.18s}.is-drag .jr__wheel{animation-duration:.35s}.is-drag .jr__flow{animation-duration:.5s}' +
+  '.is-drag #jrShadow{rx:44;opacity:.7}#jrShadow{transition:rx .3s,opacity .3s}' +
   '</style>';
 road.innerHTML = svg;
 
@@ -3507,7 +3516,7 @@ function glyph(name) {
   [].forEach.call(carEl.querySelectorAll('.jr__g'), function (g) { g.classList.toggle('on', g.dataset.g === name); });
 }
 
-function show(i) {
+function show(i, byHand) {
   if (i === cur) return;
   var prev = cur; cur = i;
   var s = S[i];
@@ -3527,15 +3536,17 @@ function show(i) {
   var paid = s.fee === '15 %';
   fee.classList.toggle('is-paid', paid);
   feeN.textContent = paid ? 'Первый и единственный раз за всю сделку' : 'Мы ничего не зарабатываем, пока зал не заработал';
-  if (paid) count15(); else feeV.textContent = '0 ₽';
+  if (paid) count15(); else { clearInterval(cnt); feeV.textContent = '0 ₽'; }
   // дорога
-  prog.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
-  flow.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
-  carEl.style.transform = 'translate(' + SX[i] + 'px,' + (Y - 4) + 'px)';
-  if (prev >= 0) { road.classList.remove('is-moving'); void road.getBoundingClientRect(); road.classList.add('is-moving'); }
+  if (!byHand) {
+    prog.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
+    flow.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
+    carEl.style.transform = 'translate(' + SX[i] + 'px,' + (Y - 4) + 'px)';
+    if (prev >= 0) { road.classList.remove('is-moving'); void road.getBoundingClientRect(); road.classList.add('is-moving'); }
+  }
   [].forEach.call(road.querySelectorAll('.jr__ic'), function (c) { c.classList.toggle('on', +c.dataset.i === i); });
   var g = GLYPH[i] || 'machine';
-  if (prev >= 0 && GLYPH[prev] !== g) setTimeout(function () { glyph(g); }, 420); else glyph(g);
+  if (prev >= 0 && GLYPH[prev] !== g && !byHand) setTimeout(function () { glyph(g); }, 420); else glyph(g);
   [].forEach.call(road.querySelectorAll('.jr__st'), function (c) {
     var k = +c.dataset.i;
     c.setAttribute('fill', k < i ? GOLD : k === i ? GOLD : '#16181A');
@@ -3552,8 +3563,10 @@ function show(i) {
   restart();
 }
 
+var cnt = null;
 function count15() {
-  var v = 0, id = setInterval(function () {
+  clearInterval(cnt);
+  var v = 0, id = cnt = setInterval(function () {
     v += 1; feeV.textContent = v + ' %';
     if (v >= 15) clearInterval(id);
   }, 30);
@@ -3577,6 +3590,66 @@ function resume() {
 }
 function next() { timer = null; show((cur + 1) % N); }
 
+/* ── протолкать рукой: тренажёр тянется по дороге, шаги сменяются под пальцем ── */
+var drag = null, grabbed = false;
+function svgX(ev) {
+  var pt = road.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+  return pt.matrixTransform(road.getScreenCTM().inverse()).x;
+}
+function nearest(x) {
+  var best = 0;
+  for (var k = 1; k < N; k++) if (Math.abs(SX[k] - x) < Math.abs(SX[best] - x)) best = k;
+  return best;
+}
+function placeCar(x) {
+  x = Math.max(X0, Math.min(X1, x));
+  var f = (x - X0) / (X1 - X0);
+  carEl.style.transform = 'translate(' + x + 'px,' + (Y - 4) + 'px)';
+  prog.style.transform = 'scaleX(' + f + ')';
+  flow.style.transform = 'scaleX(' + f + ')';
+  return x;
+}
+road.addEventListener('pointerdown', function (ev) {
+  if (ev.button !== undefined && ev.button !== 0) return;
+  var onCar = ev.target.closest('#jrCar');
+  var x = svgX(ev);
+  // взяли за тренажёр — тянем; ткнули в дорогу — тренажёр сам подъедет к пальцу и дальше тянется
+  if (!onCar && Math.abs(ev.clientY - road.getBoundingClientRect().top - Y * road.getBoundingClientRect().height / 130) > 40) return;
+  drag = { id: ev.pointerId, x0: x, moved: false };
+  road.setPointerCapture(ev.pointerId);
+  road.classList.add('is-drag'); grabbed = true; road.classList.add('grabbed');
+  paused = true; pause();
+  if (!onCar) { var k0 = nearest(x); placeCar(x); if (k0 !== cur) show(k0, true); }
+  ev.preventDefault();
+});
+road.addEventListener('pointermove', function (ev) {
+  if (!drag || ev.pointerId !== drag.id) return;
+  var x = placeCar(svgX(ev));
+  if (Math.abs(x - drag.x0) > 4) drag.moved = true;
+  var k = nearest(x);
+  if (k !== cur) show(k, true);
+});
+function endDrag(ev) {
+  if (!drag || (ev && ev.pointerId !== drag.id)) return;
+  var k = nearest(svgX(ev));
+  drag = null;
+  road.classList.remove('is-drag');
+  // отпустили — докатывается до ближайшей станции
+  var i = k; cur = -1; show(i);
+  paused = false; restart();
+}
+road.addEventListener('pointerup', endDrag);
+road.addEventListener('pointercancel', endDrag);
+
+/* ── лёгкий параллакс фона за курсором ── */
+root.addEventListener('pointermove', function (ev) {
+  if (drag) return;
+  var r = root.getBoundingClientRect();
+  var dx = (ev.clientX - r.left) / r.width - .5, dy = (ev.clientY - r.top) / r.height - .5;
+  bg.style.transform = 'translate(' + (-dx * 18) + 'px,' + (-dy * 10) + 'px) scale(1.03)';
+});
+root.addEventListener('pointerleave', function () { bg.style.transform = ''; });
+
 function stepBy(d) { show((cur + d + N) % N); }
 $('jrPrev').addEventListener('click', function () { stepBy(-1); });
 $('jrNext').addEventListener('click', function () { stepBy(1); });
@@ -3586,7 +3659,7 @@ document.addEventListener('keydown', function (ev) {
   if (ev.key === 'ArrowLeft') { stepBy(-1); ev.preventDefault(); }
 });
 root.addEventListener('mouseenter', function () { paused = true; pause(); });
-root.addEventListener('mouseleave', function () { paused = false; resume(); });
+root.addEventListener('mouseleave', function () { if (drag) return; paused = false; resume(); });
 stops.addEventListener('click', function (ev) {
   var li = ev.target.closest('li'); if (li) show(+li.dataset.i);
 });
@@ -3678,24 +3751,33 @@ form.addEventListener('submit', function (ev) {
   btn.disabled = true;
   say('Отправляем…', true);
 
+  var tries = 0;
   function fallback(why) {
+    // приёмник не ответил: не бросаем клиента в другое окно, а даём текст и кнопку
     var t = text(d, h);
     try { navigator.clipboard && navigator.clipboard.writeText(t); } catch (e) {}
-    say('Заявка скопирована в буфер — открываем MAX, вставьте её в сообщение. ' +
-        'Или позвоните: 8 (915) 771-69-81.', false);
-    window.open(C.max || 'https://max.ru/channel_gymtouch', '_blank', 'noopener');
+    status.innerHTML = 'Не удалось отправить автоматически. Заявка скопирована в буфер — ' +
+      'вставьте её нам в <a href="' + (C.max || 'https://max.ru/channel_gymtouch') +
+      '" target="_blank" rel="noopener">MAX</a> или в <a href="https://t.me/gym_touch" target="_blank" rel="noopener">Telegram</a>, ' +
+      'либо позвоните: <a href="tel:+79157716981">8 (915) 771-69-81</a>.';
+    status.className = 'lead__status warn';
     btn.disabled = false;
+  }
+
+  function send() {
+    return fetch(C.url.replace(/\/$/, '') + '/rest/v1/site_leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': C.anon,
+                 'Authorization': 'Bearer ' + C.anon, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(body)
+    }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); });
   }
 
   if (!C.url || !C.anon) { fallback('не настроено'); return; }
 
-  fetch(C.url.replace(/\/$/, '') + '/rest/v1/site_leads', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'apikey': C.anon,
-               'Authorization': 'Bearer ' + C.anon, 'Prefer': 'return=minimal' },
-    body: JSON.stringify(body)
-  }).then(function (r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
+  send().catch(function () {          // сеть моргнула — одна повторная попытка через секунду
+    return new Promise(function (ok) { setTimeout(ok, 1200); }).then(send);
+  }).then(function () {
     say('Заявка принята. Ответим в рабочее время в течение часа — в ' +
         (d.contact || 'MAX') + '.', true);
     form.reset();
