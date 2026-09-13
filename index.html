@@ -166,10 +166,10 @@ section{padding:96px 0}
   min-height:min(82vh,720px);display:flex;flex-direction:column;justify-content:space-between}
 .jr__bg{position:absolute;inset:0;overflow:hidden}
 .jr__bg img,.jr__bg .jr__scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:0;transition:opacity 1.1s ease;will-change:transform,opacity}
-.jr__bg img.on{opacity:1;animation:jrKen 9s ease-out forwards}
+  opacity:0;transition:opacity .7s ease;will-change:transform,opacity}
+.jr__bg img.on{opacity:1;animation:jrKen 6s ease-out forwards}
 .jr__bg .jr__scene.on{opacity:1}
-@keyframes jrKen{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+@keyframes jrKen{from{transform:scale(1.02)}to{transform:scale(1.10)}}
 .jr.is-scene .jr__veil{opacity:.45}
 .jr__veil{position:absolute;inset:0;pointer-events:none;transition:opacity 1s;
   background:linear-gradient(90deg,rgba(22,24,26,.92) 0%,rgba(22,24,26,.72) 36%,rgba(22,24,26,.18) 70%,rgba(22,24,26,.05) 100%),
@@ -179,9 +179,9 @@ section{padding:96px 0}
 .jr__eyebrow b{color:var(--milk)}
 .jr__eyebrow i{width:36px;height:1px;background:var(--gold-2);padding:0}
 .jr__title{color:var(--milk);font-size:var(--s-3);margin:18px 0 14px;max-width:16ch;line-height:.98;min-height:1.96em;
-  transition:opacity .45s ease,transform .45s ease}
+  transition:opacity .28s ease,transform .28s ease}
 .jr__text{color:#C9CCCF;max-width:46ch;font-size:var(--s-0);line-height:1.5;margin:0;min-height:4.5em;
-  transition:opacity .45s ease .05s,transform .45s ease .05s}
+  transition:opacity .28s ease .04s,transform .28s ease .04s}
 .jr.is-swap .jr__title,.jr.is-swap .jr__text{opacity:0;transform:translateY(10px)}
 .jr__num{position:absolute;right:28px;top:40px;z-index:1;font-family:var(--f-h);font-weight:600;
   font-size:clamp(120px,18vw,260px);line-height:1;color:rgba(237,237,231,.07);letter-spacing:-.03em;
@@ -200,26 +200,44 @@ section{padding:96px 0}
 .jr__road{position:relative;z-index:2;padding:0 28px 26px;max-width:var(--wrap);width:100%;
   box-sizing:border-box;margin:0 auto}
 .jr__road svg{display:block;width:100%;height:auto;overflow:visible}
-.jr__stops{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-.jr__stops li{position:relative;padding:12px 0 0;cursor:pointer;color:#8B9196;font-family:var(--f-m);
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.35;transition:color .3s}
-.jr__stops li::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:rgba(237,237,231,.14)}
-.jr__stops li i{position:absolute;left:0;top:0;height:2px;width:0;background:var(--gold-2)}
+.jr__stops{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.jr__stops li{position:relative;padding:14px 26px 12px 12px;cursor:pointer;color:#8B9196;font-family:var(--f-m);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.35;user-select:none;
+  border:1px solid rgba(237,237,231,.14);background:rgba(22,24,26,.35);
+  transition:color .25s,border-color .25s,background .25s,transform .25s}
+.jr__stops li::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;background:rgba(237,237,231,.14)}
+.jr__stops li i{position:absolute;left:-1px;top:-1px;height:2px;width:0;background:var(--gold-2)}
+.jr__stops li::after{content:"→";position:absolute;right:10px;top:12px;font-size:14px;color:var(--gold-2);
+  opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s}
 .jr__stops li b{display:block;color:var(--milk);font-weight:500;margin-bottom:2px}
-.jr__stops li.on{color:var(--milk)}
-.jr__stops li.on i{animation:jrFill var(--jr-dur,5s) linear forwards}
-.jr__stops li.done i{width:100%;background:rgba(200,144,31,.55)}
-.jr__stops li:hover{color:var(--milk)}
+.jr__stops li:hover{color:var(--milk);border-color:rgba(237,237,231,.4);background:rgba(237,237,231,.08);transform:translateY(-3px)}
+.jr__stops li:hover::after{opacity:1;transform:none}
+.jr__stops li:active{transform:translateY(-1px)}
+.jr__stops li.on{color:var(--milk);border-color:rgba(200,144,31,.75);background:rgba(200,144,31,.12)}
+.jr__stops li.on i{animation:jrFill var(--jr-dur,3.6s) linear forwards}
+.jr__stops li.done i{width:calc(100% + 2px);background:rgba(200,144,31,.55)}
+.jr__stops li.done::after{content:"✓";opacity:.7;transform:none;color:rgba(200,144,31,.8)}
+.jr__nav{display:inline-flex;gap:8px;margin:26px 0 0 16px;vertical-align:bottom}
+.jr__nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(237,237,231,.35);background:rgba(22,24,26,.45);
+  color:var(--milk);font-size:22px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);
+  transition:background .2s,border-color .2s,transform .2s;font-family:var(--f-b)}
+.jr__nav button:hover{background:var(--gold-2);border-color:var(--gold-2);color:var(--ink);transform:scale(1.08)}
+.jr__nav button:active{transform:scale(.96)}
+.jr__row{display:flex;align-items:flex-end;flex-wrap:wrap}
 @keyframes jrFill{from{width:0}to{width:100%}}
-.jr__hint{position:absolute;right:28px;bottom:30px;z-index:3;color:#8B9196;font-family:var(--f-m);
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.jr__hint{position:absolute;right:28px;bottom:30px;z-index:3;color:#9AA0A6;font-family:var(--f-m);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.jr__hint::after{content:"↓";color:var(--gold-2);font-size:16px;animation:jrNudge 1.4s ease-in-out infinite}
+@keyframes jrNudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 @media(max-width:900px){
   .jr{margin-top:56px;min-height:0}
   .jr__top{padding-top:40px}
   .jr__num{font-size:96px;top:18px;right:16px}
   .jr__stops{gap:4px}
-  .jr__stops li{height:14px;padding:0}
+  .jr__stops li{height:14px;padding:0;border:0;background:none}
   .jr__stops li b,.jr__stops li span{display:none}
+  .jr__stops li::after{display:none}
+  .jr__nav{margin-left:10px}
   .jr__hint{display:none}
   .jr__veil{background:linear-gradient(0deg,rgba(22,24,26,.97) 0%,rgba(22,24,26,.85) 45%,rgba(22,24,26,.25) 100%)}
 }
@@ -680,14 +698,17 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
     <div class="mono jr__eyebrow"><span>Путь вашего заказа</span><i></i><b id="jrStep">шаг 01 из 06</b></div>
     <h2 class="jr__title" id="jrTitle"></h2>
     <p class="jr__text" id="jrText"></p>
-    <div class="jr__fee" id="jrFee"><span class="lbl mono">наша комиссия на этом шаге</span><b id="jrFeeV">0 ₽</b>
-      <small id="jrFeeN">Мы ничего не зарабатываем, пока зал не заработал</small></div>
+    <div class="jr__row">
+      <div class="jr__fee" id="jrFee"><span class="lbl mono">наша комиссия на этом шаге</span><b id="jrFeeV">0 ₽</b>
+        <small id="jrFeeN">Мы ничего не зарабатываем, пока зал не заработал</small></div>
+      <div class="jr__nav"><button type="button" id="jrPrev" aria-label="Предыдущий шаг">‹</button><button type="button" id="jrNext" aria-label="Следующий шаг">›</button></div>
+    </div>
   </div>
   <div class="jr__road">
     <svg id="jrRoad" viewBox="0 0 1200 130" aria-hidden="true"></svg>
     <ol class="jr__stops" id="jrStops"></ol>
   </div>
-  <div class="jr__hint">наведите — пауза · клик по шагу — переход</div>
+  <div class="jr__hint">щёлкайте по шагам</div>
 </section>
 
 <!-- ═══════════════════════════ конструктор ════════════════════════ -->
@@ -3331,9 +3352,9 @@ if (!root || S.length < 2) return;
 var $ = function (id) { return document.getElementById(id); };
 var bg = $('jrBg'), num = $('jrNum'), step = $('jrStep'), title = $('jrTitle'), text = $('jrText'),
     fee = $('jrFee'), feeV = $('jrFeeV'), feeN = $('jrFeeN'), road = $('jrRoad'), stops = $('jrStops');
-var N = S.length, DUR = 5200, cur = -1, timer = null, t0 = 0, left = DUR, paused = false, inView = false;
+var N = S.length, DUR = 3600, cur = -1, timer = null, t0 = 0, left = DUR, paused = false, inView = false;
 var SHORT = ['Завод', 'Партия', 'Упаковка', 'Контейнер', 'Выгрузка', 'Зал'];
-var TAG = ['выбор и осмотр', 'ваш заказ в цеху', 'приёмка, ящики, кубы', 'море и таможня', 'ваш адрес', 'наши 15 %'];
+var TAG = ['выбор и осмотр', 'ваш заказ в цеху', 'ящики и кубы', 'море и таможня', 'ваш адрес', 'наши 15 %'];
 var MILK = '#EDEDE7', GOLD = '#C8901F', DIM = 'rgba(237,237,231,.28)';
 
 root.style.setProperty('--jr-dur', DUR + 'ms');
@@ -3396,7 +3417,7 @@ function icon(i, x) {
 var svg = '';
 svg += '<line x1="' + X0 + '" y1="' + Y + '" x2="' + X1 + '" y2="' + Y + '" stroke="rgba(237,237,231,.16)" stroke-width="2"/>';
 svg += '<rect id="jrProg" x="' + X0 + '" y="' + (Y - 1) + '" width="' + (X1 - X0) + '" height="2" fill="' + GOLD + '" ' +
-  'style="transform-origin:' + X0 + 'px ' + Y + 'px;transform:scaleX(0);transition:transform 1.3s cubic-bezier(.65,0,.3,1)"/>';
+  'style="transform-origin:' + X0 + 'px ' + Y + 'px;transform:scaleX(0);transition:transform .85s cubic-bezier(.65,0,.3,1)"/>';
 for (i = 0; i < N; i++) {
   svg += '<circle class="jr__st" data-i="' + i + '" cx="' + SX[i] + '" cy="' + Y + '" r="5" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/>';
   svg += '<circle class="jr__pulse" data-i="' + i + '" cx="' + SX[i] + '" cy="' + Y + '" r="5" fill="none" stroke="' + GOLD + '" stroke-width="1.5" opacity="0"/>';
@@ -3407,7 +3428,7 @@ svg += '<g id="jrSparks" opacity="0">' + [0, 1, 2, 3, 4].map(function (k) {
   return '<circle cx="' + (SX[1] + 8 + k * 9) + '" cy="' + (Y - 46 - (k % 2) * 8) + '" r="1.8" fill="' + GOLD + '" style="animation:jrSpark .9s ' + (k * .17) + 's infinite"/>';
 }).join('') + '</g>';
 // путешественник: тренажёр → ящик → судно → фура → тренажёр
-var car = '<g id="jrCar" style="transition:transform 1.4s cubic-bezier(.65,0,.3,1)">' +
+var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1)">' +
   // тренажёр (беговая дорожка): золотая дека, стойка и консоль
   '<g class="jr__g" data-g="machine">' +
   '<path d="M-34 -6 h50 M14 -6 l10 -34 h10 M-30 -6 v-8 h40" fill="none" stroke="' + MILK + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
@@ -3468,7 +3489,7 @@ function show(i) {
     title.textContent = s.t;
     text.textContent = s.p;
     root.classList.remove('is-swap');
-  }, prev < 0 ? 0 : 420);
+  }, prev < 0 ? 0 : 260);
   // комиссия
   var paid = s.fee === '15 %';
   fee.classList.toggle('is-paid', paid);
@@ -3478,7 +3499,7 @@ function show(i) {
   prog.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
   carEl.style.transform = 'translate(' + SX[i] + 'px,' + (Y - 4) + 'px)';
   var g = GLYPH[i] || 'machine';
-  if (prev >= 0 && GLYPH[prev] !== g) setTimeout(function () { glyph(g); }, 650); else glyph(g);
+  if (prev >= 0 && GLYPH[prev] !== g) setTimeout(function () { glyph(g); }, 420); else glyph(g);
   [].forEach.call(road.querySelectorAll('.jr__st'), function (c) {
     var k = +c.dataset.i;
     c.setAttribute('fill', k < i ? GOLD : k === i ? GOLD : '#16181A');
@@ -3499,7 +3520,7 @@ function count15() {
   var v = 0, id = setInterval(function () {
     v += 1; feeV.textContent = v + ' %';
     if (v >= 15) clearInterval(id);
-  }, 45);
+  }, 30);
 }
 
 /* ── автоход с паузами ──────────────────────────────────────── */
@@ -3520,6 +3541,14 @@ function resume() {
 }
 function next() { timer = null; show((cur + 1) % N); }
 
+function stepBy(d) { show((cur + d + N) % N); }
+$('jrPrev').addEventListener('click', function () { stepBy(-1); });
+$('jrNext').addEventListener('click', function () { stepBy(1); });
+document.addEventListener('keydown', function (ev) {
+  if (!inView || ev.target.closest('input,textarea,select')) return;
+  if (ev.key === 'ArrowRight') { stepBy(1); ev.preventDefault(); }
+  if (ev.key === 'ArrowLeft') { stepBy(-1); ev.preventDefault(); }
+});
 root.addEventListener('mouseenter', function () { paused = true; pause(); });
 root.addEventListener('mouseleave', function () { paused = false; resume(); });
 stops.addEventListener('click', function (ev) {
