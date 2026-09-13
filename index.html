@@ -167,9 +167,11 @@ section{padding:96px 0}
 .jr__bg{position:absolute;inset:0;overflow:hidden}
 .jr__bg img,.jr__bg .jr__scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transition:opacity .7s ease;will-change:transform,opacity}
-.jr__bg img.on{opacity:1;animation:jrKen 6s ease-out forwards}
+.jr__bg img.on{opacity:1;animation:jrKen 5s cubic-bezier(.2,.6,.3,1) forwards}
+.jr__bg img:nth-child(even).on{animation-name:jrKen2}
 .jr__bg .jr__scene.on{opacity:1}
-@keyframes jrKen{from{transform:scale(1.02)}to{transform:scale(1.10)}}
+@keyframes jrKen{from{transform:scale(1.14) translateX(2.5%)}to{transform:scale(1.04) translateX(-1%)}}
+@keyframes jrKen2{from{transform:scale(1.14) translateX(-2.5%)}to{transform:scale(1.04) translateX(1%)}}
 .jr.is-scene .jr__veil{opacity:.45}
 .jr__veil{position:absolute;inset:0;pointer-events:none;transition:opacity 1s;
   background:linear-gradient(90deg,rgba(22,24,26,.92) 0%,rgba(22,24,26,.72) 36%,rgba(22,24,26,.18) 70%,rgba(22,24,26,.05) 100%),
@@ -185,7 +187,8 @@ section{padding:96px 0}
 .jr.is-swap .jr__title,.jr.is-swap .jr__text{opacity:0;transform:translateY(10px)}
 .jr__num{position:absolute;right:28px;top:40px;z-index:1;font-family:var(--f-h);font-weight:600;
   font-size:clamp(120px,18vw,260px);line-height:1;color:rgba(237,237,231,.07);letter-spacing:-.03em;
-  pointer-events:none;user-select:none}
+  pointer-events:none;user-select:none;transition:opacity .3s,transform .3s}
+.jr.is-swap .jr__num{opacity:0;transform:translateY(24px)}
 .jr__fee{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:18px;row-gap:6px;
   margin-top:26px;padding:12px 20px 12px 16px;width:max-content;max-width:100%;
   border:1px solid rgba(237,237,231,.22);background:rgba(22,24,26,.45);backdrop-filter:blur(6px);
@@ -3403,7 +3406,7 @@ for (var i = 0; i < N; i++) SX.push(X0 + (X1 - X0) * i / (N - 1));
 function icon(i, x) {
   // подпись места под станцией — маленький контурный знак
   var s = 'fill="none" stroke="' + DIM + '" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"';
-  var g = '<g transform="translate(' + (x - 14) + ',' + (Y + 14) + ')" ' + s + '>';
+  var g = '<g class="jr__ic" data-i="' + i + '" transform="translate(' + (x - 14) + ',' + (Y + 14) + ')" ' + s + '>';
   switch (i) {
     case 0: return g + '<path d="M2 22 V10 l8 5 V10 l8 5 V10 l8 5 V22 Z M4 10 V4 h4 v6"/></g>';           // цех
     case 1: return g + '<circle cx="14" cy="13" r="6"/><path d="M14 2v4M14 20v4M2 13h4M22 13h4M5.5 4.5l3 3M19.5 18.5l3 3M22.5 4.5l-3 3M8.5 18.5l-3 3"/></g>'; // шестерня
@@ -3418,6 +3421,8 @@ var svg = '';
 svg += '<line x1="' + X0 + '" y1="' + Y + '" x2="' + X1 + '" y2="' + Y + '" stroke="rgba(237,237,231,.16)" stroke-width="2"/>';
 svg += '<rect id="jrProg" x="' + X0 + '" y="' + (Y - 1) + '" width="' + (X1 - X0) + '" height="2" fill="' + GOLD + '" ' +
   'style="transform-origin:' + X0 + 'px ' + Y + 'px;transform:scaleX(0);transition:transform .85s cubic-bezier(.65,0,.3,1)"/>';
+svg += '<line id="jrFlow" x1="' + X0 + '" y1="' + Y + '" x2="' + X1 + '" y2="' + Y + '" stroke="rgba(237,237,231,.55)" stroke-width="2" stroke-dasharray="4 14" class="jr__flow" ' +
+  'style="transform-origin:' + X0 + 'px ' + Y + 'px;transform:scaleX(0);transition:transform .85s cubic-bezier(.65,0,.3,1)"/>';
 for (i = 0; i < N; i++) {
   svg += '<circle class="jr__st" data-i="' + i + '" cx="' + SX[i] + '" cy="' + Y + '" r="5" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/>';
   svg += '<circle class="jr__pulse" data-i="' + i + '" cx="' + SX[i] + '" cy="' + Y + '" r="5" fill="none" stroke="' + GOLD + '" stroke-width="1.5" opacity="0"/>';
@@ -3427,29 +3432,48 @@ for (i = 0; i < N; i++) {
 svg += '<g id="jrSparks" opacity="0">' + [0, 1, 2, 3, 4].map(function (k) {
   return '<circle cx="' + (SX[1] + 8 + k * 9) + '" cy="' + (Y - 46 - (k % 2) * 8) + '" r="1.8" fill="' + GOLD + '" style="animation:jrSpark .9s ' + (k * .17) + 's infinite"/>';
 }).join('') + '</g>';
-// путешественник: тренажёр → ящик → судно → фура → тренажёр
-var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1)">' +
-  // тренажёр (беговая дорожка): золотая дека, стойка и консоль
+// путешественник: тренажёр → ящик → судно → фура → тренажёр.
+// Внешняя группа едет по дороге, внутренняя подпрыгивает в пути и живёт на месте:
+// у дорожки бежит полотно, у фуры крутятся колёса и идёт дым, судно качает.
+var car = '<g id="jrCar" style="transition:transform .9s cubic-bezier(.65,0,.3,1)"><g id="jrBob">' +
+  // беговая дорожка: дека с бегущим золотым полотном, стойка, поручень и консоль с экраном
   '<g class="jr__g" data-g="machine">' +
-  '<path d="M-34 -6 h50 M14 -6 l10 -34 h10 M-30 -6 v-8 h40" fill="none" stroke="' + MILK + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '<rect x="-30" y="-13" width="42" height="6" fill="' + GOLD + '"/>' +
-  '<rect x="24" y="-46" width="16" height="9" fill="' + MILK + '"/>' +
-  '<rect x="-36" y="-6" width="58" height="4" fill="' + MILK + '"/></g>' +
-  // ящик
-  '<g class="jr__g" data-g="crate"><rect x="-28" y="-40" width="56" height="38" fill="#2A2E33" stroke="' + MILK + '" stroke-width="2"/>' +
-  '<path d="M-28 -40 l56 38 M28 -40 l-56 38" stroke="rgba(237,237,231,.35)" stroke-width="1.5"/>' +
-  '<rect x="-6" y="-24" width="12" height="7" fill="' + GOLD + '"/></g>' +
-  // судно с ящиком
-  '<g class="jr__g" data-g="ship"><path d="M-48 -14 h96 l-10 12 h-76 z" fill="' + MILK + '"/>' +
-  '<rect x="26" y="-34" width="14" height="20" fill="' + MILK + '"/><rect x="-40" y="-30" width="60" height="16" fill="#2A2E33" stroke="' + MILK + '" stroke-width="1.5"/>' +
-  '<rect x="-12" y="-30" width="18" height="16" fill="' + GOLD + '"/></g>' +
-  // фура с контейнером
-  '<g class="jr__g" data-g="truck"><rect x="-44" y="-30" width="58" height="22" fill="#2A2E33" stroke="' + MILK + '" stroke-width="1.5"/>' +
-  '<rect x="-14" y="-30" width="14" height="22" fill="' + GOLD + '"/>' +
-  '<path d="M14 -8 v-16 h16 l10 10 v6 z" fill="' + MILK + '"/>' +
-  '<circle cx="-28" cy="-4" r="5" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/><circle cx="-10" cy="-4" r="5" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/>' +
-  '<circle cx="30" cy="-4" r="5" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/></g>' +
-  '</g>';
+  '<rect x="-46" y="-16" width="70" height="12" rx="3" fill="#2A2E33" stroke="' + MILK + '" stroke-width="2"/>' +
+  '<line x1="-40" y1="-10" x2="18" y2="-10" stroke="' + GOLD + '" stroke-width="5" stroke-dasharray="7 5" class="jr__belt"/>' +
+  '<rect x="-42" y="-4" width="8" height="4" fill="' + MILK + '"/><rect x="10" y="-4" width="8" height="4" fill="' + MILK + '"/>' +
+  '<path d="M18 -16 L32 -60" stroke="' + MILK + '" stroke-width="5" stroke-linecap="round"/>' +
+  '<path d="M30 -46 H-4" stroke="' + MILK + '" stroke-width="3" stroke-linecap="round"/>' +
+  '<rect x="22" y="-72" width="40" height="16" rx="2" fill="' + MILK + '"/>' +
+  '<rect x="26" y="-68" width="16" height="8" fill="' + GOLD + '"/>' +
+  '<circle cx="50" cy="-64" r="2.5" fill="#16181A"/><circle cx="57" cy="-64" r="2.5" fill="#16181A"/>' +
+  '</g>' +
+  // ящик: доски, стяжки и золотая бирка
+  '<g class="jr__g" data-g="crate">' +
+  '<rect x="-34" y="-50" width="68" height="46" fill="#3A3026" stroke="' + MILK + '" stroke-width="2"/>' +
+  '<path d="M-34 -35 h68 M-34 -20 h68" stroke="rgba(237,237,231,.3)" stroke-width="1.5"/>' +
+  '<path d="M-14 -50 v46 M14 -50 v46" stroke="' + MILK + '" stroke-width="3"/>' +
+  '<rect x="-8" y="-31" width="16" height="9" fill="' + GOLD + '"/>' +
+  '</g>' +
+  // судно с ящиком на палубе
+  '<g class="jr__g" data-g="ship">' +
+  '<path d="M-56 -18 h112 l-12 14 h-88 z" fill="' + MILK + '"/>' +
+  '<rect x="30" y="-42" width="18" height="24" fill="' + MILK + '"/><rect x="34" y="-38" width="10" height="4" fill="#16181A"/>' +
+  '<rect x="-48" y="-36" width="72" height="18" fill="#2A2E33" stroke="' + MILK + '" stroke-width="1.5"/>' +
+  '<rect x="-14" y="-36" width="22" height="18" fill="' + GOLD + '"/>' +
+  '<path class="jr__spray" d="M-62 -4 q6 -5 12 0 t12 0 t12 0" fill="none" stroke="rgba(237,237,231,.6)" stroke-width="2"/>' +
+  '</g>' +
+  // фура с контейнером: колёса со спицами, дым из трубы
+  '<g class="jr__g" data-g="truck">' +
+  '<rect x="-54" y="-40" width="70" height="26" fill="#2A2E33" stroke="' + MILK + '" stroke-width="1.5"/>' +
+  '<rect x="-20" y="-40" width="16" height="26" fill="' + GOLD + '"/>' +
+  '<path d="M16 -14 v-22 h20 l12 12 v10 z" fill="' + MILK + '"/><rect x="20" y="-32" width="12" height="8" fill="#16181A"/>' +
+  '<g class="jr__wheel" style="transform-origin:-36px -8px"><circle cx="-36" cy="-8" r="6" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/><path d="M-36 -14 v12 M-42 -8 h12" stroke="' + MILK + '" stroke-width="1.5"/></g>' +
+  '<g class="jr__wheel" style="transform-origin:-14px -8px"><circle cx="-14" cy="-8" r="6" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/><path d="M-14 -14 v12 M-20 -8 h12" stroke="' + MILK + '" stroke-width="1.5"/></g>' +
+  '<g class="jr__wheel" style="transform-origin:38px -8px"><circle cx="38" cy="-8" r="6" fill="#16181A" stroke="' + MILK + '" stroke-width="2"/><path d="M38 -14 v12 M32 -8 h12" stroke="' + MILK + '" stroke-width="1.5"/></g>' +
+  '<circle class="jr__puff" cx="-62" cy="-30" r="4" fill="rgba(237,237,231,.35)"/>' +
+  '<circle class="jr__puff" cx="-70" cy="-36" r="3" fill="rgba(237,237,231,.25)" style="animation-delay:.4s"/>' +
+  '</g>' +
+  '</g></g>';
 svg += car;
 svg += '<style>' +
   '.jr__g{transition:opacity .35s ease,transform .35s ease;transform-origin:0 -10px}' +
@@ -3460,6 +3484,15 @@ svg += '<style>' +
   '.jr__waves{animation:jrWave 6s linear infinite}@keyframes jrWave{from{transform:translateX(0)}to{transform:translateX(160px)}}' +
   '.jr__ship{animation:jrShip 7s ease-in-out infinite}@keyframes jrShip{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(18px,-6px) rotate(-.6deg)}}' +
   '.jr__route{animation:jrRoute 3s linear infinite}@keyframes jrRoute{to{stroke-dashoffset:-32}}' +
+  '.jr__flow{animation:jrRoute 1.2s linear infinite}' +
+  '.jr__belt{animation:jrBelt .5s linear infinite}@keyframes jrBelt{to{stroke-dashoffset:-12}}' +
+  '.jr__wheel{animation:jrSpin 1s linear infinite}@keyframes jrSpin{to{transform:rotate(360deg)}}' +
+  '.jr__puff{animation:jrPuff 1.2s ease-out infinite}@keyframes jrPuff{0%{opacity:.7;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(-14px,-14px) scale(1.6)}}' +
+  '.jr__spray{animation:jrSprayA .8s ease-in-out infinite alternate}@keyframes jrSprayA{to{transform:translateX(6px)}}' +
+  '#jrBob{transform-origin:0 0}.is-moving #jrBob{animation:jrHop .9s cubic-bezier(.4,0,.6,1)}' +
+  '@keyframes jrHop{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-16px) rotate(-4deg)}70%{transform:translateY(-14px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}' +
+  '.jr__ic{transition:stroke .3s,transform .3s;transform-box:fill-box;transform-origin:center}' +
+  '.jr__ic.on{stroke:' + GOLD + ';animation:jrPop .5s ease-out}@keyframes jrPop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1.12)}}' +
   '</style>';
 road.innerHTML = svg;
 
@@ -3467,7 +3500,7 @@ stops.innerHTML = S.map(function (s, i) {
   return '<li data-i="' + i + '"><i></i><b>0' + (i + 1) + ' · ' + (SHORT[i] || s.t) + '</b><span>' + (TAG[i] || '') + '</span></li>';
 }).join('');
 
-var carEl = $('jrCar'), prog = $('jrProg'), sparks = $('jrSparks');
+var carEl = $('jrCar'), prog = $('jrProg'), flow = $('jrFlow'), sparks = $('jrSparks');
 var GLYPH = ['machine', 'machine', 'crate', 'ship', 'truck', 'machine'];
 
 function glyph(name) {
@@ -3497,7 +3530,10 @@ function show(i) {
   if (paid) count15(); else feeV.textContent = '0 ₽';
   // дорога
   prog.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
+  flow.style.transform = 'scaleX(' + (i / (N - 1)) + ')';
   carEl.style.transform = 'translate(' + SX[i] + 'px,' + (Y - 4) + 'px)';
+  if (prev >= 0) { road.classList.remove('is-moving'); void road.getBoundingClientRect(); road.classList.add('is-moving'); }
+  [].forEach.call(road.querySelectorAll('.jr__ic'), function (c) { c.classList.toggle('on', +c.dataset.i === i); });
   var g = GLYPH[i] || 'machine';
   if (prev >= 0 && GLYPH[prev] !== g) setTimeout(function () { glyph(g); }, 420); else glyph(g);
   [].forEach.call(road.querySelectorAll('.jr__st'), function (c) {
