@@ -2,9 +2,8 @@
 <title>Оборудование оптом · GYMTOUCH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Спортивное оборудование для фитнес-клубов от завода-изготовителя. Цена завода плюс комиссия 15 %. Конструктор зала: расставьте тренажёры и получите смету.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<!-- шрифты лежат у нас: к Google за ними не ходим (152-ФЗ, ничего не уходит за рубеж) -->
+<link rel="stylesheet" href="fonts/fonts.css">
 
 <style>
 /* ─────────────────────────────────────────────────────────────
@@ -565,6 +564,11 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
 .lead textarea{resize:vertical}
 .lead .btn{margin-top:4px;background:var(--gold);border-color:var(--gold);color:#fff}
 .lead .btn:hover{background:var(--gold-2);border-color:var(--gold-2)}
+.lead__agree{display:grid!important;grid-template-columns:18px 1fr;gap:10px;align-items:start;margin:4px 0 12px;
+  font-family:var(--f-b)!important;font-size:12px!important;letter-spacing:0!important;text-transform:none!important;
+  color:#9AA0A6;line-height:1.45;cursor:pointer}
+.lead__agree input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--gold-2);cursor:pointer}
+.lead__agree a{color:var(--milk);text-decoration:underline}
 .lead__status{font-size:12px;color:#8B9196;line-height:1.45}
 .lead__status.ok{color:#8FCB9B}
 .lead__status.warn{color:#E0B45A}
@@ -583,6 +587,8 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
 @media(max-width:900px){.end .in{grid-template-columns:1fr;gap:34px}}
 
 .foot{background:var(--ink);color:#6E747A;padding:0 0 46px}
+.foot__law{margin-top:14px;padding-top:14px;border-top:1px solid rgba(237,237,231,.1);font-size:11.5px}
+.foot__law a{color:#9AA0A6;text-decoration:underline}
 .foot .in{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;
   border-top:1px solid rgba(237,237,231,.14);padding-top:22px;font-size:12px}
 
@@ -936,9 +942,12 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
           <label>Город<input name="city" type="text" autocomplete="address-level2"></label>
         </div>
         <label>Комментарий<textarea name="note" rows="2" placeholder="Сроки, помещение, что важно"></textarea></label>
+        <label class="lead__agree"><input type="checkbox" name="agree" value="1">
+          <span>Даю согласие на обработку моих персональных данных (имя, телефон, город) для ответа
+          на заявку — на условиях <a href="policy/" target="_blank" rel="noopener">политики обработки
+          персональных данных</a> ООО&nbsp;«СИАПО».</span></label>
         <button class="btn" type="submit">Отправить заявку</button>
-        <p class="lead__status" id="leadStatus">Нажимая «Отправить», вы соглашаетесь на обработку
-          персональных данных для ответа на заявку.</p>
+        <p class="lead__status" id="leadStatus">Ответим в рабочее время в течение часа.</p>
       </form>
       <dl style="margin-top:22px;padding-top:20px;border-top:1px solid rgba(237,237,231,.22)">
         <dt>Телефон</dt><dd class="big"><a href="tel:+79157716981">8 (915) 771-69-81</a></dd>
@@ -952,6 +961,11 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
   <div class="wrap in">
     <span>GYMTOUCH · спортивное оборудование от завода-изготовителя</span>
     <span id="stamp">Цены ориентировочные</span>
+  </div>
+  <div class="wrap in foot__law">
+    <span>Оператор персональных данных: ООО «СИАПО», ИНН 6900029331, ОГРН 1266900002380 ·
+      <a href="policy/">Политика обработки персональных данных</a> · <a href="mailto:info@gymtouch.ru">info@gymtouch.ru</a></span>
+    <span>Сайт не использует cookies и счётчики посещаемости</span>
   </div>
 </footer>
 
@@ -3743,6 +3757,11 @@ form.addEventListener('submit', function (ev) {
   };
   if (d.name.length < 2 || d.phone.replace(/\D/g, '').length < 7) {
     say('Нужны имя и телефон — по ним мы и свяжемся.', false);
+    return;
+  }
+  if (!form.agree.checked) {                // 152-ФЗ: согласие — отдельное осознанное действие
+    say('Поставьте галочку согласия на обработку данных — без неё мы не вправе принять заявку.', false);
+    form.agree.focus();
     return;
   }
   var h = hall();
