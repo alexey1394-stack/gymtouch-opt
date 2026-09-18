@@ -51,8 +51,31 @@ section{padding:88px 0}
 .dark{background:var(--ink);color:var(--milk)}
 .dark h2,.dark h3{color:var(--milk)}.dark .sec-head{border-bottom-color:rgba(237,237,231,.2)}.dark .sec-head p{color:#9AA0A6}.dark .sec-head p b{color:var(--milk)}
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;align-items:start}
-.chat{background:#0F1113;border:1px solid rgba(237,237,231,.16);padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat{background:#0F1113;border:1px solid rgba(237,237,231,.16);padding:16px;display:flex;flex-direction:column;gap:10px;max-height:520px;overflow:hidden}
+.flow{overflow:auto;scrollbar-width:thin}
 .chat .hd{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#8B9196;display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(237,237,231,.12)}
+.chatbox{display:grid;gap:10px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{font-family:var(--f-m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;border:1px solid rgba(237,237,231,.22);background:transparent;color:#9AA0A6;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.tabs button i{width:7px;height:7px;border-radius:50%;background:#5B6675;display:inline-block}
+.tabs button.on{border-color:var(--gold-2);color:var(--milk);background:rgba(200,144,31,.12)}
+.tabs button.on i{background:var(--gold-2);box-shadow:0 0 0 3px rgba(200,144,31,.25)}
+.tabs button.new i{background:#3fb950;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.3}}
+.flow{display:flex;flex-direction:column;gap:10px;min-height:380px}
+.chatnote{font-size:10px;color:#6E747A}
+.msg .t{display:block;font-family:var(--f-m);font-size:9.5px;color:#6E747A;margin-top:6px;text-align:right}
+.msg .pics{display:flex;gap:6px;margin-top:8px}
+.msg .ph{width:56px;height:42px;background:linear-gradient(135deg,#3A3E42,#23262A);border:1px solid rgba(237,237,231,.18);display:block;margin:0}
+.msg .ph.v{background:linear-gradient(135deg,#4a3a2a,#23262A);position:relative}
+.msg .ph.v::after{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#EDEDE7;font-size:12px}
+.msg.voice{display:flex;align-items:center;gap:10px}
+.msg.voice .bars{display:flex;gap:2px;align-items:center;height:18px}
+.msg.voice .bars i{width:2px;background:#9AA0A6;display:block}
+.typing{align-self:flex-start;padding:10px 14px;background:#1E2226;border:1px solid rgba(237,237,231,.12);display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#9AA0A6;animation:dots 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes dots{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
 .msg{max-width:88%;padding:10px 13px;font-size:14px;line-height:1.42;background:#1E2226;border:1px solid rgba(237,237,231,.12);opacity:0;transform:translateY(8px);animation:up .45s ease forwards}
 .msg.club{align-self:flex-end;background:#2A2E33}
 .msg .who{display:block;font-family:var(--f-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8B9196;margin-bottom:4px}
@@ -60,7 +83,6 @@ section{padding:88px 0}
 .msg .btns{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
 .msg .btns span{font-family:var(--f-m);font-size:10.5px;letter-spacing:.06em;padding:5px 9px;border:1px solid rgba(237,237,231,.28)}
 .msg .btns span.on{background:var(--gold-2);color:var(--ink);border-color:var(--gold-2)}
-.msg:nth-child(2){animation-delay:.2s}.msg:nth-child(3){animation-delay:1.1s}.msg:nth-child(4){animation-delay:2.2s}.msg:nth-child(5){animation-delay:3.1s}
 @keyframes up{to{opacity:1;transform:none}}
 .list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
 .list li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:15px;color:#B9BDC2}
@@ -150,13 +172,10 @@ section{padding:88px 0}
     <p>Никаких форм и звонков. Ваш чат с сервисом — в <b>Telegram или MAX</b>, как удобнее вам. Бот принимает заявку,
       отвечает «приняли», уточняет номер машины и срочность. Мастер видит её в ту же минуту.</p></div>
   <div class="demo">
-    <div class="chat">
-      <div class="hd"><span>Ваш клуб · Сервис GYMTOUCH</span><span>сегодня</span></div>
-      <div class="msg club"><span class="who">Администратор клуба</span>Эллипс №14 — снова люфт в пивот-блоке, левом<span class="ph"></span></div>
-      <div class="msg"><span class="who">🔧 Сервис GYMTOUCH</span>Приняли, заявка <b>FP-2609-03</b>. Тренажёр №14 — эллиптический Life Fitness ✅
-        <div class="btns"><span>🔴 Срочно, машина встала</span><span class="on">🟢 Можно планово</span></div></div>
-      <div class="msg club"><span class="who">Администратор клуба</span>🟢 Можно планово</div>
-      <div class="msg"><span class="who">🔧 Сервис GYMTOUCH</span>Заявка FP-2609-03 — эллипс №14: мастер взял в работу. Выезд — на этой неделе, напишем накануне.</div>
+    <div class="chatbox">
+      <div class="tabs" id="chatTabs"></div>
+      <div class="chat" id="chat"><div class="hd"><span id="chatTitle"></span><span id="chatWhen">сегодня</span></div><div class="flow" id="chatFlow"></div></div>
+      <div class="chatnote mono">Клубы условные, диалоги — из реальных заявок этой недели</div>
     </div>
     <ul class="list">
       <li><i>✓</i><span><b>Без отметок и тегов.</b> Написали о поломке своими словами — бот понял, что это заявка.</span></li>
@@ -232,4 +251,89 @@ section{padding:88px 0}
   <span>GYMTOUCH · сервис фитнес-оборудования · Владимир · Москва</span>
   <span>ООО «СИАПО», ИНН 6900029331 · <a href="../policy/">Политика обработки персональных данных</a></span>
 </div></footer>
+
+<script>
+/* Несколько клубов, живые диалоги: сообщения появляются по очереди, бот «печатает»,
+   вкладки переключаются сами, у ждущей вкладки мигает зелёная точка. Клубы условные. */
+(function () {
+  var CLUBS = [
+    { n: 'Фитнес-клуб «Центр»', code: 'CN', d: [
+      ['club', 'Администратор', 'Добрый день! Эллипс №14 — снова люфт в пивот-блоке, левом', '09:12', {pic: 1}],
+      ['bot', 'Приняли, заявка <b>CN-2609-03</b>. Тренажёр №14 — эллиптический Life Fitness ✅', '09:12', {btns: ['🔴 Срочно, машина встала', '🟢 Можно планово']}],
+      ['club', 'Администратор', '🟢 Можно планово', '09:13'],
+      ['bot', 'Заявка CN-2609-03 — эллипс №14: мастер взял в работу. Выезд в четверг, напишем накануне.', '09:14'],
+      ['bot', 'CN-2609-03 закрыта: заменён подшипник пивота, люфта нет. Фото до/после 👇', 'чт 16:40', {pic: 2}],
+      ['club', 'Администратор', 'Супер, спасибо 🙏', 'чт 16:52']
+    ]},
+    { n: 'Фитнес-клуб «Парк»', code: 'PK', d: [
+      ['club', 'Тренер', 'Дорожка 8 встала, экран горит, полотно не едет', '18:05', {pic: 1, video: 1}],
+      ['bot', 'Приняли, заявка <b>PK-2609-11</b>. Тренажёр №8 — беговая дорожка Precor ✅', '18:05', {btns: ['🔴 Срочно, машина встала', '🟢 Можно планово']}],
+      ['club', 'Тренер', '🔴 Срочно, машина встала', '18:06'],
+      ['bot', 'Понял, срочная. Мастер будет завтра к 10:00. По видео похоже на привод — везёт ремень с собой.', '18:07'],
+      ['bot', 'PK-2609-11: мастер на месте, дефектовка — ремень привода. Замена сегодня, дорожка вернётся в строй к 12:00.', 'пт 10:20'],
+      ['bot', 'PK-2609-11 закрыта ✅ Дорожка №8 работает, проверена под нагрузкой 20 минут.', 'пт 11:48']
+    ]},
+    { n: 'Студия «Юг»', code: 'UG', d: [
+      ['club', 'Владелец', 'Марк, привет! Когда профилактика в этом месяце?', '11:30'],
+      ['bot', 'Профилактика по студии запланирована на вторник 23.09, 16 машин по реестру. Напомним накануне.', '11:30'],
+      ['voice', 'Мастер', '', 'вт 18:10'],
+      ['bot', 'Отчёт по профилактике 23.09: пройдено 16 из 16. Внимание — реформер №3, изношен трос, рекомендуем замену. Предложение с ценой пришлём завтра.', 'вт 18:12'],
+      ['bot', 'Трос для реформера №3: 2 400 ₽ + доставка 350 ₽, срок 3 дня.', 'ср 10:05', {btns: ['✅ Согласовано', '✖ Не согласовано']}],
+      ['club', 'Владелец', '✅ Согласовано', 'ср 10:40'],
+      ['bot', 'Принято, деталь заказана. На странице клуба — «деталь в пути». Установим в следующий обход или раньше, если попросите.', 'ср 10:41']
+    ]}
+  ];
+  var tabs = document.getElementById('chatTabs'), flow = document.getElementById('chatFlow'), title = document.getElementById('chatTitle');
+  var cur = 0, timer = null, step = 0, started = false;
+  tabs.innerHTML = CLUBS.map(function (c, i) { return '<button type="button" data-i="' + i + '"><i></i>' + c.n + '</button>'; }).join('');
+  function pics(o) {
+    if (!o || (!o.pic && !o.video)) return '';
+    var h = '<span class="pics">';
+    for (var k = 0; k < (o.pic || 0); k++) h += '<span class="ph"></span>';
+    if (o.video) h += '<span class="ph v"></span>';
+    return h + '</span>';
+  }
+  function bubble(m) {
+    var kind = m[0], who = m[1], text = m[2], t = m[3], o = m[4] || {};
+    if (kind === 'voice') {
+      var bars = ''; for (var i = 0; i < 26; i++) bars += '<i style="height:' + (4 + Math.round(Math.abs(Math.sin(i * 1.7)) * 12)) + 'px"></i>';
+      return '<div class="msg club voice"><span class="who">' + who + '</span>▶ <span class="bars">' + bars + '</span> 0:41<span class="t">' + t + '</span></div>';
+    }
+    var cls = kind === 'club' ? 'msg club' : 'msg';
+    var w = kind === 'club' ? who : '🔧 Сервис GYMTOUCH';
+    var b = o.btns ? '<div class="btns">' + o.btns.map(function (x, i) { return '<span' + (i === 1 && o.btns.length === 2 && /планово|Согласовано$/.test(x) ? ' class="on"' : '') + '>' + x + '</span>'; }).join('') + '</div>' : '';
+    return '<div class="' + cls + '"><span class="who">' + w + '</span>' + text + pics(o) + b + '<span class="t">' + t + '</span></div>';
+  }
+  function show(i) {
+    clearTimeout(timer); cur = i; step = 0;
+    [].forEach.call(tabs.children, function (b, k) { b.classList.toggle('on', k === i); if (k === i) b.classList.remove('new'); });
+    title.textContent = CLUBS[i].n + ' · Сервис GYMTOUCH';
+    flow.innerHTML = '';
+    next();
+  }
+  function next() {
+    var d = CLUBS[cur].d;
+    if (step >= d.length) {
+      // переключение на следующий клуб: у него «загорается» новое сообщение
+      var nx = (cur + 1) % CLUBS.length;
+      tabs.children[nx].classList.add('new');
+      timer = setTimeout(function () { show(nx); }, 3800);
+      return;
+    }
+    var m = d[step++];
+    if (m[0] === 'bot') {
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>';
+      flow.appendChild(ty);
+      timer = setTimeout(function () { ty.remove(); flow.insertAdjacentHTML('beforeend', bubble(m)); flow.scrollTop = flow.scrollHeight; timer = setTimeout(next, 1500); }, 900);
+    } else {
+      flow.insertAdjacentHTML('beforeend', bubble(m)); flow.scrollTop = flow.scrollHeight;
+      timer = setTimeout(next, 1300);
+    }
+  }
+  tabs.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  function start() { if (started) return; started = true; show(0); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es[0].isIntersecting) start(); }, { threshold: .2 }).observe(document.getElementById('chat'));
+  else start();
+})();
+</script>
 </html>
