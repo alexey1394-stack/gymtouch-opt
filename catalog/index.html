@@ -253,6 +253,17 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
       if (e.target.id === 'mUnlock') { m.remove(); $('gate').hidden = false; }
     });
   }
+  // доставка с повторами: 3 попытки сейчас, остаток — в очередь localStorage, дошлём при следующем заходе
+  function deliver(body, n) {
+    n = n || 0;
+    send(body).then(function () { dequeue(body); }).catch(function () {
+      if (n < 2) setTimeout(function () { deliver(body, n + 1); }, 4000 * (n + 1)); else enqueue(body);
+    });
+  }
+  function queue() { try { return JSON.parse(localStorage.getItem('cat_q') || '[]'); } catch (e) { return []; } }
+  function enqueue(b) { var q = queue(); if (!q.some(function (x) { return x.note === b.note && x.phone === b.phone; })) q.push(b); try { localStorage.setItem('cat_q', JSON.stringify(q)); } catch (e) {} }
+  function dequeue(b) { var q = queue().filter(function (x) { return !(x.note === b.note && x.phone === b.phone); }); try { localStorage.setItem('cat_q', JSON.stringify(q)); } catch (e) {} }
+  setTimeout(function () { queue().forEach(function (b) { deliver(b); }); }, 2500);
   function send(body) {
     return fetch(LEAD.url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); });
@@ -265,12 +276,11 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
     if (phone.replace(/\D/g, '').length < 7) { say('Нужен телефон.', 'warn'); return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Проверьте e-mail.', 'warn'); return; }
     if (!f.agree.checked) { say('Поставьте галочку согласия.', 'warn'); return; }
-    say('Открываем…', 'ok');
+    // открываем сразу, заявку шлём фоном; не ушла — запомним и дошлём при следующем открытии
     var body = { name: email.split('@')[0], phone: phone, contact: 'Позвонить', city: '', note: 'ДОСТУП К КАТАЛОГУ. E-mail: ' + email, hall: null, total: null, page: location.href };
-    send(body).catch(function () {}).then(function () {
-      try { localStorage.setItem('cat_ok', JSON.stringify({ phone: phone, email: email, t: Date.now() })); } catch (e) {}
-      unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply();
-    });
+    try { localStorage.setItem('cat_ok', JSON.stringify({ phone: phone, email: email, t: Date.now() })); } catch (e) {}
+    unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply();
+    deliver(body);
   });
   // подборка
   $('trayForm').addEventListener('submit', function (ev) {
