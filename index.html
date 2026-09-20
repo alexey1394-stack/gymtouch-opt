@@ -267,7 +267,12 @@ section{padding:96px 0}
   transition:background .2s,border-color .2s,transform .2s;font-family:var(--f-b)}
 .jr__nav button:hover{background:var(--gold-2);border-color:var(--gold-2);color:var(--ink);transform:scale(1.08)}
 .jr__nav button:active{transform:scale(.96)}
-.jr__row{display:flex;align-items:flex-end;flex-wrap:wrap}
+.jr__row{display:flex;align-items:flex-end;flex-wrap:wrap;gap:0 18px}
+.jr__date{display:grid;gap:4px;margin-top:26px;padding:14px 20px 12px;border:1px solid var(--gold-2);background:rgba(200,144,31,.14);backdrop-filter:blur(6px);flex-basis:100%;max-width:520px}
+.jr__date .lbl{color:#C9CCCF}.jr__date .lbl b{color:var(--milk)}
+.jr__date>b{font-family:var(--f-h);font-weight:600;font-size:clamp(34px,4.2vw,56px);line-height:1;color:var(--gold-2);letter-spacing:.01em}
+.jr__date small{font-size:12px;color:#B9BDC2}
+@media(min-width:1100px){.jr__date{flex-basis:auto;margin-left:auto;margin-top:26px}}
 @keyframes jrFill{from{width:0}to{width:100%}}
 .jr__hint{position:absolute;right:28px;bottom:12px;z-index:3;color:#9AA0A6;font-family:var(--f-m);
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
@@ -768,6 +773,11 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
       <div class="jr__fee" id="jrFee"><span class="lbl mono">наша комиссия на этом шаге</span><b id="jrFeeV">0 ₽</b>
         <small id="jrFeeN">Мы ничего не зарабатываем, пока зал не заработал</small></div>
       <div class="jr__nav"><button type="button" id="jrPrev" aria-label="Предыдущий шаг">‹</button><button type="button" id="jrNext" aria-label="Следующий шаг">›</button></div>
+      <div class="jr__date" id="jrDate">
+        <span class="lbl mono">закажете сегодня, <b id="jrToday"></b> — оборудование у вас</span>
+        <b id="jrWhen">—</b>
+        <small>70 дней: 35 производство + 35 доставка. Аванс сегодня — отсчёт пошёл</small>
+      </div>
     </div>
   </div>
   <div class="jr__road">
@@ -3922,6 +3932,16 @@ show(0);
     z.addEventListener('click', function () { z.remove(); });
     document.body.appendChild(z);
   });
+})();
+
+/* ── дата получения: сегодня + 70 дней (35 производство + 35 доставка) ── */
+(function () {
+  var w = document.getElementById('jrWhen'), t = document.getElementById('jrToday');
+  if (!w) return;
+  var M = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+  var now = new Date(), d = new Date(now.getTime() + 70 * 86400000);
+  t.textContent = now.getDate() + ' ' + M[now.getMonth()];
+  w.textContent = d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear();
 })();
 
 /* ───────────────────────────────────────────────────────────────
