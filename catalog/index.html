@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>Каталог оборудования · GYMTOUCH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{--paper:#EFEFEA;--paper-2:#F6F6F2;--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
+  --rule:rgba(22,24,26,.16);--hair:rgba(22,24,26,.09);--f-h:"Oswald",Impact,"Arial Narrow",sans-serif;--f-b:"Golos Text",-apple-system,"Segoe UI",Roboto,sans-serif;--f-m:"JetBrains Mono",ui-monospace,Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-h);font-weight:600;text-transform:uppercase;margin:0;line-height:1.02}
+.mono{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+.mono b{color:var(--ink);font-weight:500}.mono i{color:var(--gold);font-style:normal;padding:0 .5em}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:40;background:rgba(239,239,234,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top__in{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:18px}
+.brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+.brand i{width:7px;height:18px;background:var(--gold);display:block}
+.brand span{font-family:var(--f-h);font-weight:600;font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.top .ttl{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+.search{margin-left:auto;flex:0 1 380px;display:flex}
+.search input{width:100%;font:15px var(--f-b);padding:9px 12px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink)}
+.search input:focus{outline:0;border-color:var(--gold)}
+.tel{font-family:var(--f-h);font-size:15px;text-decoration:none;white-space:nowrap}
+.top a.back{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);text-decoration:none;white-space:nowrap}
+.wrap{max-width:1400px;margin:0 auto;padding:22px 24px 120px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
+.side{position:sticky;top:64px;display:grid;gap:22px}
+.f h3{font-size:12px;letter-spacing:.14em;color:var(--graphite);font-weight:500;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.f label{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:4px 0;cursor:pointer}
+.f label input{accent-color:var(--gold)}
+.f label span.n{margin-left:auto;font-family:var(--f-m);font-size:10.5px;color:var(--graphite)}
+.f .z{display:block;font-size:11.5px;color:var(--graphite);margin:-2px 0 6px 24px;line-height:1.35}
+.f .price{display:flex;gap:6px;align-items:center}
+.f .price input{width:100%;font:13px var(--f-m);padding:7px 8px;border:1px solid var(--rule);background:var(--paper-2)}
+.bar{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.bar h1{font-size:clamp(1.6rem,1.2rem+1.4vw,2.4rem)}
+.bar .cnt{font-family:var(--f-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.bar select{margin-left:auto;font:12px var(--f-m);letter-spacing:.06em;padding:7px 10px;border:1px solid var(--rule);background:var(--paper-2)}
+.note{font-size:12.5px;color:var(--graphite);margin:0 0 18px;max-width:90ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.card{background:var(--paper);display:flex;flex-direction:column;cursor:pointer;transition:background .15s}
+.card:hover{background:var(--paper-2)}
+.card .pic{aspect-ratio:1;background:#F6F6F2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .pic img{width:100%;height:100%;object-fit:contain;display:block}
+.card .b{padding:12px 14px 14px;display:grid;gap:4px}
+.card .zc{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+.card .zc b{color:var(--gold);font-weight:500}
+.card .nm{font-weight:600;font-size:14.5px;line-height:1.3}
+.card .en{font-size:12px;color:var(--graphite)}
+.card .dm{font-family:var(--f-m);font-size:10.5px;color:var(--graphite);margin-top:2px}
+.card .pr{margin-top:8px;display:grid;gap:8px}
+.card .pr b{font-family:var(--f-h);font-size:22px;font-weight:600;color:var(--gold);white-space:nowrap}
+.card .pr b small{font-size:11px;font-family:var(--f-b);font-weight:400;color:var(--graphite);margin-right:4px}
+.card .add{font-family:var(--f-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:transparent;padding:8px 10px;cursor:pointer;white-space:nowrap;justify-self:start}
+.card .add.on,.card .add:hover{background:var(--ink);color:var(--milk)}
+.locked .card .pr b{filter:blur(6px);user-select:none}
+.locked .card .add{visibility:hidden}
+.more{margin:18px auto 0;display:block;font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border:1px solid var(--ink);background:transparent;cursor:pointer}
+/* дверь */
+.gate{position:fixed;inset:0;z-index:80;background:rgba(22,24,26,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px}
+.gate[hidden],.more[hidden]{display:none}
+.gate__box{background:var(--ink);color:var(--milk);padding:30px 30px 26px;max-width:440px;width:100%;display:grid;gap:12px}
+.gate__box h2{color:var(--milk);font-size:1.6rem;margin-bottom:4px}
+.gate__box p{margin:0;color:#B9BDC2;font-size:14px}
+.gate__box label{display:grid;gap:6px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9AA0A6}
+.gate__box input:not([type=checkbox]){font:15px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:12px;width:100%}
+.gate__box input:focus{outline:0;border-color:var(--gold-2)}
+.agree{display:grid!important;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-family:var(--f-b)!important;font-size:12px!important;letter-spacing:0!important;text-transform:none!important;color:#9AA0A6!important;line-height:1.4;cursor:pointer}
+.agree input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--gold-2)}
+.agree a{color:var(--milk)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;background:var(--gold);color:var(--milk);font-family:var(--f-h);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--gold);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--gold-2);border-color:var(--gold-2)}
+.btn[disabled]{opacity:.6;cursor:default}
+.status{font-size:12px;color:#8B9196;margin:0;min-height:1.2em}.status.warn{color:#E0B45A}.status.ok{color:#8FCB9B}
+/* модалка */
+.modal{position:fixed;inset:0;z-index:70;background:rgba(22,24,26,.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.modal__box{background:var(--paper);max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.modal__pic{background:#F6F6F2;display:flex;align-items:center;justify-content:center;min-height:360px}
+.modal__pic img{max-width:100%;max-height:520px;object-fit:contain}
+.modal__b{padding:26px 26px 22px;display:grid;gap:12px;align-content:start}
+.modal__b h2{font-size:1.5rem}
+.modal .x{position:absolute;right:10px;top:8px;background:transparent;border:0;font-size:26px;cursor:pointer;color:var(--graphite)}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px}
+.spec dt{color:var(--graphite);font-family:var(--f-m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;align-self:baseline}
+.spec dd{margin:0}
+.big{font-family:var(--f-h);font-size:34px;font-weight:600;color:var(--gold);line-height:1}
+.big small{font-family:var(--f-b);font-size:12px;font-weight:400;color:var(--graphite);display:block;margin-top:4px}
+.brk{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:12.5px;color:var(--graphite);border-top:1px solid var(--hair);padding-top:10px}
+.brk b{color:var(--ink);font-weight:500;font-family:var(--f-m);font-size:12px}
+@media(max-width:760px){.modal__box{grid-template-columns:1fr}}
+/* подборка */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--ink);color:var(--milk);transform:translateY(110%);transition:transform .3s}
+.tray.on{transform:none}
+.tray__in{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.tray .s{font-family:var(--f-h);font-size:20px}
+.tray .s small{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#9AA0A6;display:block}
+.tray .lst{flex:1;font-size:12.5px;color:#B9BDC2;max-height:44px;overflow:auto}
+.tray .btn{min-height:44px}
+.tray .clr{background:transparent;border:1px solid rgba(237,237,231,.35);color:var(--milk);font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;cursor:pointer}
+.tray form{display:none;gap:8px;width:100%;flex-wrap:wrap}
+.tray.ask form{display:flex}.tray.ask .btn.go{display:none}
+.tray form input{font:14px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:10px 12px;flex:1 1 180px}
+.tray form .st{flex-basis:100%;font-size:12px;color:#9AA0A6}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:static;grid-template-columns:1fr 1fr;gap:14px}.search{flex-basis:200px}.top .ttl{display:none}}
+</style>
+
+<header class="top"><div class="top__in">
+  <a class="brand" href="../"><i></i><span>Gymtouch</span></a>
+  <span class="ttl">Каталог · цена в Москве с НДС</span>
+  <div class="search"><input id="q" type="search" placeholder="Поиск: дорожка, жим ногами, реформер, артикул…"></div>
+  <a class="back" href="../">← Оборудование</a>
+  <a class="tel" href="tel:+79157716981">8 (915) 771-69-81</a>
+</div></header>
+
+<div class="wrap">
+  <aside class="side">
+    <div class="f"><h3>Завод</h3><div id="fZ"></div></div>
+    <div class="f"><h3>Категория</h3><div id="fC"></div></div>
+    <div class="f"><h3>Цена, ₽</h3><div class="price"><input id="pMin" type="number" placeholder="от" inputmode="numeric"><span>—</span><input id="pMax" type="number" placeholder="до" inputmode="numeric"></div></div>
+    <div class="f"><h3>Как считаем</h3><p class="note" id="howNote" style="margin:0"></p></div>
+  </aside>
+  <main>
+    <div class="bar"><h1>Каталог</h1><span class="cnt" id="cnt"></span>
+      <select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
+    <p class="note">Заводы показаны под кодами: имя фабрики, каталог и условия — после запроса. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без фото не показываем.</p>
+    <div class="grid" id="grid"></div>
+    <button class="more" id="more" hidden>Показать ещё</button>
+  </main>
+</div>
+
+<div class="tray" id="tray"><div class="tray__in">
+  <div class="s"><span id="trayN">0</span> позиций<small id="traySum"></small></div>
+  <div class="lst" id="trayList"></div>
+  <button class="clr" id="trayClear">Очистить</button>
+  <button class="btn go" id="trayGo">Отправить запрос</button>
+  <form id="trayForm" novalidate>
+    <input name="name" placeholder="Имя" autocomplete="name"><input name="phone" type="tel" placeholder="+7" autocomplete="tel"><input name="city" placeholder="Город доставки">
+    <button class="btn" type="submit">Отправить подборку</button><p class="st" id="trayStatus"></p>
+  </form>
+</div></div>
+
+<div class="gate" id="gate" hidden>
+  <form class="gate__box" id="gateForm" novalidate>
+    <p class="mono" style="color:#9AA0A6"><b style="color:#EDEDE7">GYMTOUCH</b><i>·</i>каталог для клубов</p>
+    <h2>Цены завода<br>с доставкой в Москву</h2>
+    <p>Оставьте телефон и почту — откроем цены на все <span id="gateN"></span> позиций и пришлём каталог файлом.</p>
+    <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
+    <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="для каталога и КП" required></label>
+    <label class="agree"><input type="checkbox" name="agree" value="1"><span>Согласен на обработку персональных данных по <a href="../policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
+    <button class="btn" type="submit">Открыть цены</button>
+    <p class="status" id="gateStatus">Без звонков-роботов: пишем сами, в рабочее время.</p>
+  </form>
+</div>
+
+<script>
+var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5cl2'};
+(function () {
+  var D = null, sel = {}, view = [], shown = 0, PAGE = 60, unlocked = false;
+  try { unlocked = !!localStorage.getItem('cat_ok'); } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
+
+  function init() {
+    $('gateN').textContent = D.items.length;
+    $('howNote').textContent = D.note + ' Курс ЦБ ' + D.rate.date + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом).';
+    var cz = {}, cc = {};
+    D.items.forEach(function (i) { cz[i.z] = (cz[i.z] || 0) + 1; cc[i.cat] = (cc[i.cat] || 0) + 1; });
+    $('fZ').innerHTML = D.zavody.map(function (z) {
+      return '<label><input type="checkbox" name="z" value="' + z.code + '" checked>' + z.name + '<span class="n">' + (cz[z.code] || 0) + '</span></label><span class="z">' + z.about + '</span>';
+    }).join('');
+    $('fC').innerHTML = D.cats.filter(function (c) { return cc[c.k]; }).map(function (c) {
+      return '<label><input type="checkbox" name="c" value="' + c.k + '" checked>' + c.n + '<span class="n">' + cc[c.k] + '</span></label>';
+    }).join('');
+    document.body.classList.toggle('locked', !unlocked);
+    if (!unlocked) $('gate').hidden = false;
+    ['fZ', 'fC'].forEach(function (id) { $(id).addEventListener('change', apply); });
+    ['pMin', 'pMax', 'q'].forEach(function (id) { $(id).addEventListener('input', apply); });
+    $('sort').addEventListener('change', apply);
+    $('more').addEventListener('click', function () { draw(false); });
+    apply();
+  }
+  function apply() {
+    var zs = [].map.call(document.querySelectorAll('#fZ input:checked'), function (i) { return i.value; });
+    var cs = [].map.call(document.querySelectorAll('#fC input:checked'), function (i) { return i.value; });
+    var mn = +$('pMin').value || 0, mx = +$('pMax').value || Infinity, q = $('q').value.trim().toLowerCase();
+    var order = D.cats.map(function (c) { return c.k; });
+    view = D.items.filter(function (i) {
+      return zs.indexOf(i.z) >= 0 && cs.indexOf(i.cat) >= 0 && i.price >= mn && i.price <= mx &&
+        (!q || (i.ru + ' ' + i.en + ' ' + i.art).toLowerCase().indexOf(q) >= 0);
+    });
+    var s = $('sort').value;
+    view.sort(function (a, b) {
+      if (s === 'pa') return a.price - b.price; if (s === 'pd') return b.price - a.price;
+      if (s === 'nm') return a.ru.localeCompare(b.ru, 'ru');
+      return (order.indexOf(a.cat) - order.indexOf(b.cat)) || a.ru.localeCompare(b.ru, 'ru') || a.price - b.price;
+    });
+    $('cnt').textContent = view.length + ' из ' + D.items.length;
+    shown = 0; $('grid').innerHTML = ''; draw(true);
+  }
+  function card(i) {
+    var z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
+    return '<div class="card" data-id="' + i.id + '"><div class="pic"><img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
+      '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
+      (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
+      '<div class="dm">' + (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '') + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
+      '<div class="pr"><b><small>в Москве</small>' + fmt(i.price) + ' ₽</b><button class="add' + (sel[i.id] ? ' on' : '') + '" data-add="' + i.id + '">' + (sel[i.id] ? '✓ в подборке' : '+ в подборку') + '</button></div></div></div>';
+  }
+  function draw(reset) {
+    var next = view.slice(shown, shown + PAGE); shown += next.length;
+    $('grid').insertAdjacentHTML('beforeend', next.map(card).join(''));
+    $('more').hidden = shown >= view.length;
+  }
+  $('grid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-add]');
+    if (b) { if (!unlocked) { $('gate').hidden = false; return; } toggle(b.dataset.add); return; }
+    var c = e.target.closest('.card'); if (c) open(c.dataset.id);
+  });
+  function byId(id) { return D.items.filter(function (i) { return i.id === id; })[0]; }
+  function toggle(id) {
+    if (sel[id]) delete sel[id]; else sel[id] = 1;
+    [].forEach.call(document.querySelectorAll('[data-add="' + id + '"]'), function (b) { b.classList.toggle('on', !!sel[id]); b.textContent = sel[id] ? '✓ в подборке' : '+ в подборку'; });
+    tray();
+  }
+  function tray() {
+    var ids = Object.keys(sel), sum = 0, cbm = 0;
+    ids.forEach(function (id) { var i = byId(id); sum += i.price; cbm += i.cbm; });
+    $('trayN').textContent = ids.length; $('traySum').textContent = fmt(sum) + ' ₽ · ' + cbm.toFixed(1).replace('.', ',') + ' м³';
+    $('trayList').textContent = ids.map(function (id) { return byId(id).ru + ' (' + byId(id).art + ')'; }).join(' · ');
+    $('tray').classList.toggle('on', ids.length > 0);
+  }
+  $('trayClear').addEventListener('click', function () { sel = {}; tray(); apply(); $('tray').classList.remove('ask'); });
+  $('trayGo').addEventListener('click', function () { $('tray').classList.add('ask'); try { var g = JSON.parse(localStorage.getItem('cat_ok') || '{}'); if (g.phone) $('trayForm').phone.value = g.phone; } catch (e) {} });
+  function open(id) {
+    var i = byId(id), z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
+    var m = document.createElement('div'); m.className = 'modal';
+    m.innerHTML = '<div class="modal__box"><button class="x" aria-label="Закрыть">×</button><div class="modal__pic"><img src="img/' + i.id + '.webp" alt=""></div><div class="modal__b">' +
+      '<div class="mono"><b>' + z.name + '</b><i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
+      '<dl class="spec">' + (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '') + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
+      '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd></dl>' +
+      (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽<small>в Москве, с НДС 22 %, без брокера и сборки</small></div>' +
+      '<div class="brk"><span>Цена завода</span><b>' + fmt(i.brk.inv) + ' ₽</b><span>Логистика: банк, фрахт, доставка</span><b>' + fmt(i.brk.log) + ' ₽</b><span>Таможня: сбор, пошлина</span><b>' + fmt(i.brk.tam) + ' ₽</b><span>Наши 15 %</span><b>' + fmt(i.brk.fee) + ' ₽</b><span>НДС 22 %</span><b>' + fmt(i.brk.vat) + ' ₽</b></div>' +
+      '<button class="btn" data-add="' + i.id + '">' + (sel[i.id] ? '✓ В подборке' : '+ В подборку') + '</button>' :
+      '<div class="big" style="filter:blur(6px)">000 000 ₽</div><button class="btn" id="mUnlock">Открыть цены</button>') +
+      '</div></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', function (e) {
+      if (e.target === m || e.target.closest('.x')) { m.remove(); return; }
+      var b = e.target.closest('[data-add]'); if (b) { toggle(b.dataset.add); b.textContent = sel[i.id] ? '✓ В подборке' : '+ В подборку'; }
+      if (e.target.id === 'mUnlock') { m.remove(); $('gate').hidden = false; }
+    });
+  }
+  function send(body) {
+    return fetch(LEAD.url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); });
+  }
+  // дверь
+  $('gateForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var f = ev.target, st = $('gateStatus'), phone = f.phone.value.trim(), email = f.email.value.trim();
+    function say(m, c) { st.textContent = m; st.className = 'status ' + c; }
+    if (phone.replace(/\D/g, '').length < 7) { say('Нужен телефон.', 'warn'); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Проверьте e-mail.', 'warn'); return; }
+    if (!f.agree.checked) { say('Поставьте галочку согласия.', 'warn'); return; }
+    say('Открываем…', 'ok');
+    var body = { name: email.split('@')[0], phone: phone, contact: 'Позвонить', city: '', note: 'ДОСТУП К КАТАЛОГУ. E-mail: ' + email, hall: null, total: null, page: location.href };
+    send(body).catch(function () {}).then(function () {
+      try { localStorage.setItem('cat_ok', JSON.stringify({ phone: phone, email: email, t: Date.now() })); } catch (e) {}
+      unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply();
+    });
+  });
+  // подборка
+  $('trayForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var f = ev.target, st = $('trayStatus');
+    if (f.phone.value.replace(/\D/g, '').length < 7) { st.textContent = 'Нужен телефон.'; return; }
+    var ids = Object.keys(sel), items = ids.map(function (id) { var i = byId(id); return { art: i.sku || i.art, name: i.ru + ' (' + (D.zavody.filter(function (z) { return z.code === i.z; })[0].name) + ')', qty: 1 }; });
+    var sum = 0, cbm = 0; ids.forEach(function (id) { sum += byId(id).price; cbm += byId(id).cbm; });
+    var email = ''; try { email = (JSON.parse(localStorage.getItem('cat_ok') || '{}').email) || ''; } catch (e) {}
+    var body = { name: f.name.value.trim() || 'Из каталога', phone: f.phone.value.trim(), contact: 'Позвонить', city: f.city.value.trim(),
+      note: 'КАТАЛОГ: подборка' + (email ? '. E-mail: ' + email : ''), hall: { size: 'подборка из каталога', zones: [], items: items, volume: Math.round(cbm * 10) / 10, total: Math.round(sum) }, total: Math.round(sum), page: location.href };
+    st.textContent = 'Отправляем…';
+    send(body).then(function () { st.textContent = 'Подборка у нас. Ответим в рабочее время в течение часа.'; sel = {}; setTimeout(function () { tray(); apply(); $('tray').classList.remove('ask'); }, 2500); })
+      .catch(function () { st.textContent = 'Не отправилось — позвоните 8 (915) 771-69-81 или напишите в MAX.'; });
+  });
+})();
+</script>
+</html>
