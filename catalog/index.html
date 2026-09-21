@@ -27,7 +27,10 @@ a{color:inherit}
 .top a.back{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);text-decoration:none;white-space:nowrap}
 .wrap{max-width:1400px;margin:0 auto;padding:22px 24px 120px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
 .side{position:sticky;top:64px;display:grid;gap:22px;align-content:start;max-height:calc(100vh - 64px);overflow-y:auto;overscroll-behavior:contain;padding:0 10px 30px 0;scrollbar-width:thin}
-.f h3{font-size:12px;letter-spacing:.14em;color:var(--graphite);font-weight:500;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.f h3{font-size:12px;letter-spacing:.14em;color:var(--graphite);font-weight:500;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
+.tog{font-family:var(--f-m);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:transparent;border:0;cursor:pointer;padding:0;text-decoration:underline dotted}
+.tog:hover{color:var(--ink)}
+.f .grp>b{display:flex;justify-content:space-between;align-items:baseline}
 .f label{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:4px 0;cursor:pointer}
 .f label input{accent-color:var(--gold)}
 .f label span.n{margin-left:auto;font-family:var(--f-m);font-size:10.5px;color:var(--graphite)}
@@ -117,8 +120,8 @@ a{color:inherit}
 
 <div class="wrap">
   <aside class="side">
-    <div class="f"><h3>Фабрика</h3><div id="fZ"></div></div>
-    <div class="f"><h3>Категория</h3><div id="fC"></div></div>
+    <div class="f"><h3>Фабрика <button type="button" class="tog" data-scope="fZ">снять все</button></h3><div id="fZ"></div></div>
+    <div class="f"><h3>Категория <button type="button" class="tog" data-scope="fC">снять все</button></h3><div id="fC"></div></div>
     <div class="f"><h3>Цена, ₽</h3><div class="price"><input id="pMin" type="number" placeholder="от" inputmode="numeric"><span>—</span><input id="pMax" type="number" placeholder="до" inputmode="numeric"></div></div>
     <div class="f"><h3>Как считаем</h3><p class="note" id="howNote" style="margin:0"></p></div>
   </aside>
@@ -175,19 +178,36 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
     }).join('');
     var groups = []; D.cats.forEach(function (c) { if (cc[c.k] && groups.indexOf(c.g) < 0) groups.push(c.g); });
     $('fC').innerHTML = groups.map(function (g) {
-      return '<div class="grp"><b>' + g + '</b>' + D.cats.filter(function (c) { return c.g === g && cc[c.k]; }).map(function (c) {
+      return '<div class="grp" data-grp="' + g + '"><b>' + g + ' <button type="button" class="tog" data-grp="' + g + '">снять</button></b>' + D.cats.filter(function (c) { return c.g === g && cc[c.k]; }).map(function (c) {
         return '<label><input type="checkbox" name="c" value="' + c.k + '" checked>' + c.n + '<span class="n">' + cc[c.k] + '</span></label>';
       }).join('') + '</div>';
     }).join('');
     document.body.classList.toggle('locked', !unlocked);
     if (!unlocked) $('gate').hidden = false;
     ['fZ', 'fC'].forEach(function (id) { $(id).addEventListener('change', apply); });
+    document.querySelector('.side').addEventListener('click', function (e) {
+      var b = e.target.closest('.tog'); if (!b) return;
+      var scope = b.dataset.grp ? document.querySelector('.grp[data-grp="' + b.dataset.grp + '"]') : $(b.dataset.scope);
+      var boxes = [].slice.call(scope.querySelectorAll('input[type=checkbox]'));
+      var anyOn = boxes.some(function (x) { return x.checked; });
+      boxes.forEach(function (x) { x.checked = !anyOn; });
+      syncTog(); apply();
+    });
+    syncTog();
     ['pMin', 'pMax', 'q'].forEach(function (id) { $(id).addEventListener('input', apply); });
     $('sort').addEventListener('change', apply);
     $('more').addEventListener('click', function () { draw(false); });
     apply();
   }
+  function syncTog() {
+    [].forEach.call(document.querySelectorAll('.tog'), function (b) {
+      var scope = b.dataset.grp ? document.querySelector('.grp[data-grp="' + b.dataset.grp + '"]') : $(b.dataset.scope);
+      var anyOn = [].some.call(scope.querySelectorAll('input[type=checkbox]'), function (x) { return x.checked; });
+      b.textContent = anyOn ? (b.dataset.grp ? 'снять' : 'снять все') : (b.dataset.grp ? 'все' : 'выбрать все');
+    });
+  }
   function apply() {
+    syncTog();
     var zs = [].map.call(document.querySelectorAll('#fZ input:checked'), function (i) { return i.value; });
     var cs = [].map.call(document.querySelectorAll('#fC input:checked'), function (i) { return i.value; });
     var mn = +$('pMin').value || 0, mx = +$('pMax').value || Infinity, q = $('q').value.trim().toLowerCase();
