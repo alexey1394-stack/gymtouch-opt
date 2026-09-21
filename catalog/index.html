@@ -110,7 +110,7 @@ a{color:inherit}
 .tray .lst{flex:1;font-size:12.5px;color:#B9BDC2;max-height:44px;overflow:auto}
 .tray .btn{min-height:44px}
 .tray .clr{background:transparent;border:1px solid rgba(237,237,231,.35);color:var(--milk);font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;cursor:pointer}
-.tray form{display:none;gap:8px;width:100%;flex-wrap:wrap}
+.tray form{display:none;gap:8px;width:100%;flex-wrap:wrap}.tray form .agree{color:#B9BDC2!important}
 .tray.ask form{display:flex}.tray.ask .btn.go{display:none}
 .tray form input{font:14px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:10px 12px;flex:1 1 180px}
 .tray form .st{flex-basis:100%;font-size:12px;color:#9AA0A6}
@@ -171,6 +171,7 @@ a{color:inherit}
   <button class="btn go" id="trayGo">Отправить запрос</button>
   <form id="trayForm" novalidate>
     <input name="name" placeholder="Имя" autocomplete="name"><input name="phone" type="tel" placeholder="+7" autocomplete="tel"><input name="city" placeholder="Город доставки">
+    <label class="agree" style="flex-basis:100%"><input type="checkbox" name="agree" value="1"><span>Согласен на обработку персональных данных по <a href="../policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
     <button class="btn" type="submit">Отправить подборку</button><p class="st" id="trayStatus"></p>
   </form>
 </div></div>
@@ -428,6 +429,7 @@ var PHOTO = {url:''};
     ev.preventDefault();
     var f = ev.target, st = $('trayStatus');
     if (f.phone.value.replace(/\D/g, '').length < 7) { st.textContent = 'Нужен телефон.'; return; }
+    if (!f.agree.checked) { st.textContent = 'Поставьте галочку согласия на обработку данных.'; return; }
     var ids = Object.keys(sel), items = ids.map(function (id) { var i = byId(id); return { art: i.sku || i.art, name: i.ru + (i.unit ? ' — цена за ' + i.unit : '') + ' (' + (D.zavody.filter(function (z) { return z.code === i.z; })[0].name) + ')', qty: 1 }; });
     var sum = 0, cbm = 0; ids.forEach(function (id) { sum += byId(id).price; cbm += byId(id).cbm || 0; });
     var email = ''; try { email = (JSON.parse(localStorage.getItem('cat_ok') || '{}').email) || ''; } catch (e) {}
