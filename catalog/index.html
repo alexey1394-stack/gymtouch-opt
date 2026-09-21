@@ -114,7 +114,26 @@ a{color:inherit}
 .tray.ask form{display:flex}.tray.ask .btn.go{display:none}
 .tray form input{font:14px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:10px 12px;flex:1 1 180px}
 .tray form .st{flex-basis:100%;font-size:12px;color:#9AA0A6}
-@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:static;grid-template-columns:1fr 1fr;gap:14px}.search{flex-basis:200px}.top .ttl{display:none}}
+/* телефон: фильтры — шторкой по кнопке, поиск во всю ширину, товары сразу под шапкой */
+.fltBtn,.side__done,.side__x,.side-bg{display:none}
+@media(max-width:900px){
+  .top__in{flex-wrap:wrap;gap:8px 12px;padding:10px 16px}.top .ttl,.top a.back{display:none}.top .tel{margin-left:auto;font-size:15px}
+  .search{order:10;flex:1 1 100%;margin-left:0}.search input{font-size:16px;padding:10px 12px}.search .cam{padding:0 10px}
+  .wrap{grid-template-columns:1fr;padding:14px 16px 130px;gap:0}
+  .side{position:fixed;top:0;right:0;bottom:0;left:auto;width:min(380px,94vw);max-height:none;background:var(--paper);z-index:90;transform:translateX(104%);transition:transform .28s;padding:18px 16px 96px;box-shadow:-12px 0 40px rgba(0,0,0,.25);overscroll-behavior:contain}
+  .side.on{transform:none}
+  .side-bg{display:block;position:fixed;inset:0;z-index:85;background:rgba(22,24,26,.5);opacity:0;pointer-events:none;transition:opacity .25s}.side-bg.on{opacity:1;pointer-events:auto}
+  .side__x{display:block;position:absolute;top:10px;right:12px;font-size:26px;line-height:1;background:none;border:0;cursor:pointer;color:var(--graphite);padding:4px 8px}
+  .side__done{display:block;position:fixed;right:0;bottom:0;width:min(380px,94vw);padding:16px;background:var(--ink);color:var(--milk);font:13px var(--f-m);letter-spacing:.12em;text-transform:uppercase;border:0;z-index:91;cursor:pointer;transform:translateX(104%);transition:transform .28s}.side.on~.side__done{transform:none}
+  .fltBtn{display:inline-flex;align-items:center;gap:8px;font:11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--ink);background:var(--ink);color:var(--milk);cursor:pointer}.fltBtn i{font-style:normal;background:var(--gold);color:var(--ink);padding:1px 6px;font-size:10px}
+  .bar{gap:8px 10px;margin-bottom:10px;align-items:center}.bar h1{font-size:1.5rem;flex-basis:100%}.bar .cnt{font-size:10px}.bar select{margin-left:auto;padding:8px 8px;font-size:11px}.bar .share{padding:8px 9px;font-size:10px}
+  main>.note{font-size:12px}
+  .grid{grid-template-columns:repeat(2,1fr)}.card .b{padding:10px 10px 12px}.card .nm{font-size:13.5px}.card .dm{font-size:11px}.card .pr b{font-size:16px}.card .zc{font-size:9.5px}
+  .card .pr b{white-space:normal}
+  .ph{gap:10px;padding:8px 10px}.ph b{font-size:15px}.ph span{font-size:11.5px}
+  .modal{padding:0;align-items:flex-end}.modal__box{max-height:94vh}.modal__pic{min-height:220px}.modal__pic img{max-height:300px}.modal__b{padding:18px 16px 20px}
+  .tray__in{padding:10px 16px;gap:10px}.tray .lst{flex-basis:100%;order:5;max-height:36px}
+}
 </style>
 
 <header class="top"><div class="top__in">
@@ -126,15 +145,17 @@ a{color:inherit}
 </div></header>
 
 <div class="wrap">
-  <aside class="side">
+  <div class="side-bg" id="sideBg"></div>
+  <aside class="side" id="side"><button type="button" class="side__x" id="sideX" aria-label="Закрыть">×</button>
     <div class="f"><h3>Сегмент</h3><div class="seg" id="fS"><button type="button" data-seg="all" class="on">Все</button><button type="button" data-seg="prem">Премиум</button><button type="button" data-seg="mid">Средний</button></div></div>
     <div class="f"><h3>Фабрика <button type="button" class="tog" data-scope="fZ">снять все</button></h3><div id="fZ"></div></div>
     <div class="f"><h3>Категория <button type="button" class="tog" data-scope="fC">снять все</button></h3><div id="fC"></div></div>
     <div class="f"><h3>Цена, ₽</h3><div class="price"><input id="pMin" type="number" placeholder="от" inputmode="numeric"><span>—</span><input id="pMax" type="number" placeholder="до" inputmode="numeric"></div></div>
     <div class="f"><h3>Как считаем</h3><p class="note" id="howNote" style="margin:0"></p></div>
   </aside>
+  <button type="button" class="side__done" id="sideDone">Показать</button>
   <main>
-    <div class="bar"><h1>Каталог</h1><span class="cnt" id="cnt"></span>
+    <div class="bar"><h1>Каталог</h1><button type="button" class="fltBtn" id="fltBtn">Фильтры <i id="fltN"></i></button><span class="cnt" id="cnt"></span>
       <button type="button" class="share" id="share" title="Скопировать ссылку с этим набором фильтров">Ссылка на фильтр</button><select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
     <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без фото не показываем.</p>
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
@@ -223,6 +244,9 @@ var PHOTO = {url:''};
       $('phFile').addEventListener('change', function () { if (this.files[0]) поФото(this.files[0]); this.value = ''; });
       $('phOff').addEventListener('click', function () { phRank = null; $('ph').classList.remove('on'); apply(); });
     }
+    var sideOn = function (on) { $('side').classList.toggle('on', on); $('sideBg').classList.toggle('on', on); document.body.style.overflow = on ? 'hidden' : ''; };
+    $('fltBtn').addEventListener('click', function () { sideOn(true); });
+    [$('sideBg'), $('sideX'), $('sideDone')].forEach(function (el) { el.addEventListener('click', function () { sideOn(false); }); });
     fromHash();
     syncTog();
     ['pMin', 'pMax', 'q'].forEach(function (id) { $(id).addEventListener('input', apply); });
@@ -265,6 +289,9 @@ var PHOTO = {url:''};
       return (order.indexOf(a.cat) - order.indexOf(b.cat)) || a.ru.localeCompare(b.ru, 'ru') || a.price - b.price;
     });
     $('cnt').textContent = view.length + ' из ' + D.items.length;
+    $('sideDone').textContent = 'Показать ' + view.length + ' поз.';
+    var акт = (D.zavody.length - zs.length) + (document.querySelectorAll('#fC input').length - cs.length) + (mn ? 1 : 0) + (mx !== Infinity ? 1 : 0);
+    $('fltN').textContent = акт || ''; $('fltN').style.display = акт ? '' : 'none';
     var segs = D.zavody.map(function (z) { return zs.indexOf(z.code) >= 0 ? z.seg : null; }).filter(Boolean);
     var allOn = zs.length === D.zavody.length, only = segs.length && segs.every(function (x) { return x === segs[0]; }) && D.zavody.filter(function (z) { return z.seg === segs[0]; }).length === zs.length ? segs[0] : null;
     [].forEach.call(document.querySelectorAll('#fS button'), function (b) { b.classList.toggle('on', allOn ? b.dataset.seg === 'all' : b.dataset.seg === only); });
