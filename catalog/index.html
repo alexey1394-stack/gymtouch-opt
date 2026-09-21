@@ -57,6 +57,7 @@ a{color:inherit}
 .card .pr{margin-top:8px;display:grid;gap:8px}
 .card .pr b{font-family:var(--f-h);font-size:22px;font-weight:600;color:var(--gold);white-space:nowrap}
 .card .pr b small{font-size:11px;font-family:var(--f-b);font-weight:400;color:var(--graphite);margin-right:4px}
+.card .rt{font-family:var(--f-m);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);margin-top:-4px}
 .card .add{font-family:var(--f-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:transparent;padding:8px 10px;cursor:pointer;white-space:nowrap;justify-self:start}
 .card .add.on,.card .add:hover{background:var(--ink);color:var(--milk)}
 .locked .card .pr b{filter:blur(6px);user-select:none}
@@ -231,7 +232,7 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
       '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
       (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
       '<div class="dm">' + (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '') + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
-      '<div class="pr"><b><small>в Москве</small>' + fmt(i.price) + ' ₽</b><button class="add' + (sel[i.id] ? ' on' : '') + '" data-add="' + i.id + '">' + (sel[i.id] ? '✓ в подборке' : '+ в подборку') + '</button></div></div></div>';
+      '<div class="pr"><b><small>в Москве</small>' + fmt(i.price) + ' ₽</b><span class="rt">по курсу ЦБ на ' + D.rate.date.split('-').reverse().join('.') + '</span><button class="add' + (sel[i.id] ? ' on' : '') + '" data-add="' + i.id + '">' + (sel[i.id] ? '✓ в подборке' : '+ в подборку') + '</button></div></div></div>';
   }
   function draw(reset) {
     var next = view.slice(shown, shown + PAGE); shown += next.length;
@@ -265,7 +266,7 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
       '<div class="mono"><b>' + z.name + '</b><i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
       '<dl class="spec">' + (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '') + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd></dl>' +
-      (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽<small>в Москве, с НДС 22 %, без брокера и сборки</small></div>' +
+      (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽<small>в Москве, с НДС 22 %, без брокера и сборки · по курсу ЦБ на ' + D.rate.date.split('-').reverse().join('.') + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом)</small></div>' +
       '<div class="brk"><span>Цена завода</span><b>' + fmt(i.brk.inv) + ' ₽</b><span>Логистика: банк, фрахт, доставка</span><b>' + fmt(i.brk.log) + ' ₽</b><span>Таможня: сбор, пошлина</span><b>' + fmt(i.brk.tam) + ' ₽</b><span>Наши 15 %</span><b>' + fmt(i.brk.fee) + ' ₽</b><span>НДС 22 %</span><b>' + fmt(i.brk.vat) + ' ₽</b></div>' +
       '<button class="btn" data-add="' + i.id + '">' + (sel[i.id] ? '✓ В подборке' : '+ В подборку') + '</button>' :
       '<div class="big" style="filter:blur(6px)">000 000 ₽</div><button class="btn" id="mUnlock">Открыть цены</button>') +
