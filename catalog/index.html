@@ -46,7 +46,9 @@ a{color:inherit}
 .bar .cnt{font-family:var(--f-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
 .bar select{margin-left:auto;font:12px var(--f-m);letter-spacing:.06em;padding:7px 10px;border:1px solid var(--rule);background:var(--paper-2)}
 .seg{display:flex;gap:6px;margin-bottom:8px}.seg button{flex:1;font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:8px 6px;border:1px solid var(--rule);background:var(--paper-2);cursor:pointer;color:var(--ink)}.seg button.on{background:var(--ink);color:var(--milk);border-color:var(--ink)}
-.f .tag{display:inline-block;font:9.5px var(--f-m);letter-spacing:.1em;text-transform:uppercase;padding:1px 5px;margin-left:6px;border:1px solid var(--ink);color:var(--ink);vertical-align:1px}
+.f .tag{display:inline-block;font:9.5px var(--f-m);letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;margin-left:6px;background:var(--gold);color:var(--milk);vertical-align:1px}
+.card .pm{position:absolute;right:10px;top:10px;z-index:2;font:9.5px var(--f-m);letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;background:var(--gold);color:var(--milk)}
+.card.prem{box-shadow:inset 3px 0 0 var(--gold)}.card.prem .zc b{color:var(--gold)}
 .bar .share{font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border:1px solid var(--rule);background:var(--paper-2);cursor:pointer;color:var(--ink)}.bar .share.ok{background:var(--ink);color:var(--milk)}
 .note{font-size:12.5px;color:var(--graphite);margin:0 0 18px;max-width:90ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
@@ -359,7 +361,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   }
   function card(i) {
     var z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
-    return '<div class="card" data-id="' + i.id + '"><div class="pic">' + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
+    return '<div class="card' + (z && z.seg === 'prem' ? ' prem' : '') + '" data-id="' + i.id + '"><div class="pic">' + (z && z.seg === 'prem' ? '<span class="pm">премиум</span>' : '') + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
       '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
       (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
       '<div class="dm">' + (i.unit ? (i.dims || '') : (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '')) + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
@@ -394,7 +396,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var i = byId(id), z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
     var m = document.createElement('div'); m.className = 'modal';
     m.innerHTML = '<div class="modal__box"><button class="x" aria-label="Закрыть">×</button><div class="modal__pic"><img src="img/' + i.id + '.webp" alt=""></div><div class="modal__b">' +
-      '<div class="mono"><b>' + z.name + '</b><i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
+      '<div class="mono"><b>' + z.name + '</b>' + (z.seg === 'prem' ? '<span class="pm" style="position:static;margin-left:8px">премиум</span>' : '') + '<i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
       '<dl class="spec">' + (i.unit ? (i.dims ? '<dt>Варианты</dt><dd>' + i.dims + '</dd>' : '') + '<dt>Цена</dt><dd>за ' + (i.unit === 'шт' ? 'штуку' : i.unit === 'кг' ? 'килограмм' : 'квадратный метр') + ', фрахт по массе</dd>' : (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '')) + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       (i.cbm ? '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd>' : '') + '</dl>' +
       (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽' + (i.unit ? ' / ' + i.unit : '') + '<small>в Москве, с НДС 22 %, без брокера и сборки · по курсу ЦБ на ' + D.rate.date.split('-').reverse().join('.') + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом)</small></div>' +
