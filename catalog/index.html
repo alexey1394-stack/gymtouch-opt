@@ -26,7 +26,7 @@ a{color:inherit}
 .tel{font-family:var(--f-h);font-size:15px;text-decoration:none;white-space:nowrap}
 .top a.back{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);text-decoration:none;white-space:nowrap}
 .wrap{max-width:1400px;margin:0 auto;padding:22px 24px 120px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
-.side{position:sticky;top:64px;display:grid;gap:22px}
+.side{position:sticky;top:64px;display:grid;gap:22px;align-content:start;max-height:calc(100vh - 64px);overflow-y:auto;overscroll-behavior:contain;padding:0 10px 30px 0;scrollbar-width:thin}
 .f h3{font-size:12px;letter-spacing:.14em;color:var(--graphite);font-weight:500;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
 .f label{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:4px 0;cursor:pointer}
 .f label input{accent-color:var(--gold)}
