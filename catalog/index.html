@@ -3,7 +3,9 @@
 <meta charset="utf-8">
 <title>Каталог оборудования · GYMTOUCH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
+<meta name="description" content="Каталог тренажёров и фитнес-оборудования с 11 фабрик Китая: цены в Москве с НДС, фильтры по фабрике, категории и сегменту, поиск по фото. Цена завода + 15 %.">
+<link rel="canonical" href="https://opt.gymtouch.ru/catalog/">
+<meta property="og:title" content="Каталог оборудования · GYMTOUCH"><meta property="og:description" content="2 000+ позиций с 11 фабрик Китая, цены в Москве с НДС. Цена завода + 15 %."><meta property="og:url" content="https://opt.gymtouch.ru/catalog/">
 <link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 :root{--paper:#EFEFEA;--paper-2:#F6F6F2;--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
@@ -163,6 +165,9 @@ a{color:inherit}
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Показать ещё</button>
+    <nav class="static" style="margin-top:36px;font-size:13px;color:var(--graphite)"><b style="font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase">Каталог по разделам:</b>
+      <a href="c/">все категории</a> · <a href="f/">фабрики</a> · <a href="c/tread/">беговые дорожки</a> · <a href="c/legs/">ноги</a> · <a href="c/glute/">ягодичные</a> · <a href="c/press/">жимы</a> · <a href="c/row/">тяги</a> · <a href="c/multi/">мультистанции</a> · <a href="c/dumb/">гантели и грифы</a> · <a href="c/plate/">диски</a> · <a href="c/floor/">покрытие</a> · <a href="c/pilates/">пилатес</a> · <a href="../kak-kupit/">как купить</a> · <a href="../faq/">вопросы и ответы</a>
+    </nav>
   </main>
 </div>
 
@@ -200,13 +205,14 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function память() {
     var v = null;
     try { v = localStorage.getItem('cat_ok'); } catch (e) {}
-    if (!v) { var m = document.cookie.match(/(?:^|; )cat_ok=([^;]*)/); if (m) { try { v = decodeURIComponent(m[1]); localStorage.setItem('cat_ok', v); } catch (e) {} } }
+    if (!v && /(?:^|; )cat_ok=/.test(document.cookie)) { v = '{"again":1}'; try { localStorage.setItem('cat_ok', v); } catch (e) {} }
     return v;
   }
   function запомнить(o) {
     var v = JSON.stringify(o);
     try { localStorage.setItem('cat_ok', v); } catch (e) {}
-    try { document.cookie = 'cat_ok=' + encodeURIComponent(v) + '; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch (e) {}
+    // в cookie — только отметка (она уходит на сервер с каждым запросом), телефон и почта остаются в localStorage
+    try { document.cookie = 'cat_ok=1; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch (e) {}
   }
   unlocked = !!память();
   var $ = function (id) { return document.getElementById(id); };
