@@ -23,6 +23,9 @@ a{color:inherit}
 .search{margin-left:auto;flex:0 1 380px;display:flex}
 .search input{width:100%;font:15px var(--f-b);padding:9px 12px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink)}
 .search input:focus{outline:0;border-color:var(--gold)}
+.search .cam{flex:0 0 auto;margin-left:6px;font:11px var(--f-m);letter-spacing:.06em;text-transform:uppercase;padding:0 12px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink);cursor:pointer;white-space:nowrap}.search .cam:hover{border-color:var(--gold)}.search .cam[hidden]{display:none}
+.ph{display:none;align-items:center;gap:14px;margin:0 0 14px;padding:10px 14px;border:1px solid var(--gold);background:var(--paper-2)}.ph.on{display:flex}.ph img{width:56px;height:56px;object-fit:cover;border:1px solid var(--rule)}.ph b{font-family:var(--f-h);font-size:17px}.ph span{font-size:12.5px;color:var(--graphite)}.ph button{margin-left:auto;font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border:1px solid var(--rule);background:transparent;cursor:pointer}
+.card .sim{position:absolute;left:10px;top:10px;font:10.5px var(--f-m);letter-spacing:.08em;padding:3px 7px;background:var(--ink);color:var(--milk)}
 .tel{font-family:var(--f-h);font-size:15px;text-decoration:none;white-space:nowrap}
 .top a.back{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);text-decoration:none;white-space:nowrap}
 .wrap{max-width:1400px;margin:0 auto;padding:22px 24px 120px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
@@ -47,7 +50,7 @@ a{color:inherit}
 .bar .share{font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border:1px solid var(--rule);background:var(--paper-2);cursor:pointer;color:var(--ink)}.bar .share.ok{background:var(--ink);color:var(--milk)}
 .note{font-size:12.5px;color:var(--graphite);margin:0 0 18px;max-width:90ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.card{background:var(--paper);display:flex;flex-direction:column;cursor:pointer;transition:background .15s}
+.card{position:relative;background:var(--paper);display:flex;flex-direction:column;cursor:pointer;transition:background .15s}
 .card:hover{background:var(--paper-2)}
 .card .pic{aspect-ratio:1;background:#F6F6F2;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card .pic img{width:100%;height:100%;object-fit:contain;display:block}
@@ -117,7 +120,7 @@ a{color:inherit}
 <header class="top"><div class="top__in">
   <a class="brand" href="../"><i></i><span>Gymtouch</span></a>
   <span class="ttl">Каталог · цена в Москве с НДС</span>
-  <div class="search"><input id="q" type="search" placeholder="Поиск: дорожка, жим ногами, реформер, артикул…"></div>
+  <div class="search"><input id="q" type="search" placeholder="Поиск: дорожка, жим ногами, реформер, артикул…"><button type="button" class="cam" id="byPhoto" title="Загрузите фото тренажёра — покажем похожие" hidden>📷 По фото</button><input id="phFile" type="file" accept="image/*" hidden></div>
   <a class="back" href="../">← Оборудование</a>
   <a class="tel" href="tel:+79157716981">8 (915) 771-69-81</a>
 </div></header>
@@ -134,6 +137,7 @@ a{color:inherit}
     <div class="bar"><h1>Каталог</h1><span class="cnt" id="cnt"></span>
       <button type="button" class="share" id="share" title="Скопировать ссылку с этим набором фильтров">Ссылка на фильтр</button><select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
     <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без фото не показываем.</p>
+    <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Показать ещё</button>
   </main>
@@ -165,8 +169,9 @@ a{color:inherit}
 
 <script>
 var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5cl2'};
+var PHOTO = {url:''};
 (function () {
-  var D = null, sel = {}, view = [], shown = 0, PAGE = 60, unlocked = false;
+  var D = null, sel = {}, view = [], shown = 0, PAGE = 60, unlocked = false, phRank = null, EMB = null;
   try { unlocked = !!localStorage.getItem('cat_ok'); } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
@@ -212,6 +217,12 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { prompt('Ссылка на этот фильтр:', url); });
       else prompt('Ссылка на этот фильтр:', url);
     });
+    if (PHOTO.url) {
+      $('byPhoto').hidden = false;
+      $('byPhoto').addEventListener('click', function () { $('phFile').click(); });
+      $('phFile').addEventListener('change', function () { if (this.files[0]) поФото(this.files[0]); this.value = ''; });
+      $('phOff').addEventListener('click', function () { phRank = null; $('ph').classList.remove('on'); apply(); });
+    }
     fromHash();
     syncTog();
     ['pMin', 'pMax', 'q'].forEach(function (id) { $(id).addEventListener('input', apply); });
@@ -242,6 +253,12 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
       return qw.every(function (w) { return t.indexOf(w) >= 0; });
     });
     var s = $('sort').value;
+    if (phRank) {
+      view = view.filter(function (i) { return phRank[i.id] !== undefined; }).sort(function (a, b) { return phRank[b.id] - phRank[a.id]; });
+      $('cnt').textContent = view.length + ' похожих';
+      shown = 0; $('grid').innerHTML = ''; draw(true);
+      toHash(zs, cs, mn, mx, q, s); return;
+    }
     view.sort(function (a, b) {
       if (s === 'pa') return a.price - b.price; if (s === 'pd') return b.price - a.price;
       if (s === 'nm') return a.ru.localeCompare(b.ru, 'ru');
@@ -273,9 +290,34 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
     if (P.min) $('pMin').value = P.min; if (P.max) $('pMax').value = P.max;
     if (P.q) $('q').value = P.q; if (P.s) $('sort').value = P.s;
   }
+  // ── поиск по фото: отпечаток фото считает облако, сравнение с каталогом — здесь ──
+  function поФото(file) {
+    var st = $('phS'), img = new Image(), url = URL.createObjectURL(file);
+    $('ph').classList.add('on'); $('phImg').src = url; $('phT').textContent = 'Ищу похожие…'; st.textContent = 'первый запрос может занять до 15 секунд';
+    img.onload = function () {
+      var m = 448, w = img.width, h = img.height, k = Math.min(1, m / Math.max(w, h));
+      var c = document.createElement('canvas'); c.width = Math.round(w * k); c.height = Math.round(h * k);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      var b64 = c.toDataURL('image/jpeg', 0.85);
+      Promise.all([
+        fetch(PHOTO.url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image: b64 }) }).then(function (r) { return r.json(); }),
+        EMB ? Promise.resolve(EMB) : Promise.all([fetch('emb.json').then(function (r) { return r.json(); }), fetch('emb.bin').then(function (r) { return r.arrayBuffer(); })]).then(function (a) { EMB = { ids: a[0].ids, dim: a[0].dim, q: new Int8Array(a[1]) }; return EMB; })
+      ]).then(function (r) {
+        var v = r[0].v; if (!v) throw new Error(r[0].error || 'нет ответа');
+        var e = r[1], n = e.ids.length, d = e.dim, sc = [];
+        for (var i = 0; i < n; i++) { var dot = 0, o = i * d; for (var j = 0; j < d; j++) dot += v[j] * e.q[o + j]; sc.push([dot / 127, e.ids[i]]); }
+        sc.sort(function (a, b) { return b[0] - a[0]; });
+        var top = sc.slice(0, 40).filter(function (x) { return x[0] >= sc[0][0] - 0.12; });
+        phRank = {}; top.forEach(function (x) { phRank[x[1]] = x[0]; });
+        $('phT').textContent = 'Похожие на ваше фото'; st.textContent = top.length + ' позиций, самые похожие — первыми. Фильтры слева работают и здесь.';
+        apply(); window.scrollTo({ top: $('ph').getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+      }).catch(function (e) { $('phT').textContent = 'Не получилось'; st.textContent = 'Попробуйте другое фото или чуть позже. ' + (e && e.message ? e.message : ''); });
+    };
+    img.src = url;
+  }
   function card(i) {
     var z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
-    return '<div class="card" data-id="' + i.id + '"><div class="pic"><img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
+    return '<div class="card" data-id="' + i.id + '"><div class="pic">' + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
       '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
       (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
       '<div class="dm">' + (i.unit ? (i.dims || '') : (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '')) + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
