@@ -186,6 +186,7 @@ a{color:inherit}
     <label class="agree"><input type="checkbox" name="agree" value="1"><span>Согласен на обработку персональных данных по <a href="../policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
     <button class="btn" type="submit">Открыть цены</button>
     <p class="status" id="gateStatus">Без звонков-роботов: пишем сами, в рабочее время.</p>
+    <p class="status" style="margin-top:2px"><a href="#" id="gateAgain" style="color:#EDEDE7">Уже оставляли контакты? Войти по телефону →</a></p>
   </form>
 </div>
 
@@ -194,7 +195,18 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
 var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
 (function () {
   var D = null, sel = {}, view = [], shown = 0, PAGE = 60, unlocked = false, phRank = null, EMB = null;
-  try { unlocked = !!localStorage.getItem('cat_ok'); } catch (e) {}
+  function память() {
+    var v = null;
+    try { v = localStorage.getItem('cat_ok'); } catch (e) {}
+    if (!v) { var m = document.cookie.match(/(?:^|; )cat_ok=([^;]*)/); if (m) { try { v = decodeURIComponent(m[1]); localStorage.setItem('cat_ok', v); } catch (e) {} } }
+    return v;
+  }
+  function запомнить(o) {
+    var v = JSON.stringify(o);
+    try { localStorage.setItem('cat_ok', v); } catch (e) {}
+    try { document.cookie = 'cat_ok=' + encodeURIComponent(v) + '; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch (e) {}
+  }
+  unlocked = !!память();
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
 
@@ -416,13 +428,27 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var f = ev.target, st = $('gateStatus'), phone = f.phone.value.trim(), email = f.email.value.trim();
     function say(m, c) { st.textContent = m; st.className = 'status ' + c; }
     if (phone.replace(/\D/g, '').length < 7) { say('Нужен телефон.', 'warn'); return; }
+    if (f.dataset.again) {
+      запомнить({ phone: phone, email: '', t: Date.now(), again: 1 });
+      unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply(); return;
+    }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Проверьте e-mail.', 'warn'); return; }
     if (!f.agree.checked) { say('Поставьте галочку согласия.', 'warn'); return; }
     // открываем сразу, заявку шлём фоном; не ушла — запомним и дошлём при следующем открытии
     var body = { name: email.split('@')[0], phone: phone, contact: 'Позвонить', city: '', note: 'ДОСТУП К КАТАЛОГУ. E-mail: ' + email, hall: null, total: null, page: location.href };
-    try { localStorage.setItem('cat_ok', JSON.stringify({ phone: phone, email: email, t: Date.now() })); } catch (e) {}
+    запомнить({ phone: phone, email: email, t: Date.now() });
     unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply();
     deliver(body);
+  });
+  // повторный вход: только телефон, без почты и без новой заявки (слово Алексея 21.09.2026)
+  $('gateAgain').addEventListener('click', function (ev) {
+    ev.preventDefault();
+    var f = $('gateForm'), st = $('gateStatus');
+    f.email.required = false; f.email.parentNode.style.display = 'none'; f.agree.parentNode.style.display = 'none';
+    f.querySelector('h2').textContent = 'С возвращением'; f.querySelector('p:not(.mono)').textContent = 'Введите телефон, который оставляли, — откроем цены сразу.';
+    f.querySelector('.btn').textContent = 'Войти'; this.parentNode.style.display = 'none';
+    f.dataset.again = '1'; f.phone.focus();
+    st.textContent = 'Почту и согласие второй раз не спрашиваем — они уже у нас.';
   });
   // подборка
   $('trayForm').addEventListener('submit', function (ev) {
