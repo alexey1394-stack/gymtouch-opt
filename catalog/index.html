@@ -184,17 +184,15 @@ a{color:inherit}
 </div></div>
 
 <div class="gate" id="gate" hidden>
-  <form class="gate__box" id="gateForm" novalidate>
+  <div class="gate__box" id="gateForm">
     <p class="mono" style="color:#9AA0A6"><b style="color:#EDEDE7">GYMTOUCH</b><i>·</i>каталог для клубов</p>
     <h2>Цены завода<br>с доставкой в Москву</h2>
-    <p>Оставьте телефон и почту — откроем цены на все <span id="gateN"></span> позиций и пришлём каталог файлом.</p>
-    <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
-    <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="для каталога и КП" required></label>
-    <label class="agree"><input type="checkbox" name="agree" value="1"><span>Согласен на обработку персональных данных по <a href="../policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
-    <button class="btn" type="submit">Открыть цены</button>
-    <p class="status" id="gateStatus">Без звонков-роботов: пишем сами, в рабочее время.</p>
-    <p class="status" style="margin-top:2px"><a href="#" id="gateAgain" style="color:#EDEDE7">Уже оставляли контакты? Войти по телефону →</a></p>
-  </form>
+    <p>Откройте каталог через мессенджер — бот пришлёт ссылку с доступом ко всем <span id="gateN"></span> позициям, а если что-то не найдёте — напишете туда же, поможем.</p>
+    <a class="btn" href="https://t.me/avrorabbot?start=cat" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">✈️ Открыть через Telegram</a>
+    <a class="btn" href="https://max.ru/id332762072611_1_bot" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;background:#2b2f34;color:#EDEDE7">Открыть через MAX — напишите «каталог»</a>
+    <p class="status" id="gateStatus">Без звонков-роботов и анкет: только чат, в рабочее время.</p>
+    <p class="status" style="margin-top:2px">Ссылка из бота откроет цены на этом устройстве; на другом — просто откройте её ещё раз.</p>
+  </div>
 </div>
 
 <script>
@@ -214,6 +212,11 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     // в cookie — только отметка (она уходит на сервер с каждым запросом), телефон и почта остаются в localStorage
     try { document.cookie = 'cat_ok=1; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch (e) {}
   }
+  // ключ из ссылки бота (?k=gt…): открываем и запоминаем — калитка через мессенджер, слово Алексея 22.09.2026
+  (function () {
+    var k = (location.search.match(/[?&]k=(gt[a-z0-9]{6,})/) || [])[1];
+    if (k) { запомнить({ k: k, t: Date.now() }); try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {} }
+  })();
   unlocked = !!память();
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
@@ -433,33 +436,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); });
   }
   // дверь
-  $('gateForm').addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var f = ev.target, st = $('gateStatus'), phone = f.phone.value.trim(), email = f.email.value.trim();
-    function say(m, c) { st.textContent = m; st.className = 'status ' + c; }
-    if (phone.replace(/\D/g, '').length < 7) { say('Нужен телефон.', 'warn'); return; }
-    if (f.dataset.again) {
-      запомнить({ phone: phone, email: '', t: Date.now(), again: 1 });
-      unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply(); return;
-    }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Проверьте e-mail.', 'warn'); return; }
-    if (!f.agree.checked) { say('Поставьте галочку согласия.', 'warn'); return; }
-    // открываем сразу, заявку шлём фоном; не ушла — запомним и дошлём при следующем открытии
-    var body = { name: email.split('@')[0], phone: phone, contact: 'Позвонить', city: '', note: 'ДОСТУП К КАТАЛОГУ. E-mail: ' + email, hall: null, total: null, page: location.href };
-    запомнить({ phone: phone, email: email, t: Date.now() });
-    unlocked = true; document.body.classList.remove('locked'); $('gate').hidden = true; apply();
-    deliver(body);
-  });
-  // повторный вход: только телефон, без почты и без новой заявки (слово Алексея 21.09.2026)
-  $('gateAgain').addEventListener('click', function (ev) {
-    ev.preventDefault();
-    var f = $('gateForm'), st = $('gateStatus');
-    f.email.required = false; f.email.parentNode.style.display = 'none'; f.agree.parentNode.style.display = 'none';
-    f.querySelector('h2').textContent = 'С возвращением'; f.querySelector('p:not(.mono)').textContent = 'Введите телефон, который оставляли, — откроем цены сразу.';
-    f.querySelector('.btn').textContent = 'Войти'; this.parentNode.style.display = 'none';
-    f.dataset.again = '1'; f.phone.focus();
-    st.textContent = 'Почту и согласие второй раз не спрашиваем — они уже у нас.';
-  });
+  // калитка: телефон/почта убраны (слово Алексея 22.09.2026, п. А) — вход только по ссылке из бота
   // подборка
   $('trayForm').addEventListener('submit', function (ev) {
     ev.preventDefault();
