@@ -361,6 +361,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
         EMB ? Promise.resolve(EMB) : Promise.all([fetch('emb.json').then(function (r) { return r.json(); }), fetch('emb.bin').then(function (r) { return r.arrayBuffer(); })]).then(function (a) { EMB = { ids: a[0].ids, dim: a[0].dim, q: new Int8Array(a[1]) }; return EMB; })
       ]).then(function (r) {
         var v = r[0].v; if (!v) throw new Error(r[0].error || 'нет ответа');
+        if (v.length !== r[1].dim) throw new Error('поиск по фото обновляется, попробуйте через несколько минут');
         var e = r[1], n = e.ids.length, d = e.dim, sc = [];
         for (var i = 0; i < n; i++) { var dot = 0, o = i * d; for (var j = 0; j < d; j++) dot += v[j] * e.q[o + j]; sc.push([dot / 127, e.ids[i]]); }
         sc.sort(function (a, b) { return b[0] - a[0]; });
