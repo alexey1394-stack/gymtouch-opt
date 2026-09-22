@@ -5,7 +5,7 @@
 > (35 производство + 35 доставка), оплата 87 % / 13 %. Комплектуем контейнер позициями разных фабрик, собираем залы
 > от 150 до 4 000 м², в России — своя сервисная служба (профилактика и ремонт тренажёров).
 
-## Каталог: 2044 позиций, 11 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-22)
+## Каталог: 2034 позиций, 11 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-22)
 Интерактивный каталог: https://gymtouch.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
 Статические страницы для чтения: категории https://gymtouch.ru/catalog/c/, фабрики https://gymtouch.ru/catalog/f/, карточка позиции https://gymtouch.ru/catalog/i/<id>/.
 
@@ -14,37 +14,38 @@
 - [Аксессуары и детали](https://gymtouch.ru/catalog/c/access/) — 37 поз., от 211 ₽
 - [Беговые дорожки](https://gymtouch.ru/catalog/c/tread/) — 69 поз., от 74 800 ₽
 - [Эллипсы](https://gymtouch.ru/catalog/c/ellip/) — 27 поз., от 81 300 ₽
-- [Гребные, лыжные, аэробайки](https://gymtouch.ru/catalog/c/rowski/) — 35 поз., от 28 800 ₽
+- [Гребные, лыжные, аэробайки](https://gymtouch.ru/catalog/c/rowski/) — 21 поз., от 28 800 ₽
+- [Тяги](https://gymtouch.ru/catalog/c/row/) — 211 поз., от 13 800 ₽
 - [Велотренажёры](https://gymtouch.ru/catalog/c/bike/) — 43 поз., от 27 900 ₽
 - [Лестницы и степперы](https://gymtouch.ru/catalog/c/stair/) — 27 поз., от 91 200 ₽
 - [Реформеры и станции](https://gymtouch.ru/catalog/c/pilates/) — 14 поз., от 11 800 ₽
 - [Турники и брусья](https://gymtouch.ru/catalog/c/dipchin/) — 56 поз., от 8 900 ₽
-- [Ноги](https://gymtouch.ru/catalog/c/legs/) — 427 поз., от 14 700 ₽
-- [Ягодичные](https://gymtouch.ru/catalog/c/glute/) — 112 поз., от 43 500 ₽
+- [Ноги](https://gymtouch.ru/catalog/c/legs/) — 425 поз., от 14 700 ₽
+- [Ягодичные](https://gymtouch.ru/catalog/c/glute/) — 111 поз., от 43 500 ₽
 - [Руки и плечи](https://gymtouch.ru/catalog/c/arms/) — 146 поз., от 240 ₽
-- [Жимы](https://gymtouch.ru/catalog/c/press/) — 307 поз., от 24 200 ₽
-- [Тяги](https://gymtouch.ru/catalog/c/row/) — 197 поз., от 13 800 ₽
+- [Жимы](https://gymtouch.ru/catalog/c/press/) — 304 поз., от 24 200 ₽
+- [Тяги](https://gymtouch.ru/catalog/c/row/) — 211 поз., от 13 800 ₽
 - [Пресс и спина](https://gymtouch.ru/catalog/c/core/) — 166 поз., от 8 900 ₽
 - [Скамьи](https://gymtouch.ru/catalog/c/bench/) — 97 поз., от 7 300 ₽
-- [Мультистанции и кроссоверы](https://gymtouch.ru/catalog/c/multi/) — 137 поз., от 11 600 ₽
-- [Гантели, грифы и стойки](https://gymtouch.ru/catalog/c/dumb/) — 62 поз., от 211 ₽
+- [Мультистанции и кроссоверы](https://gymtouch.ru/catalog/c/multi/) — 135 поз., от 11 600 ₽
+- [Гантели, грифы и стойки](https://gymtouch.ru/catalog/c/dumb/) — 61 поз., от 211 ₽
 - [Диски и стеллажи](https://gymtouch.ru/catalog/c/plate/) — 20 поз., от 179 ₽
 - [Рамы, стойки, помосты](https://gymtouch.ru/catalog/c/rack/) — 34 поз., от 6 300 ₽
-- [Функциональный тренинг](https://gymtouch.ru/catalog/c/func/) — 8 поз., от 1 460 ₽
+- [Функциональный тренинг](https://gymtouch.ru/catalog/c/func/) — 7 поз., от 1 460 ₽
 - [Прочее](https://gymtouch.ru/catalog/c/other/) — 1 поз., от 63 600 ₽
 
 ### Фабрики
 - [Shuyoute (SYT)](https://gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (164 поз.)
-- [MND Fitness](https://gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (561 поз.)
+- [MND Fitness](https://gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (559 поз.)
 - [Guwow](https://gymtouch.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (46 поз.)
 - [Juren (JR)](https://gymtouch.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (227 поз.)
-- [McNorthen (MNS)](https://gymtouch.ru/catalog/f/E/): Хэбэй · грузоблочные машины и стойки (6 поз.)
-- [Relax Fitness](https://gymtouch.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (358 поз.)
+- [McNorthen (MNS)](https://gymtouch.ru/catalog/f/E/): Хэбэй · грузоблочные машины и стойки (5 поз.)
+- [Relax Fitness](https://gymtouch.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (353 поз.)
 - [Yozoe](https://gymtouch.ru/catalog/f/I/) — премиум: Пилатес и йога — оборудование студий (6 поз.)
 - [TZ Fitness (Tianzhan)](https://gymtouch.ru/catalog/f/J/): Шаньдун, Дэчжоу · кардио, грузоблочные, нагружаемые, стойки и аксессуары (589 поз.)
 - [Brightway (BRTW)](https://gymtouch.ru/catalog/f/K/): Шаньдун · грузоблочная серия TY (35 поз.)
 - [Langmai](https://gymtouch.ru/catalog/f/M/): Шаньдун, Дэчжоу · кардио: дорожки, степперы-лестницы, эллипсы, велосипеды, гребные (44 поз.)
-- [CKB (Chinakettlebell)](https://gymtouch.ru/catalog/f/L/) — премиум: Шаньдун · диски, грифы, штанги — свободный вес (8 поз.)
+- [CKB (Chinakettlebell)](https://gymtouch.ru/catalog/f/L/) — премиум: Шаньдун · диски, грифы, штанги — свободный вес (6 поз.)
 
 ## Полезные страницы
 - [Как купить оборудование из Китая напрямую: 7 шагов](https://gymtouch.ru/kak-kupit/)

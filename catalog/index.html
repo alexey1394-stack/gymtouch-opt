@@ -57,7 +57,7 @@ a{color:inherit}
 .card{position:relative;background:var(--paper);display:flex;flex-direction:column;cursor:pointer;transition:background .15s}
 .card:hover{background:var(--paper-2)}
 .card .pic{aspect-ratio:1;background:#F6F6F2;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.card .pic img{width:100%;height:100%;object-fit:contain;display:block}
+.card .pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}   /* мелкий кадр не растягиваем — иначе пиксели */
 .card .b{padding:12px 14px 14px;display:grid;gap:4px}
 .card .zc{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
 .card .zc b{color:var(--gold);font-weight:500}
@@ -93,7 +93,7 @@ a{color:inherit}
 .modal{position:fixed;inset:0;z-index:70;background:rgba(22,24,26,.6);display:flex;align-items:center;justify-content:center;padding:20px}
 .modal__box{background:var(--paper);max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
 .modal__pic{background:#F6F6F2;display:flex;align-items:center;justify-content:center;min-height:360px}
-.modal__pic img{max-width:100%;max-height:520px;object-fit:contain}
+.modal__pic img{max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain}
 .modal__b{padding:26px 26px 22px;display:grid;gap:12px;align-content:start}
 .modal__b h2{font-size:1.5rem}
 .modal .x{position:absolute;right:10px;top:8px;background:transparent;border:0;font-size:26px;cursor:pointer;color:var(--graphite)}
