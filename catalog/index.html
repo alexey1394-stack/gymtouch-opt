@@ -218,6 +218,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   }
   // ключ из ссылки бота (?k=gt…): открываем и запоминаем — калитка через мессенджер, слово Алексея 22.09.2026
   (function () {
+    // ?reset — забыть доступ (для проверки калитки: слово Алексея 22.09 «сразу показывает сайт»)
+    if (/[?&]reset\b/.test(location.search)) { try { localStorage.removeItem('cat_ok'); document.cookie = 'cat_ok=; max-age=0; path=/'; } catch (e) {} }
     var k = (location.search.match(/[?&]k=(gt[a-z0-9]{6,})/) || [])[1];
     if (k) { запомнить({ k: k, t: Date.now() }); try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {} }
   })();
