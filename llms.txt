@@ -5,19 +5,19 @@
 > (35 производство + 35 доставка), оплата 87 % / 13 %. Комплектуем контейнер позициями разных фабрик, собираем залы
 > от 150 до 4 000 м², в России — своя сервисная служба (профилактика и ремонт тренажёров).
 
-## Каталог: 3239 позиций, 11 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-23)
+## Каталог: 3251 позиций, 11 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-23)
 Интерактивный каталог: https://opt.gymtouch.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
 Статические страницы для чтения: категории https://opt.gymtouch.ru/catalog/c/, фабрики https://opt.gymtouch.ru/catalog/f/, карточка позиции https://opt.gymtouch.ru/catalog/i/<id>/.
 
 ### Категории
-- [Покрытие и маты](https://opt.gymtouch.ru/catalog/c/floor/) — 27 поз., от 2 280 ₽
-- [Аксессуары и детали](https://opt.gymtouch.ru/catalog/c/access/) — 54 поз., от 211 ₽
+- [Покрытие и маты](https://opt.gymtouch.ru/catalog/c/floor/) — 31 поз., от 2 200 ₽
+- [Аксессуары и детали](https://opt.gymtouch.ru/catalog/c/access/) — 57 поз., от 211 ₽
 - [Беговые дорожки](https://opt.gymtouch.ru/catalog/c/tread/) — 116 поз., от 74 800 ₽
 - [Эллипсы](https://opt.gymtouch.ru/catalog/c/ellip/) — 34 поз., от 81 300 ₽
 - [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 38 поз., от 22 700 ₽
 - [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 346 поз., от 9 400 ₽
 - [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 70 поз., от 27 600 ₽
-- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 46 поз., от 105 500 ₽
+- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 46 поз., от 105 100 ₽
 - [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 27 поз., от 8 600 ₽
 - [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 81 поз., от 8 900 ₽
 - [Ноги](https://opt.gymtouch.ru/catalog/c/legs/) — 625 поз., от 6 400 ₽
@@ -28,7 +28,7 @@
 - [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 248 поз., от 8 900 ₽
 - [Скамьи](https://opt.gymtouch.ru/catalog/c/bench/) — 159 поз., от 7 300 ₽
 - [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 259 поз., от 11 100 ₽
-- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 102 поз., от 211 ₽
+- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 107 поз., от 211 ₽
 - [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 40 поз., от 179 ₽
 - [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 94 поз., от 6 400 ₽
 - [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 20 поз., от 1 460 ₽
@@ -36,7 +36,7 @@
 
 ### Фабрики
 - [Shuyoute (SYT)](https://opt.gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (164 поз.)
-- [MND Fitness](https://opt.gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1143 поз.)
+- [MND Fitness](https://opt.gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1155 поз.)
 - [Guwow](https://opt.gymtouch.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (236 поз.)
 - [Juren (JR)](https://opt.gymtouch.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (284 поз.)
 - [McNorthen (MNS)](https://opt.gymtouch.ru/catalog/f/E/): Хэбэй · грузоблочные машины и стойки (7 поз.)
