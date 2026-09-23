@@ -58,6 +58,9 @@ a{color:inherit}
 .card:hover{background:var(--paper-2)}
 .card .pic{aspect-ratio:1;background:#F6F6F2;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card .pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}   /* мелкий кадр не растягиваем — иначе пиксели */
+.pic.no{flex-direction:column;gap:8px;color:var(--graphite);text-align:center;padding:18px;background:repeating-linear-gradient(135deg,#F6F6F2,#F6F6F2 12px,#F1F1EC 12px,#F1F1EC 24px)}
+.pic.no b{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.pic.no span{font-size:12px;line-height:1.35}
 .card .b{padding:12px 14px 14px;display:grid;gap:4px}
 .card .zc{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
 .card .zc b{color:var(--gold);font-weight:500}
@@ -154,6 +157,7 @@ a{color:inherit}
     <div class="f"><h3>Сегмент</h3><div class="seg" id="fS"><button type="button" data-seg="all" class="on">Все</button><button type="button" data-seg="prem">Премиум</button><button type="button" data-seg="mid">Средний</button></div></div>
     <div class="f"><h3>Фабрика <button type="button" class="tog" data-scope="fZ">снять все</button></h3><div id="fZ"></div></div>
     <div class="f"><h3>Категория <button type="button" class="tog" data-scope="fC">снять все</button></h3><div id="fC"></div></div>
+    <div class="f"><h3>Фото</h3><label style="display:flex;gap:8px;align-items:center;font-size:13.5px"><input type="checkbox" id="onlyPhoto"><span>Только с фотографиями</span></label></div>
     <div class="f"><h3>Цена, ₽</h3><div class="price"><input id="pMin" type="number" placeholder="от" inputmode="numeric"><span>—</span><input id="pMax" type="number" placeholder="до" inputmode="numeric"></div></div>
     <div class="f"><h3>Как считаем</h3><p class="note" id="howNote" style="margin:0"></p></div>
   </aside>
@@ -161,7 +165,7 @@ a{color:inherit}
   <main>
     <div class="bar"><h1>Каталог</h1><button type="button" class="fltBtn" id="fltBtn">Фильтры <i id="fltN"></i></button><span class="cnt" id="cnt"></span>
       <button type="button" class="share" id="share" title="Скопировать ссылку с этим набором фильтров">Ссылка на фильтр</button><select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
-    <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без фото не показываем.</p>
+    <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции, где фото от фабрики пока слабое, показываем плашкой — снимок пришлём по запросу.</p>
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Показать ещё</button>
@@ -280,6 +284,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     fromHash();
     syncTog();
     ['pMin', 'pMax', 'q'].forEach(function (id) { $(id).addEventListener('input', apply); });
+    $('onlyPhoto').addEventListener('change', apply);
     $('sort').addEventListener('change', apply);
     $('more').addEventListener('click', function () { draw(false); });
     apply();
@@ -302,6 +307,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var qw = q ? q.split(/\s+/).filter(Boolean).map(function (w) { return w.length > 5 ? w.slice(0, w.length - 2) : w; }) : [];
     view = D.items.filter(function (i) {
       if (!(zs.indexOf(i.z) >= 0 && cs.indexOf(i.cat) >= 0 && i.price >= mn && i.price <= mx)) return false;
+      if ($('onlyPhoto').checked && i.nophoto) return false;
       if (!qw.length) return true;
       var t = (i.ru + ' ' + i.en + ' ' + i.art + ' ' + (catN[i.cat] || '')).toLowerCase();
       return qw.every(function (w) { return t.indexOf(w) >= 0; });
@@ -377,7 +383,10 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   }
   function card(i) {
     var z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
-    return '<div class="card' + (z && z.seg === 'prem' ? ' prem' : '') + '" data-id="' + i.id + '"><div class="pic">' + (z && z.seg === 'prem' ? '<span class="pm">премиум</span>' : '') + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div><div class="b">' +
+    var кадр = i.nophoto
+      ? '<div class="pic no"><b>' + i.art + '</b><span>Фото уточняем у фабрики — пришлём по запросу</span></div>'
+      : null;
+    return '<div class="card' + (z && z.seg === 'prem' ? ' prem' : '') + '" data-id="' + i.id + '">' + (кадр || '<div class="pic">' + (z && z.seg === 'prem' ? '<span class="pm">премиум</span>' : '') + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div>') + '<div class="b">' +
       '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
       (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
       '<div class="dm">' + (i.unit ? (i.dims || '') : (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '')) + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
@@ -411,7 +420,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function open(id) {
     var i = byId(id), z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
     var m = document.createElement('div'); m.className = 'modal';
-    m.innerHTML = '<div class="modal__box"><button class="x" aria-label="Закрыть">×</button><div class="modal__pic"><img src="img/' + i.id + '.webp" alt=""></div><div class="modal__b">' +
+    m.innerHTML = '<div class="modal__box"><button class="x" aria-label="Закрыть">×</button>' + (i.nophoto ? '<div class="modal__pic no" style="flex-direction:column;gap:10px;padding:30px;text-align:center"><b class="mono">' + i.art + '</b><span style="color:var(--graphite);font-size:13px">Фото этой позиции уточняем у фабрики — пришлём по запросу вместе с расчётом</span></div>' : '<div class="modal__pic"><img src="img/' + i.id + '.webp" alt=""></div>') + '<div class="modal__b">' +
       '<div class="mono"><b>' + z.name + '</b>' + (z.seg === 'prem' ? '<span class="pm" style="position:static;margin-left:8px">премиум</span>' : '') + '<i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
       '<dl class="spec">' + (i.unit ? (i.dims ? '<dt>Варианты</dt><dd>' + i.dims + '</dd>' : '') + '<dt>Цена</dt><dd>за ' + (i.unit === 'шт' ? 'штуку' : i.unit === 'кг' ? 'килограмм' : 'квадратный метр') + ', фрахт по массе</dd>' : (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '')) + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       (i.cbm ? '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd>' : '') + '</dl>' +
