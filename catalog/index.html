@@ -165,7 +165,7 @@ a{color:inherit}
   <main>
     <div class="bar"><h1>Каталог</h1><button type="button" class="fltBtn" id="fltBtn">Фильтры <i id="fltN"></i></button><span class="cnt" id="cnt"></span>
       <button type="button" class="share" id="share" title="Скопировать ссылку с этим набором фильтров">Ссылка на фильтр</button><select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
-    <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции, где фото от фабрики пока слабое, показываем плашкой — снимок пришлём по запросу.</p>
+    <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без хорошего снимка стоят в конце списка — фото пришлём по запросу.</p>
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Показать ещё</button>
@@ -320,6 +320,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       toHash(zs, cs, mn, mx, q, s); return;
     }
     view.sort(function (a, b) {
+      var фa = a.nophoto ? 1 : 0, фb = b.nophoto ? 1 : 0;
+      if (фa !== фb) return фa - фb;                       // сначала то, что видно глазами
       if (s === 'pa') return a.price - b.price; if (s === 'pd') return b.price - a.price;
       if (s === 'nm') return a.ru.localeCompare(b.ru, 'ru');
       return (order.indexOf(a.cat) - order.indexOf(b.cat)) || a.ru.localeCompare(b.ru, 'ru') || a.price - b.price;
