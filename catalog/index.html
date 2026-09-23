@@ -482,7 +482,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var body = { name: f.name.value.trim() || 'Из каталога', phone: f.phone.value.trim(), contact: 'Позвонить', city: f.city.value.trim(),
       note: 'КАТАЛОГ: подборка' + (email ? '. E-mail: ' + email : ''), hall: { size: 'подборка из каталога', zones: [], items: items, volume: Math.round(cbm * 10) / 10, total: Math.round(sum) }, total: Math.round(sum), page: location.href };
     st.textContent = 'Отправляем…';
-    send(body).then(function () { st.textContent = 'Подборка у нас. Ответим в рабочее время в течение часа.'; sel = {}; setTimeout(function () { tray(); apply(); $('tray').classList.remove('ask'); }, 2500); })
+    send(body).then(function () { st.textContent = 'Подборка у нас. Ответим в рабочее время в течение 15 минут.'; sel = {}; setTimeout(function () { tray(); apply(); $('tray').classList.remove('ask'); }, 2500); })
       .catch(function () { st.textContent = 'Не отправилось — позвоните 8 (915) 771-69-81 или напишите в MAX.'; });
   });
 })();
