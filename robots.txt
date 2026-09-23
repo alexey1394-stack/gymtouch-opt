@@ -31,4 +31,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://www.gymtouch.ru/sitemap.xml
+Sitemap: https://opt.gymtouch.ru/sitemap.xml
