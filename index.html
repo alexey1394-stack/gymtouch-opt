@@ -96,14 +96,27 @@ p{margin:0}
 .hero__price--row{display:flex;align-items:center;gap:26px;margin:40px 0 48px}
 .hero__price--row .v{font-size:clamp(2.4rem,5vw,3.6rem)}
 .hero__price--row .n{margin:0;max-width:52ch}
-.hero__form{background:var(--ink);color:var(--milk);padding:22px 22px 20px;display:grid;gap:12px;align-self:center}
-.hero__form>.mono{color:#9AA0A6;margin-bottom:2px}.hero__form>.mono b{color:var(--milk)}
+.hero__form{position:relative;background:linear-gradient(180deg,#1B1E21 0%,var(--ink) 100%);color:var(--milk);
+  padding:26px 26px 22px;display:grid;gap:14px;align-self:center;border:1px solid rgba(237,237,231,.1);
+  box-shadow:0 24px 60px rgba(22,24,26,.28)}
+.hero__form::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
+.hero__form>.mono{color:#9AA0A6;margin-bottom:0}.hero__form>.mono b{color:var(--milk);font-size:13px;letter-spacing:.1em}
+.hero__form .hint{margin:-6px 0 2px;font-size:12.5px;color:#9AA0A6;line-height:1.4}
 .hero__form label{display:grid;gap:6px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9AA0A6}
-.hero__form input:not([type=checkbox]){font-family:var(--f-b);font-size:15px;color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:12px 12px;width:100%;box-sizing:border-box}
-.hero__form input:focus{outline:0;border-color:var(--gold-2)}
+.hero__form .fld{position:relative}
+.hero__form .fld i{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;font-size:15px;opacity:.5;pointer-events:none}
+.hero__form .fld input{padding-left:38px!important}
+.hero__form button[type=submit]{width:100%;margin-top:4px;min-height:52px;background:var(--gold);border-color:var(--gold);color:var(--milk);font-size:15px;letter-spacing:.1em;box-shadow:0 8px 24px rgba(168,117,18,.28)}
+.hero__form button[type=submit]:hover{background:var(--gold-2);border-color:var(--gold-2);color:#fff}
+.hero__form .lead__agree span{font-size:12px;line-height:1.35}
+.hero__form input:not([type=checkbox]){font-family:var(--f-b);font-size:15px;color:var(--milk);background:#22262A;border:1px solid rgba(237,237,231,.16);border-radius:2px;padding:13px 12px;width:100%;transition:border-color .15s,background .15s;box-sizing:border-box}
+.hero__form input:focus{outline:0;border-color:var(--gold-2);background:#272B30}
+.hero__form input::placeholder{color:#6E747A}
 .hero__form .lead__agree{margin:0}
 .hero__form .lead__status{margin:0}
-.hero__soc{display:flex;gap:8px;margin-top:4px}
+.hero__form .or{display:flex;align-items:center;gap:10px;margin:2px 0 -2px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6E747A}
+.hero__form .or::before,.hero__form .or::after{content:"";flex:1;height:1px;background:rgba(237,237,231,.14)}
+.hero__soc{display:flex;gap:8px;margin-top:2px}
 .hero__soc a{flex:1;text-align:center;font-family:var(--f-h);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--milk);text-decoration:none;border:1px solid rgba(237,237,231,.35);padding:9px 8px}
 .hero__soc a:hover{border-color:var(--gold-2);color:var(--gold-2)}
 @media(max-width:900px){.hero__grid{grid-template-columns:1fr}.hero__price--row{flex-direction:column;align-items:flex-start;gap:8px}}
@@ -748,12 +761,14 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
       </div>
       <form class="hero__form" id="quickForm" novalidate>
         <p class="mono"><b>Получить расчёт</b><i>·</i>ответим в течение часа</p>
-        <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
-        <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="для расчёта и КП"></label>
+        <p class="hint">Оставьте контакт — пришлём каталог с ценами в Москве и смету под вашу площадь.</p>
+        <label>Телефон<span class="fld"><i>📞</i><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required></span></label>
+        <label>E-mail<span class="fld"><i>✉</i><input name="email" type="email" autocomplete="email" placeholder="для расчёта и КП"></span></label>
         <label class="lead__agree"><input type="checkbox" name="agree" value="1">
           <span>Согласен на обработку персональных данных по <a href="policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
-        <button class="btn" type="submit">Отправить</button>
-        <p class="lead__status" id="quickStatus">Перезвоним или напишем — как удобнее вам.</p>
+        <button class="btn" type="submit">Получить расчёт</button>
+        <p class="lead__status" id="quickStatus">Перезвоним или напишем — как удобнее вам. Без звонков-роботов.</p>
+        <div class="or">или напишите сразу</div>
         <div class="hero__soc">
           <a href="https://max.ru/channel_gymtouch" target="_blank" rel="noopener">Мы в MAX</a>
           <a href="https://t.me/gym_touch" target="_blank" rel="noopener">Мы в Telegram</a>
