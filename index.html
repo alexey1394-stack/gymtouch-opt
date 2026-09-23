@@ -88,7 +88,8 @@ p{margin:0}
 
 /* ── обложка ───────────────────────────────────────────── */
 .hero{padding:88px 0 0;position:relative;overflow:hidden}
-.hero__grid{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:end}
+.hero__grid{display:grid;grid-template-columns:1.3fr minmax(330px,420px);gap:48px;align-items:start}
+.hero__grid>div:first-child{align-self:center;padding-bottom:6px}
 .hero h1{margin:18px 0 0}
 .hero h1 em{font-style:normal;color:var(--gold);display:block}
 .hero__sub{margin-top:26px;max-width:46ch}
@@ -97,19 +98,19 @@ p{margin:0}
 .hero__price--row .v{font-size:clamp(2.4rem,5vw,3.6rem)}
 .hero__price--row .n{margin:0;max-width:52ch}
 .hero__form{position:relative;background:linear-gradient(180deg,#1B1E21 0%,var(--ink) 100%);color:var(--milk);
-  padding:26px 26px 22px;display:grid;gap:14px;align-self:center;border:1px solid rgba(237,237,231,.1);
+  padding:24px 24px 20px;display:grid;gap:12px;align-self:start;border:1px solid rgba(237,237,231,.1);
   box-shadow:0 24px 60px rgba(22,24,26,.28)}
 .hero__form::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
 .hero__form>.mono{color:#9AA0A6;margin-bottom:0}.hero__form>.mono b{color:var(--milk);font-size:13px;letter-spacing:.1em}
-.hero__form .hint{margin:-6px 0 2px;font-size:12.5px;color:#9AA0A6;line-height:1.4}
+.hero__form .hint{margin:-4px 0 0;font-size:12.5px;color:#9AA0A6;line-height:1.4}
 .hero__form label{display:grid;gap:6px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9AA0A6}
 .hero__form .fld{position:relative}
 .hero__form .fld i{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;font-size:15px;opacity:.5;pointer-events:none}
 .hero__form .fld input{padding-left:38px!important}
-.hero__form button[type=submit]{width:100%;margin-top:4px;min-height:52px;background:var(--gold);border-color:var(--gold);color:var(--milk);font-size:15px;letter-spacing:.1em;box-shadow:0 8px 24px rgba(168,117,18,.28)}
+.hero__form button[type=submit]{width:100%;margin-top:2px;min-height:50px;background:var(--gold);border-color:var(--gold);color:var(--milk);font-size:15px;letter-spacing:.1em;box-shadow:0 8px 24px rgba(168,117,18,.28)}
 .hero__form button[type=submit]:hover{background:var(--gold-2);border-color:var(--gold-2);color:#fff}
 .hero__form .lead__agree span{font-size:12px;line-height:1.35}
-.hero__form input:not([type=checkbox]){font-family:var(--f-b);font-size:15px;color:var(--milk);background:#22262A;border:1px solid rgba(237,237,231,.16);border-radius:2px;padding:13px 12px;width:100%;transition:border-color .15s,background .15s;box-sizing:border-box}
+.hero__form input:not([type=checkbox]){font-family:var(--f-b);font-size:15px;color:var(--milk);background:#22262A;border:1px solid rgba(237,237,231,.16);border-radius:2px;padding:12px 12px;width:100%;transition:border-color .15s,background .15s;box-sizing:border-box}
 .hero__form input:focus{outline:0;border-color:var(--gold-2);background:#272B30}
 .hero__form input::placeholder{color:#6E747A}
 .hero__form .lead__agree{margin:0}
