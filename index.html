@@ -1,4 +1,11 @@
 <meta charset="utf-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113119927','ym');
+ym(113119927,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113119927" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <title>Тренажёры оптом из Китая для фитнес-клубов — цена завода + 15 % · GYMTOUCH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Спортивное оборудование для фитнес-клубов от завода-изготовителя. Цена завода плюс комиссия 15 %. Конструктор зала: расставьте тренажёры и получите смету.">
@@ -4010,7 +4017,7 @@ var C = (typeof LEAD === 'object' && LEAD) || {};
     b.disabled = true; say('Отправляем…', true);
     fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
-      .then(function () { say('Принято. Инженер перезвонит в рабочее время в течение 15 минут.', true); f.reset(); b.disabled = false; })
+      .then(function () { try { ym(113119927, 'reachGoal', 'lead'); } catch (e) {} say('Принято. Инженер перезвонит в рабочее время в течение 15 минут.', true); f.reset(); b.disabled = false; })
       .catch(function () {
         say('Не отправилось — позвоните 8 (915) 771-69-81 или напишите в MAX, ответим сразу.', false); b.disabled = false;
       });
@@ -4037,7 +4044,7 @@ var C = (typeof LEAD === 'object' && LEAD) || {};
     b.disabled = true; say('Отправляем…', true);
     fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
-      .then(function () { say('Принято. Свяжемся в рабочее время в течение 15 минут.', true); f.reset(); b.disabled = false; })
+      .then(function () { try { ym(113119927, 'reachGoal', 'lead'); } catch (e) {} say('Принято. Свяжемся в рабочее время в течение 15 минут.', true); f.reset(); b.disabled = false; })
       .catch(function () { say('Не отправилось — позвоните 8 (915) 771-69-81 или напишите в MAX.', false); b.disabled = false; });
   });
 })();
@@ -4133,6 +4140,7 @@ form.addEventListener('submit', function (ev) {
   send().catch(function () {          // сеть моргнула — одна повторная попытка через секунду
     return new Promise(function (ok) { setTimeout(ok, 1200); }).then(send);
   }).then(function () {
+    try { ym(113119927, 'reachGoal', 'lead'); } catch (e) {}
     say('Заявка принята. Ответим в рабочее время в течение 15 минут — в ' +
         (d.contact || 'MAX') + '.', true);
     form.reset();
