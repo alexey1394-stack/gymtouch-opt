@@ -16,7 +16,7 @@
 - [Эллипсы](https://opt.gymtouch.ru/catalog/c/ellip/) — 34 поз., от 81 500 ₽
 - [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 38 поз., от 22 700 ₽
 - [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 346 поз., от 9 500 ₽
-- [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 70 поз., от 27 600 ₽
+- [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 71 поз., от 27 600 ₽
 - [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 46 поз., от 105 300 ₽
 - [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 27 поз., от 8 600 ₽
 - [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 81 поз., от 8 900 ₽
@@ -32,7 +32,7 @@
 - [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 40 поз., от 179 ₽
 - [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 94 поз., от 6 400 ₽
 - [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 20 поз., от 1 470 ₽
-- [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 10 поз., от 30 800 ₽
+- [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 9 поз., от 30 800 ₽
 
 ### Фабрики
 - [Shuyoute (SYT)](https://opt.gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (164 поз.)
