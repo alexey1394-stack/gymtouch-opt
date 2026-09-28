@@ -2652,10 +2652,31 @@ run();
 (function () {
   var g = $('gal');
   if (!g || !PH.projects.length) return;
-  g.innerHTML = PH.projects.map(function (p) {
-    return '<figure><img loading="lazy" src="' + p.img + '" alt="' + p.t + '">' +
+  g.innerHTML = PH.projects.map(function (p, i) {
+    // первые две плитки широкие и попадают на экран сразу — их грузим без lazy,
+    // иначе на медленной сети они дольше всех висят пустыми
+    return '<figure><img' + (i < 2 ? '' : ' loading="lazy"') + ' decoding="async" src="' + p.img +
+      '" alt="' + p.t + '">' +
       '<figcaption><b>' + p.t + '</b><span>' + p.n + '</span></figcaption></figure>';
   }).join('');
+  // Сайт без фото нельзя (слово Алексея 28.09.2026). Бывает, что загрузка обрывается
+  // молча — без события error: тогда картинка навсегда остаётся пустой. Поэтому раз в
+  // 4 секунды смотрим, что плитка на экране и всё ещё без кадра, и перезапускаем её.
+  var попытки = 0;
+  var сторож = setInterval(function () {
+    var живые = 0, ждут = 0;
+    [].forEach.call(g.querySelectorAll('img'), function (im) {
+      if (im.naturalWidth > 0) { живые++; return; }
+      var r = im.getBoundingClientRect();
+      var виден = r.top < innerHeight * 1.5 && r.bottom > -innerHeight * 0.5;
+      if (!виден) return;
+      ждут++;
+      im.removeAttribute('loading');
+      var чистый = im.src.split('#')[0].replace(/[?&]_p=\d+/, '');
+      im.src = чистый + (чистый.indexOf('?') < 0 ? '?' : '&') + '_p=' + (попытки + 1);
+    });
+    if (++попытки >= 3 || (ждут === 0 && живые > 0)) clearInterval(сторож);
+  }, 4000);
 })();
 
 // ── зоны под ключ: состав и цена берутся из того же каталога ────
