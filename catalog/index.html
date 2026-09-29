@@ -47,7 +47,8 @@ a{color:inherit}
 .bar h1{font-size:clamp(1.6rem,1.2rem+1.4vw,2.4rem)}
 .bar .cnt{font-family:var(--f-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
 .bar select{margin-left:auto;font:12px var(--f-m);letter-spacing:.06em;padding:7px 10px;border:1px solid var(--rule);background:var(--paper-2)}
-.seg{display:flex;gap:6px;margin-bottom:8px}.seg button{flex:1;font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:8px 6px;border:1px solid var(--rule);background:var(--paper-2);cursor:pointer;color:var(--ink)}.seg button.on{background:var(--ink);color:var(--milk);border-color:var(--ink)}
+.cpm{font:10px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.seg{display:flex;gap:6px;margin-bottom:8px}.seg.cp{flex-wrap:wrap}.seg.cp button{flex:0 0 auto;padding:8px 12px}.seg button{flex:1;font:11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:8px 6px;border:1px solid var(--rule);background:var(--paper-2);cursor:pointer;color:var(--ink)}.seg button.on{background:var(--ink);color:var(--milk);border-color:var(--ink)}
 .f .tag{display:inline-block;font:9.5px var(--f-m);letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;margin-left:6px;background:var(--gold);color:var(--milk);vertical-align:1px}
 .card .pm{position:absolute;right:10px;top:10px;z-index:2;font:9.5px var(--f-m);letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;background:var(--gold);color:var(--milk)}
 .card.prem{box-shadow:inset 3px 0 0 var(--gold)}.card.prem .zc b{color:var(--gold)}
@@ -154,6 +155,7 @@ a{color:inherit}
 <div class="wrap">
   <div class="side-bg" id="sideBg"></div>
   <aside class="side" id="side"><button type="button" class="side__x" id="sideX" aria-label="Закрыть">×</button>
+    <div class="f" id="fCopyBox" hidden><h3>Копии брендов</h3><div class="seg cp" id="fCopy"></div></div>
     <div class="f"><h3>Сегмент</h3><div class="seg" id="fS"><button type="button" data-seg="all" class="on">Все</button><button type="button" data-seg="prem">Премиум</button><button type="button" data-seg="mid">Средний</button></div></div>
     <div class="f"><h3>Фабрика <button type="button" class="tog" data-scope="fZ">снять все</button></h3><div id="fZ"></div></div>
     <div class="f"><h3>Категория <button type="button" class="tog" data-scope="fC">снять все</button></h3><div id="fC"></div></div>
@@ -208,6 +210,7 @@ var LEAD = {kind:'yc', url:'https://functions.yandexcloud.net/d4e6ubis8ni2eanh5c
 var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
 (function () {
   var D = null, sel = {}, view = [], shown = 0, PAGE = 60, unlocked = false, phRank = null, EMB = null;
+  var копияВыбрана = '';   // выбранная метка «копия …»; общая для фильтра и адреса
   function память() {
     var v = null;
     try { v = localStorage.getItem('cat_ok'); } catch (e) {}
@@ -258,6 +261,24 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       boxes.forEach(function (x) { x.checked = !anyOn; });
       syncTog(); apply();
     });
+    // Копии брендов — слово Алексея 29.09.2026: «фильтрация под бренды, называй
+    // «копия PANA», «копия HOIS»». Кнопки строятся по меткам из каталога: нет меток —
+    // блока нет, и никто не обещает клиенту фильтр, за которым пусто.
+    var копии = (D.copies || []).filter(function (м) { return D.items.some(function (i) { return i.cp === м.k; }); });
+    if (копии.length) {
+      $('fCopyBox').hidden = false;
+      $('fCopy').innerHTML = '<button type="button" data-cp="" class="on">Все</button>' +
+        копии.map(function (м) {
+          var n = D.items.filter(function (i) { return i.cp === м.k; }).length;
+          return '<button type="button" data-cp="' + м.k + '">' + м.n + ' <span style="opacity:.6">' + n + '</span></button>';
+        }).join('');
+      $('fCopy').addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        копияВыбрана = b.dataset.cp;
+        [].forEach.call($('fCopy').children, function (x) { x.classList.toggle('on', x === b); });
+        apply();
+      });
+    }
     $('fS').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       [].forEach.call(document.querySelectorAll('#fZ input'), function (x) {
@@ -307,6 +328,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var qw = q ? q.split(/\s+/).filter(Boolean).map(function (w) { return w.length > 5 ? w.slice(0, w.length - 2) : w; }) : [];
     view = D.items.filter(function (i) {
       if (!(zs.indexOf(i.z) >= 0 && cs.indexOf(i.cat) >= 0 && i.price >= mn && i.price <= mx)) return false;
+      if (копияВыбрана && i.cp !== копияВыбрана) return false;
       if ($('onlyPhoto').checked && i.nophoto) return false;
       if (!qw.length) return true;
       var t = (i.ru + ' ' + i.en + ' ' + i.art + ' ' + (catN[i.cat] || '')).toLowerCase();
@@ -344,6 +366,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     if (cs.length < allC) p.push('c=' + cs.join(','));
     if (mn) p.push('min=' + mn); if (mx !== Infinity) p.push('max=' + mx);
     if (q) p.push('q=' + encodeURIComponent(q)); if (s !== 'cat') p.push('s=' + s);
+    if (копияВыбрана) p.push('cp=' + копияВыбрана);
     var h = p.length ? '#' + p.join('&') : '';
     if (h !== location.hash) { try { history.replaceState(null, '', location.pathname + location.search + h); } catch (e) {} }
   }
@@ -354,6 +377,10 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     if (P.c !== undefined) { var c = P.c.split(','); [].forEach.call(document.querySelectorAll('#fC input'), function (x) { x.checked = c.indexOf(x.value) >= 0; }); }
     if (P.min) $('pMin').value = P.min; if (P.max) $('pMax').value = P.max;
     if (P.q) $('q').value = P.q; if (P.s) $('sort').value = P.s;
+    if (P.cp) {
+      копияВыбрана = P.cp;
+      [].forEach.call(document.querySelectorAll('#fCopy button'), function (x) { x.classList.toggle('on', x.dataset.cp === P.cp); });
+    }
   }
   // ── поиск по фото: отпечаток фото считает облако, сравнение с каталогом — здесь ──
   function поФото(file) {
@@ -389,6 +416,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       ? '<div class="pic no"><b>' + i.art + '</b><span>Фото уточняем у фабрики — пришлём по запросу</span></div>'
       : null;
     return '<div class="card' + (z && z.seg === 'prem' ? ' prem' : '') + '" data-id="' + i.id + '">' + (кадр || '<div class="pic">' + (z && z.seg === 'prem' ? '<span class="pm">премиум</span>' : '') + (phRank && phRank[i.id] !== undefined ? '<span class="sim">' + Math.round(phRank[i.id] * 100) + ' %</span>' : '') + '<img loading="lazy" src="img/' + i.id + '.webp" alt=""></div>') + '<div class="b">' +
+      (i.cp ? '<div class="cpm">' + (((D.copies || []).filter(function (м) { return м.k === i.cp; })[0] || {}).n || '') + '</div>' : '') +
       '<div class="zc"><b>' + z.name + '</b> · ' + i.art + '</div><div class="nm">' + i.ru + '</div>' +
       (i.en && i.en !== i.ru ? '<div class="en">' + i.en + '</div>' : '') +
       '<div class="dm">' + (i.unit ? (i.dims || '') : (i.dims ? i.dims.replace(/\*/g, ' × ') + ' мм' : '')) + (i.cbm ? ' · ' + String(i.cbm).replace('.', ',') + ' м³' : '') + '</div>' +
@@ -423,6 +451,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var i = byId(id), z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
     var m = document.createElement('div'); m.className = 'modal';
     m.innerHTML = '<div class="modal__box"><button class="x" aria-label="Закрыть">×</button>' + (i.nophoto ? '<div class="modal__pic no" style="flex-direction:column;gap:10px;padding:30px;text-align:center"><b class="mono">' + i.art + '</b><span style="color:var(--graphite);font-size:13px">Фото этой позиции уточняем у фабрики — пришлём по запросу вместе с расчётом</span></div>' : '<div class="modal__pic"><img src="img/' + i.id + '.webp" alt=""></div>') + '<div class="modal__b">' +
+      (i.cp ? '<div class="mono" style="color:var(--gold)">' + ((D.copies || []).filter(function (м) { return м.k === i.cp; })[0] || {}).n + '</div>' : '') +
       '<div class="mono"><b>' + z.name + '</b>' + (z.seg === 'prem' ? '<span class="pm" style="position:static;margin-left:8px">премиум</span>' : '') + '<i>·</i>' + i.art + '</div><h2>' + i.ru + '</h2>' + (i.en && i.en !== i.ru ? '<div style="color:var(--graphite)">' + i.en + '</div>' : '') +
       '<dl class="spec">' + (i.unit ? (i.dims ? '<dt>Варианты</dt><dd>' + i.dims + '</dd>' : '') + '<dt>Цена</dt><dd>за ' + (i.unit === 'шт' ? 'штуку' : i.unit === 'кг' ? 'килограмм' : 'квадратный метр') + ', фрахт по массе</dd>' : (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '')) + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       (i.cbm ? '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd>' : '') + '</dl>' +
