@@ -251,7 +251,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609291914', { cache: 'no-cache' })
+  fetch('data.json?v=202609291915', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -461,7 +461,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       + (p['юрлицо'] ? '<div class="yur">' + p['юрлицо'] + '</div>' : '')
       + (p['о_компании'] ? '<p class="pro">' + p['о_компании'] + '</p>' : '')
       + '<dl>' + ряд.join('') + '</dl>'
-      + '<div class="ist">Данные — из каталога самой фабрики' + (p['карточка_есть'] ? ' и нашей карточки поставщика' : '')
+      + '<div class="ist">Данные — ' + (p['источник_ручного'] ? 'по нашим сведениям о заводе'
+        : 'из каталога самой фабрики' + (p['карточка_есть'] ? ' и нашей карточки поставщика' : ''))
       + '. Возим напрямую с завода, без посредников.</div></div></div>';
     document.body.appendChild(m);
     m.addEventListener('click', function (e) {
