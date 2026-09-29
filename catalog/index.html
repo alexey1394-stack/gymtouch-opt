@@ -234,7 +234,11 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
 
-  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
+  // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
+  // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
+  // у посетителя, хотя на сервере уже лежали).
+  fetch('data.json?v=202609290844', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
     $('gateN').textContent = D.items.length;
