@@ -113,8 +113,8 @@ p{margin:0}
 /* ── обложка ───────────────────────────────────────────── */
 .hero{padding:88px 0 0;position:relative;overflow:hidden}
 .hero__grid{display:grid;grid-template-columns:1.3fr minmax(330px,420px);gap:48px;align-items:stretch}
-.hero__grid>div:first-child{align-self:center;padding-bottom:6px}
-.hero__grid>div:first-child+.hero__form,.hero__grid .hero__form{align-self:center}
+.hero__grid>div:first-child{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.hero__grid .hero__form{align-self:stretch}
 .hero h1{margin:18px 0 0}
 .hero h1 em{font-style:normal;color:var(--gold);display:block}
 .hero__sub{margin-top:34px;max-width:46ch;line-height:1.7}
@@ -123,11 +123,11 @@ p{margin:0}
 .hero__price--row .v{font-size:clamp(2.4rem,5vw,3.6rem)}
 .hero__price--row .n{margin:0;max-width:52ch}
 .hero__form{position:relative;background:linear-gradient(180deg,#1B1E21 0%,var(--ink) 100%);color:var(--milk);
-  padding:16px 22px 14px;display:grid;gap:7px;align-self:center;border:1px solid rgba(237,237,231,.1);
+  padding:20px 24px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;align-self:stretch;border:1px solid rgba(237,237,231,.1);
   box-shadow:0 24px 60px rgba(22,24,26,.28)}
 .hero__form::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
 .hero__form>.mono{color:#9AA0A6;margin-bottom:0;white-space:nowrap;font-size:clamp(9.5px,2.6vw,12px);letter-spacing:.1em}.hero__form>.mono b{color:var(--milk);font-size:inherit;letter-spacing:.1em}.hero__form>.mono i{padding:0 .4em}
-.hero__form .hint{margin:-4px 0 0;font-size:12.5px;color:#9AA0A6;line-height:1.4}
+.hero__form .hint{margin:-2px 0 0;font-size:12px;color:#9AA0A6;line-height:1.4}
 .hero__form label{display:grid;gap:5px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9AA0A6}
 .hero__form .fld{position:relative}
 .hero__form .fld i{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;font-size:15px;opacity:.5;pointer-events:none}
@@ -139,7 +139,7 @@ p{margin:0}
 .hero__form input:focus{outline:0;border-color:var(--gold-2);background:#272B30}
 .hero__form input::placeholder{color:#6E747A}
 .hero__form .lead__agree{margin:0}
-.hero__form .lead__status{margin:0}
+.hero__form .lead__status{margin:0;font-size:12px;line-height:1.35}
 .hero__form .or{display:flex;align-items:center;gap:10px;margin:2px 0 -2px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6E747A}
 .hero__form .or::before,.hero__form .or::after{content:"";flex:1;height:1px;background:rgba(237,237,231,.14)}
 .hero__soc{display:flex;gap:8px;margin-top:2px}
@@ -420,6 +420,9 @@ section{padding:96px 0}
   transform:scale(.4);opacity:0;transition:transform .45s cubic-bezier(.2,.9,.3,1.2),opacity .45s ease}
 .jc.on .jc__box i{transform:scale(1);opacity:1}
 .jc__box i.f{background:var(--ink)}
+.jc__box i.free{cursor:pointer}
+.jc__box i.free:hover{background:var(--gold-2);transform:scale(1.18)}
+.jc__box:hover i.free{background:#DCD9CE}
 .jc__box i.f.last{background:var(--gold)}
 .jc__free{margin:16px 0 0;font-family:var(--f-h);font-size:clamp(30px,4vw,42px);color:var(--ink);line-height:1;
   display:flex;align-items:baseline;gap:10px}
@@ -462,9 +465,11 @@ section{padding:96px 0}
 .fc__play{position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;
   background:rgba(22,24,26,.72);display:grid;place-items:center}
 .fc__play:after{content:"";border:7px solid transparent;border-left:11px solid #fff;margin-left:4px}
-.feed__more{grid-column:1/-1;background:var(--paper-2);padding:18px 20px;display:flex;
-  justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.feed__more span{font-family:var(--f-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.feed__bar{background:var(--paper-2);border:1px solid var(--rule);border-top:0;padding:14px 20px;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.feed__bar:empty{display:none}
+.feed__bar span{font-family:var(--f-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.feed__bar .btn{padding:10px 18px}
 @media(max-width:1100px){.feed{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.feed{grid-template-columns:1fr}}
 /* ── галерея проектов ──────────────────────────────────── */
@@ -861,14 +866,13 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
       </div>
       <form class="hero__form" id="quickForm" novalidate>
         <p class="mono"><b>Получить расчёт</b><i>·</i>ответим в течение 15 мин</p>
-        <p class="hint">Оставьте контакт — пришлём каталог с ценами в Москве и смету под вашу площадь.</p>
+        <p class="hint">Пришлём каталог с ценами в Москве и смету под вашу площадь.</p>
         <label>Телефон<span class="fld"><i>📞</i><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required></span></label>
         <label>E-mail<span class="fld"><i>✉</i><input name="email" type="email" autocomplete="email" placeholder="для расчёта и КП"></span></label>
         <label class="lead__agree"><input type="checkbox" name="agree" value="1">
           <span>Согласен на обработку персональных данных по <a href="policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
         <button class="btn" type="submit">Получить расчёт</button>
-        <p class="lead__status" id="quickStatus">Перезвоним или напишем — как удобнее вам. Без звонков-роботов.</p>
-        <div class="or">или напишите сразу</div>
+        <p class="lead__status" id="quickStatus">Перезвоним или напишем — как удобнее вам.</p>
         <div class="hero__soc">
           <a href="https://max.ru/channel_gymtouch" target="_blank" rel="noopener">Мы в MAX</a>
           <a href="https://t.me/gym_touch" target="_blank" rel="noopener">Мы в Telegram</a>
@@ -1225,6 +1229,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin:6px 0}
       </div>
     </div>
     <div class="feed" id="feed"></div>
+    <div class="feed__bar" id="feedBar"></div>
   </div>
 </section>
 
@@ -3186,19 +3191,22 @@ var TURNKEY = [
       var горит = д !== null && д <= 14;
       var кубы = '';
       for (var k = 0; k < ЯЧЕЕК; k++) {
-        кубы += '<i class="' + (k < полных ? 'f' + (k === полных - 1 ? ' last' : '') : '') +
-          '" style="transition-delay:' + (k * 11) + 'ms"></i>';
+        var занятая = k < полных;
+        кубы += '<i class="' + (занятая ? 'f' + (k === полных - 1 ? ' last' : '') : 'free') +
+          '" style="transition-delay:' + (k * 11) + 'ms"' +
+          (занятая ? '' : ' title="Свободное место — нажмите, чтобы занять"') + '></i>';
       }
       return '<article class="jc" data-free="' + своб + '">' +
         '<div class="jc__top"><b>' + (с.код || '') + ' · ' + (с.тип || '') + '</b>' +
         (горит ? '<span class="jc__срочно">закрываем через ' + д + ' дн.</span>'
-               : '<span>' + (с.название || 'сборный') + '</span>') + '</div>' +
+               : '<span>свободно ' + своб + ' м³</span>') + '</div>' +
         '<div class="jc__box">' + кубы + '</div>' +
         '<p class="jc__free"><b data-to="' + своб + '">0</b> м³ <span>свободно из ' + всего +
         ' м³ · занято ' + процент + ' %</span></p>' +
         '<div class="jc__rows">' +
         (с.закрытие ? '<div class="jc__row"><span>Последний день приёма</span><b' +
           (горит ? ' class="hot"' : '') + '>' + дата(с.закрытие) + '</b></div>' : '') +
+        (с.название ? '<div class="jc__row"><span>Куда идёт</span><b>' + с.название + '</b></div>' : '') +
         (с.выход ? '<div class="jc__row"><span>Уходит из Китая</span><b>' + с.выход + '</b></div>' : '') +
         (с.приход ? '<div class="jc__row"><span>У вас на объекте</span><b>' + с.приход + '</b></div>' : '') +
         (с['что_везём'] ? '<div class="jc__row"><span>Уже внутри</span><b>' + с['что_везём'] + '</b></div>' : '') +
@@ -3244,7 +3252,8 @@ var TURNKEY = [
     // «Занять место» — прокрутка к форме и готовый текст заявки: человек не должен
     // объяснять своими словами, в какой контейнер он хочет
     бокс.addEventListener('click', function (e) {
-      var b = e.target.closest('button[data-code]');
+      var куб = e.target.closest('.jc__box i.free');
+      var b = куб ? куб.closest('.jc').querySelector('button[data-code]') : e.target.closest('button[data-code]');
       if (!b) return;
       var форма = document.getElementById('leadForm') || document.querySelector('#kontakty form');
       var поле = форма && (форма.querySelector('textarea[name=note]') || форма.querySelector('textarea'));
@@ -3277,10 +3286,11 @@ var TURNKEY = [
         '<h3 class="fc__h">' + (п.заголовок || 'Пост канала') + '</h3>' +
         (п.текст ? '<p class="fc__t">' + п.текст + '</p>' : '') +
         '<div class="fc__go">Читать в Telegram →</div></div></a>';
-    }).join('') +
-      '<div class="feed__more"><span>Канал обновляется каждый день' +
+    }).join('');
+    var подвал = document.getElementById('feedBar');
+    if (подвал) подвал.innerHTML = '<span>Канал обновляется каждый день' +
       (FEED.обновлено ? ' · собрано ' + FEED.обновлено : '') + '</span>' +
-      '<a class="btn" href="https://t.me/' + (FEED.канал || 'gym_touch') + '" target="_blank" rel="noopener">Подписаться на канал</a></div>';
+      '<a class="btn" href="https://t.me/' + (FEED.канал || 'gym_touch') + '" target="_blank" rel="noopener">Подписаться на канал</a>';
   } else if (доска) {
     доска.style.display = 'none';
   }
