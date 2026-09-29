@@ -95,6 +95,15 @@ a{color:inherit}
 .status{font-size:12px;color:#8B9196;margin:0;min-height:1.2em}.status.warn{color:#E0B45A}.status.ok{color:#8FCB9B}
 /* модалка */
 .modal{position:fixed;inset:0;z-index:70;background:rgba(22,24,26,.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.pick{display:flex;align-items:center;gap:14px;border:1px solid var(--gold);background:linear-gradient(90deg,rgba(168,117,18,.07),transparent 60%);padding:13px 16px;margin:0 0 16px}
+.pick b{font-family:var(--f-m);font-size:15px;letter-spacing:.02em}
+.pick .t{flex:1;font-size:13.5px;line-height:1.45}
+.pick .t i{font-style:normal;color:var(--graphite)}
+.pick button{border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:inherit;font-size:13px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.pick button:hover{background:var(--gold);border-color:var(--gold)}
+@media(max-width:700px){.pick{flex-direction:column;align-items:flex-start;gap:9px}.pick button{width:100%}}
+.zpick{font-weight:600}
+.zpick .tag{background:var(--gold);color:#fff;border:none}
 .sim{grid-column:1/-1;border-top:1px solid var(--hair);padding:16px 28px 22px}
 .sim h3{margin:0 0 10px;font-size:13px;font-weight:500;color:var(--graphite);letter-spacing:.04em;text-transform:uppercase}
 .sim__row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
@@ -191,6 +200,11 @@ a{color:inherit}
       <button type="button" class="share" id="share" title="Скопировать ссылку с этим набором фильтров">Ссылка на фильтр</button><select id="sort"><option value="cat">по категории</option><option value="pa">цена ↑</option><option value="pd">цена ↓</option><option value="nm">по названию</option></select></div>
     <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без хорошего снимка стоят в конце списка — фото пришлём по запросу.</p>
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
+    <div class="pick" id="pick" hidden>
+      <div class="t"><b>Relax Fitness</b> — выбор владельца GYMTOUCH.<br>
+        <i>Если нужен топ — берите эту линейку: сборка, обивка и рамы здесь заметно крепче, и мы возим её сами.</i></div>
+      <button type="button" id="pickGo">Показать только Relax</button>
+    </div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Показать ещё</button>
     <nav class="static" style="margin-top:36px;font-size:13px;color:var(--graphite)"><b style="font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase">Каталог по разделам:</b>
@@ -263,7 +277,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609291938', { cache: 'no-cache' })
+  fetch('data.json?v=202609291952', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -271,8 +285,24 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     $('howNote').textContent = D.note + ' Курс ЦБ ' + D.rate.date + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом).';
     var cz = {}, cc = {};
     D.items.forEach(function (i) { cz[i.z] = (cz[i.z] || 0) + 1; cc[i.cat] = (cc[i.cat] || 0) + 1; });
-    $('fZ').innerHTML = D.zavody.map(function (z) {
-      return '<label><input type="checkbox" name="z" value="' + z.code + '" checked>' + z.name + (z.seg === 'prem' ? '<span class="tag">премиум</span>' : '') + '<span class="n">' + (cz[z.code] || 0) + '</span></label><span class="z">' + z.about
+    // Слово Алексея 29.09.2026: «выдели прямо жирным бренд Relax и сверху напиши,
+    // что это мой выбор — если хотите топчик, то вот». Ставим его первым в списке
+    // фабрик и показываем полосу над каталогом.
+    var ВЫБОР = 'H';                       // Relax Fitness
+    var заводы = D.zavody.slice().sort(function (a, b) {
+      return (a.code === ВЫБОР ? -1 : 0) - (b.code === ВЫБОР ? -1 : 0);
+    });
+    if (D.zavody.some(function (z) { return z.code === ВЫБОР; })) $('pick').hidden = false;
+    $('pickGo').addEventListener('click', function () {
+      [].forEach.call(document.querySelectorAll('#fZ input'), function (x) { x.checked = x.value === ВЫБОР; });
+      syncTog(); apply();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    $('fZ').innerHTML = заводы.map(function (z) {
+      var выбор = z.code === ВЫБОР;
+      return '<label' + (выбор ? ' class="zpick"' : '') + '><input type="checkbox" name="z" value="' + z.code + '" checked>' + z.name
+        + (выбор ? '<span class="tag">наш выбор</span>' : (z.seg === 'prem' ? '<span class="tag">премиум</span>' : ''))
+        + '<span class="n">' + (cz[z.code] || 0) + '</span></label><span class="z">' + z.about
         + (z.pass ? ' <button type="button" class="ozav" data-z="' + z.code + '">о фабрике</button>' : '') + '</span>';
     }).join('');
     var groups = []; D.cats.forEach(function (c) { if (cc[c.k] && groups.indexOf(c.g) < 0) groups.push(c.g); });
