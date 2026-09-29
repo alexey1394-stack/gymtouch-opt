@@ -237,7 +237,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609291703', { cache: 'no-cache' })
+  fetch('data.json?v=202609291705', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -460,8 +460,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       '<dl class="spec">' + (i.unit ? (i.dims ? '<dt>Варианты</dt><dd>' + i.dims + '</dd>' : '') + '<dt>Цена</dt><dd>за ' + (i.unit === 'шт' ? 'штуку' : i.unit === 'кг' ? 'килограмм' : 'квадратный метр') + ', фрахт по массе</dd>' : (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '')) + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       (i.cbm ? '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd>' : '') + '</dl>' +
       (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽' + (i.unit ? ' / ' + i.unit : '') + '<small>в Москве, с НДС 22 %, без брокера и сборки · по курсу ЦБ на ' + D.rate.date.split('-').reverse().join('.') + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом)</small></div>' +
-      '<div class="brk"><span>Что входит в цену</span><b>доставка до Москвы</b><span></span><b>таможенное оформление</b><span></span><b>НДС 22 %</b><span>Считаем отдельно</span><b>брокер, сборка, доставка по адресу</b></div>' +
-      '<div style="font-size:12px;color:var(--graphite);margin-top:6px">Открытый расчёт по позициям — цена фабрики, логистика, таможня, наши 15 % — даём листом в коммерческом предложении: там он считается на ваш объём и ваш контейнер.</div>' +
+      '<div class="brk"><span>Цена фабрики, EXW</span><b>' + fmt(i.brk.inv) + ' ₽</b><span>В нашей цене</span><b>доставка до Москвы</b><span></span><b>таможенное оформление</b><span></span><b>НДС 22 %</b><span>Считаем отдельно</span><b>брокер, сборка, доставка по адресу</b></div>' +
+      '<div style="font-size:12px;color:var(--graphite);margin-top:6px">Цену фабрики показываем открыто. Разбивку по позициям — логистика, таможня, наша работа — даём листом в коммерческом предложении: там она считается на ваш объём и ваш контейнер.</div>' +
       '<button class="btn" data-add="' + i.id + '">' + (sel[i.id] ? '✓ В подборке' : '+ В подборку') + '</button>' :
       '<div class="big" style="filter:blur(6px)">000 000 ₽</div><button class="btn" id="mUnlock">Открыть цены</button>') +
       '</div></div>';
