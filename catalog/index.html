@@ -95,6 +95,18 @@ a{color:inherit}
 .status{font-size:12px;color:#8B9196;margin:0;min-height:1.2em}.status.warn{color:#E0B45A}.status.ok{color:#8FCB9B}
 /* модалка */
 .modal{position:fixed;inset:0;z-index:70;background:rgba(22,24,26,.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.sim{grid-column:1/-1;border-top:1px solid var(--hair);padding:16px 28px 22px}
+.sim h3{margin:0 0 10px;font-size:13px;font-weight:500;color:var(--graphite);letter-spacing:.04em;text-transform:uppercase}
+.sim__row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.sim__i{flex:0 0 132px;cursor:pointer;border:1px solid var(--hair);background:var(--paper);padding:8px;display:flex;flex-direction:column;gap:5px}
+.sim__i:hover{border-color:var(--gold)}
+.sim__i img{width:100%;height:96px;object-fit:contain;background:#f6f6f2}
+.sim__i .nm{font-size:11.5px;line-height:1.25;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:29px}
+.sim__i .pr{font-size:12.5px;font-family:var(--f-m)}
+.sim__i .dl{font-size:11px}
+.sim__i .dl.dn{color:#2e7d32}.sim__i .dl.up{color:var(--graphite)}
+.sim__i .no{height:96px;display:flex;align-items:center;justify-content:center;background:#f6f6f2;color:var(--graphite);font-size:10.5px;text-align:center;padding:6px}
+@media(max-width:760px){.sim{padding:14px 16px 18px}.sim__i{flex:0 0 118px}}
 .ozav{border:1px solid var(--hair);background:none;color:var(--ink);font:inherit;font-size:11.5px;padding:2px 8px;border-radius:11px;cursor:pointer;margin-left:2px}
 .ozav:hover{border-color:var(--gold);color:var(--gold)}
 .zav{max-width:620px;padding:26px 28px 30px;line-height:1.55}
@@ -251,7 +263,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609291923', { cache: 'no-cache' })
+  fetch('data.json?v=202609291938', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -520,12 +532,52 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       '<div style="font-size:12px;color:var(--graphite);margin-top:6px">Цену фабрики показываем открыто. Разбивку по позициям — логистика, таможня, наша работа — даём листом в коммерческом предложении: там она считается на ваш объём и ваш контейнер.</div>' +
       '<button class="btn" data-add="' + i.id + '">' + (sel[i.id] ? '✓ В подборке' : '+ В подборку') + '</button>' :
       '<div class="big" style="filter:blur(6px)">000 000 ₽</div><button class="btn" id="mUnlock">Открыть цены</button>') +
-      '</div></div>';
+      '</div><div class="sim" hidden></div></div>';
     document.body.appendChild(m);
+    похожие(i, m);
     m.addEventListener('click', function (e) {
       if (e.target === m || e.target.closest('.x')) { m.remove(); return; }
       var b = e.target.closest('[data-add]'); if (b) { toggle(b.dataset.add); b.textContent = sel[i.id] ? '✓ В подборке' : '+ В подборку'; }
       if (e.target.id === 'mUnlock') { m.remove(); $('gate').hidden = false; }
+      var s = e.target.closest('.sim__i');
+      if (s) { m.remove(); open(s.dataset.id); }
+    });
+  }
+
+  // Похожие товары — слово Алексея 29.09.2026: «показывать похожие товары, ниже
+  // по цене или выше по цене, визуально похожие, похожие по названию или по
+  // картинкам». Список считается заранее (каталог/похожие.py) по отпечаткам
+  // картинок SigLIP, общим словам названия и категории; здесь только рисуем.
+  var SIM = null, SIM_ЖДЁМ = null;
+  function списокПохожих() {
+    if (SIM) return Promise.resolve(SIM);
+    if (!SIM_ЖДЁМ) {
+      SIM_ЖДЁМ = fetch('похожие.json?v=' + (D.built || '').replace(/\D/g, ''))
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .then(function (j) { SIM = j; return j; })
+        .catch(function () { SIM = {}; return SIM; });
+    }
+    return SIM_ЖДЁМ;
+  }
+  function похожие(i, m) {
+    var блок = m.querySelector('.sim');
+    if (!блок) return;
+    списокПохожих().then(function (карта) {
+      var ids = (карта[i.id] || []).filter(function (x) { return byId(x); }).slice(0, 10);
+      if (!ids.length) return;
+      блок.innerHTML = '<h3>Похожие машины</h3><div class="sim__row">' + ids.map(function (x) {
+        var s = byId(x);
+        var разн = (unlocked && i.price && s.price) ? Math.round((s.price - i.price) / i.price * 100) : null;
+        var метка = разн === null || разн === 0 ? ''
+          : '<div class="dl ' + (разн < 0 ? 'dn' : 'up') + '">' + (разн < 0 ? '' : '+') + разн + ' %</div>';
+        return '<div class="sim__i" data-id="' + s.id + '">'
+          + (s.nophoto ? '<div class="no">фото по запросу</div>'
+                       : '<img loading="lazy" src="img/' + s.id + '.webp" alt="">')
+          + '<div class="nm">' + s.ru + '</div>'
+          + (unlocked ? '<div class="pr">' + fmt(s.price) + ' ₽</div>' + метка : '')
+          + '</div>';
+      }).join('') + '</div>';
+      блок.hidden = false;
     });
   }
   // доставка с повторами: 3 попытки сейчас, остаток — в очередь localStorage, дошлём при следующем заходе

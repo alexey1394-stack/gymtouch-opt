@@ -5,7 +5,7 @@
 > (35 производство + 35 доставка), оплата 87 % / 13 %. Комплектуем контейнер позициями разных фабрик, собираем залы
 > от 150 до 4 000 м², в России — своя сервисная служба (профилактика и ремонт тренажёров).
 
-## Каталог: 4056 позиций, 9 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-29)
+## Каталог: 4044 позиций, 9 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-09-29)
 Интерактивный каталог: https://opt.gymtouch.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
 Статические страницы для чтения: категории https://opt.gymtouch.ru/catalog/c/, фабрики https://opt.gymtouch.ru/catalog/f/, карточка позиции https://opt.gymtouch.ru/catalog/i/<id>/.
 
@@ -17,30 +17,30 @@
 - [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 47 поз., от 26 000 ₽
 - [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 435 поз., от 7 200 ₽
 - [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 83 поз., от 22 000 ₽
-- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 58 поз., от 87 400 ₽
+- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 53 поз., от 87 400 ₽
 - [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 75 поз., от 9 600 ₽
-- [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 101 поз., от 9 100 ₽
+- [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 100 поз., от 9 600 ₽
 - [Ноги](https://opt.gymtouch.ru/catalog/c/legs/) — 788 поз., от 8 600 ₽
 - [Ягодичные](https://opt.gymtouch.ru/catalog/c/glute/) — 193 поз., от 38 200 ₽
 - [Руки и плечи](https://opt.gymtouch.ru/catalog/c/arms/) — 291 поз., от 240 ₽
 - [Жимы](https://opt.gymtouch.ru/catalog/c/press/) — 568 поз., от 17 300 ₽
 - [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 435 поз., от 7 200 ₽
-- [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 269 поз., от 9 000 ₽
+- [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 268 поз., от 9 000 ₽
 - [Скамьи](https://opt.gymtouch.ru/catalog/c/bench/) — 202 поз., от 8 000 ₽
-- [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 315 поз., от 2 240 ₽
-- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 150 поз., от 210 ₽
+- [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 313 поз., от 2 240 ₽
+- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 148 поз., от 210 ₽
 - [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 37 поз., от 180 ₽
-- [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 113 поз., от 8 100 ₽
+- [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 112 поз., от 8 100 ₽
 - [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 18 поз., от 1 480 ₽
 - [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 36 поз., от 1 330 ₽
 
 ### Фабрики
 - [Shuyoute (SYT)](https://opt.gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (911 поз.)
-- [MND Fitness](https://opt.gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1219 поз.)
+- [MND Fitness](https://opt.gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1212 поз.)
 - [Guwow](https://opt.gymtouch.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (224 поз.)
-- [Juren (JR)](https://opt.gymtouch.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (261 поз.)
+- [Juren (JR)](https://opt.gymtouch.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (258 поз.)
 - [Relax Fitness](https://opt.gymtouch.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (596 поз.)
-- [TZ Fitness (Tianzhan)](https://opt.gymtouch.ru/catalog/f/J/): Шаньдун, Дэчжоу · кардио, грузоблочные, нагружаемые, стойки и аксессуары (719 поз.)
+- [TZ Fitness (Tianzhan)](https://opt.gymtouch.ru/catalog/f/J/): Шаньдун, Дэчжоу · кардио, грузоблочные, нагружаемые, стойки и аксессуары (717 поз.)
 - [Brightway (BRTW)](https://opt.gymtouch.ru/catalog/f/K/): Шаньдун · грузоблочная серия TY (35 поз.)
 - [Langmai](https://opt.gymtouch.ru/catalog/f/M/): Шаньдун, Дэчжоу · кардио: дорожки, степперы-лестницы, эллипсы, велосипеды, гребные (58 поз.)
 - [Yozoe](https://opt.gymtouch.ru/catalog/f/I/) — премиум: Гуандун · пилатес и йога — оборудование студий (33 поз.)
