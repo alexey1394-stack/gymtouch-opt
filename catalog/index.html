@@ -95,6 +95,16 @@ a{color:inherit}
 .status{font-size:12px;color:#8B9196;margin:0;min-height:1.2em}.status.warn{color:#E0B45A}.status.ok{color:#8FCB9B}
 /* модалка */
 .modal{position:fixed;inset:0;z-index:70;background:rgba(22,24,26,.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.ozav{border:1px solid var(--hair);background:none;color:var(--ink);font:inherit;font-size:11.5px;padding:2px 8px;border-radius:11px;cursor:pointer;margin-left:2px}
+.ozav:hover{border-color:var(--gold);color:var(--gold)}
+.zav{max-width:620px;padding:26px 28px 30px;line-height:1.55}
+.zav h2{margin:0 0 2px;font-size:22px}
+.zav .yur{color:var(--graphite);font-size:13px;margin-bottom:16px}
+.zav dl{display:grid;grid-template-columns:auto 1fr;gap:7px 16px;margin:0 0 16px;font-size:14px}
+.zav dt{color:var(--graphite)}
+.zav .pro{border-left:2px solid var(--gold);padding-left:12px;color:var(--ink);font-size:13.5px;margin:0 0 16px}
+.zav .ist{color:var(--graphite);font-size:12px;border-top:1px solid var(--hair);padding-top:10px;margin-top:4px}
+@media(max-width:760px){.zav{padding:18px 16px 22px}.zav dl{grid-template-columns:1fr;gap:2px 0}.zav dt{margin-top:8px}}
 .modal__box{background:var(--paper);max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
 .modal__pic{background:#F6F6F2;display:flex;align-items:center;justify-content:center;min-height:360px}
 .modal__pic img{max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain}
@@ -233,11 +243,15 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   unlocked = !!память();
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Math.round(n).toLocaleString('ru-RU'); };
+  var знак = function (с, в) {
+    var н = String(Math.round(с * 100) / 100).replace('.', ',');
+    return в === 'CNY' ? н + ' ¥' : н + ' $';
+  };
 
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609291839', { cache: 'no-cache' })
+  fetch('data.json?v=202609291855', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -246,7 +260,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     var cz = {}, cc = {};
     D.items.forEach(function (i) { cz[i.z] = (cz[i.z] || 0) + 1; cc[i.cat] = (cc[i.cat] || 0) + 1; });
     $('fZ').innerHTML = D.zavody.map(function (z) {
-      return '<label><input type="checkbox" name="z" value="' + z.code + '" checked>' + z.name + (z.seg === 'prem' ? '<span class="tag">премиум</span>' : '') + '<span class="n">' + (cz[z.code] || 0) + '</span></label><span class="z">' + z.about + '</span>';
+      return '<label><input type="checkbox" name="z" value="' + z.code + '" checked>' + z.name + (z.seg === 'prem' ? '<span class="tag">премиум</span>' : '') + '<span class="n">' + (cz[z.code] || 0) + '</span></label><span class="z">' + z.about
+        + (z.pass ? ' <button type="button" class="ozav" data-z="' + z.code + '">о фабрике</button>' : '') + '</span>';
     }).join('');
     var groups = []; D.cats.forEach(function (c) { if (cc[c.k] && groups.indexOf(c.g) < 0) groups.push(c.g); });
     $('fC').innerHTML = groups.map(function (g) {
@@ -258,6 +273,8 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     if (!unlocked) $('gate').hidden = false;
     ['fZ', 'fC'].forEach(function (id) { $(id).addEventListener('change', apply); });
     document.querySelector('.side').addEventListener('click', function (e) {
+      var z = e.target.closest('.ozav');
+      if (z) { оФабрике(z.dataset.z); return; }
       var b = e.target.closest('.tog'); if (!b) return;
       var scope = b.dataset.grp ? document.querySelector('.grp[data-grp="' + b.dataset.grp + '"]') : $(b.dataset.scope);
       var boxes = [].slice.call(scope.querySelectorAll('input[type=checkbox]'));
@@ -414,6 +431,44 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
     };
     img.src = url;
   }
+  // Слово Алексея 29.09.2026: «можно кликнуть на фабрику и посмотреть подробнее».
+  // Всё в карточке — из каталогов самой фабрики и карточек Мартина: юрлицо, где
+  // стоит завод, с какого года, площадь. Чего в источниках нет, того тут не будет.
+  function оФабрике(код) {
+    var z = D.zavody.filter(function (x) { return x.code === код; })[0];
+    if (!z || !z.pass) return;
+    var p = z.pass, ряд = [];
+    function строка(имя, знач) { if (знач) ряд.push('<dt>' + имя + '</dt><dd>' + знач + '</dd>'); }
+    строка('Где', p['где']);
+    строка('На рынке', p['основана'] ? 'с ' + p['основана'] + ' года' : '');
+    строка('Завод', p['площадь_м2'] ? fmt(p['площадь_м2']) + ' м²' : '');
+    строка('Моделей у фабрики', p['моделей_у_фабрики'] ? p['моделей_у_фабрики'] + '+' : '');
+    строка('У нас в каталоге', p['позиций'] + ' позиций'
+      + (p['без_фото'] ? ' <span style="color:var(--graphite)">(' + p['без_фото'] + ' пока без фото)</span>' : ''));
+    if (p['цены_от']) строка('Цены', fmt(p['цены_от']) + ' – ' + fmt(p['цены_до']) + ' ₽');
+    if (p['категории'] && p['категории'].length) {
+      строка('Что делает', p['категории'].map(function (c) { return c.n.toLowerCase() + ' (' + c['сколько'] + ')'; }).join(', '));
+    }
+    if (p['копии'] && p['копии'].length) {
+      строка('Копии брендов', p['копии'].map(function (c) { return c.n.replace('копия ', '') + ' — ' + c['сколько']; }).join(', '));
+    }
+    строка('Сайт', p['сайт'] ? '<a href="' + (p['сайт'].indexOf('http') === 0 ? p['сайт'] : 'https://' + p['сайт'])
+      + '" target="_blank" rel="noopener nofollow">' + p['сайт'].replace(/^https?:\/\//, '') + '</a>' : '');
+    строка('Адрес', p['адрес']);
+    var m = document.createElement('div'); m.className = 'modal';
+    m.innerHTML = '<div class="modal__box" style="grid-template-columns:1fr"><button class="x" aria-label="Закрыть">×</button>'
+      + '<div class="zav"><h2>' + z.name + '</h2>'
+      + (p['юрлицо'] ? '<div class="yur">' + p['юрлицо'] + '</div>' : '')
+      + (p['о_компании'] ? '<p class="pro">' + p['о_компании'] + '</p>' : '')
+      + '<dl>' + ряд.join('') + '</dl>'
+      + '<div class="ist">Данные — из каталога самой фабрики' + (p['карточка_есть'] ? ' и нашей карточки поставщика' : '')
+      + '. Возим напрямую с завода, без посредников.</div></div></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', function (e) {
+      if (e.target === m || e.target.closest('.x')) m.remove();
+    });
+  }
+
   function card(i) {
     var z = D.zavody.filter(function (z) { return z.code === i.z; })[0];
     var кадр = i.nophoto
@@ -460,7 +515,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
       '<dl class="spec">' + (i.unit ? (i.dims ? '<dt>Варианты</dt><dd>' + i.dims + '</dd>' : '') + '<dt>Цена</dt><dd>за ' + (i.unit === 'шт' ? 'штуку' : i.unit === 'кг' ? 'килограмм' : 'квадратный метр') + ', фрахт по массе</dd>' : (i.dims ? '<dt>Габариты</dt><dd>' + i.dims.replace(/\*/g, ' × ') + ' мм</dd>' : '')) + (i.kg ? '<dt>Вес</dt><dd>' + i.kg + ' кг</dd>' : '') +
       (i.cbm ? '<dt>Объём</dt><dd>' + String(i.cbm).replace('.', ',') + ' м³' + (i.est ? ' <span style="color:var(--graphite)">(оценка по габаритам)</span>' : '') + '</dd>' : '') + '</dl>' +
       (unlocked ? '<div class="big">' + fmt(i.price) + ' ₽' + (i.unit ? ' / ' + i.unit : '') + '<small>в Москве, с НДС 22 %, без брокера и сборки · по курсу ЦБ на ' + D.rate.date.split('-').reverse().join('.') + ': USD ' + String(D.rate.usd).replace('.', ',') + ', CNY ' + String(D.rate.cny).replace('.', ',') + ' (с запасом)</small></div>' +
-      '<div class="brk"><span>Цена фабрики, EXW</span><b>' + fmt(i.brk.inv) + ' ₽</b><span>В нашей цене</span><b>доставка до Москвы</b><span></span><b>таможенное оформление</b><span></span><b>НДС 22 %</b><span>Считаем отдельно</span><b>брокер, сборка, доставка по адресу</b></div>' +
+      '<div class="brk"><span>Цена фабрики, EXW</span><b>' + (i.brk.exw ? знак(i.brk.exw, i.brk.cur) + '<i style="color:var(--graphite);font-weight:400;font-style:normal"> · ' + fmt(i.brk.inv) + ' ₽</i>' : fmt(i.brk.inv) + ' ₽') + '</b><span>В нашей цене</span><b>доставка до Москвы</b><span></span><b>таможенное оформление</b><span></span><b>НДС 22 %</b><span>Считаем отдельно</span><b>брокер, сборка, доставка по адресу</b></div>' +
       '<div style="font-size:12px;color:var(--graphite);margin-top:6px">Цену фабрики показываем открыто. Разбивку по позициям — логистика, таможня, наша работа — даём листом в коммерческом предложении: там она считается на ваш объём и ваш контейнер.</div>' +
       '<button class="btn" data-add="' + i.id + '">' + (sel[i.id] ? '✓ В подборке' : '+ В подборку') + '</button>' :
       '<div class="big" style="filter:blur(6px)">000 000 ₽</div><button class="btn" id="mUnlock">Открыть цены</button>') +
