@@ -10,29 +10,29 @@
 Статические страницы для чтения: категории https://opt.gymtouch.ru/catalog/c/, фабрики https://opt.gymtouch.ru/catalog/f/, карточка позиции https://opt.gymtouch.ru/catalog/i/<id>/.
 
 ### Категории
-- [Покрытие и маты](https://opt.gymtouch.ru/catalog/c/floor/) — 32 поз., от 2 200 ₽
-- [Аксессуары и детали](https://opt.gymtouch.ru/catalog/c/access/) — 62 поз., от 212 ₽
-- [Беговые дорожки](https://opt.gymtouch.ru/catalog/c/tread/) — 146 поз., от 42 700 ₽
-- [Эллипсы](https://opt.gymtouch.ru/catalog/c/ellip/) — 37 поз., от 79 400 ₽
-- [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 48 поз., от 22 800 ₽
-- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 412 поз., от 8 200 ₽
-- [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 82 поз., от 22 200 ₽
-- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 57 поз., от 87 000 ₽
-- [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 48 поз., от 8 700 ₽
-- [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 99 поз., от 8 900 ₽
-- [Ноги](https://opt.gymtouch.ru/catalog/c/legs/) — 755 поз., от 6 400 ₽
-- [Ягодичные](https://opt.gymtouch.ru/catalog/c/glute/) — 190 поз., от 39 200 ₽
-- [Руки и плечи](https://opt.gymtouch.ru/catalog/c/arms/) — 274 поз., от 240 ₽
-- [Жимы](https://opt.gymtouch.ru/catalog/c/press/) — 549 поз., от 21 500 ₽
-- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 412 поз., от 8 200 ₽
-- [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 272 поз., от 8 900 ₽
-- [Скамьи](https://opt.gymtouch.ru/catalog/c/bench/) — 193 поз., от 7 300 ₽
-- [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 319 поз., от 2 200 ₽
-- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 137 поз., от 212 ₽
-- [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 41 поз., от 179 ₽
-- [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 115 поз., от 6 400 ₽
-- [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 22 поз., от 1 470 ₽
-- [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 32 поз., от 1 300 ₽
+- [Покрытие и маты](https://opt.gymtouch.ru/catalog/c/floor/) — 32 поз., от 1 700 ₽
+- [Аксессуары и детали](https://opt.gymtouch.ru/catalog/c/access/) — 62 поз., от 300 ₽
+- [Беговые дорожки](https://opt.gymtouch.ru/catalog/c/tread/) — 146 поз., от 37 100 ₽
+- [Эллипсы](https://opt.gymtouch.ru/catalog/c/ellip/) — 37 поз., от 55 800 ₽
+- [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 48 поз., от 25 800 ₽
+- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 412 поз., от 8 100 ₽
+- [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 82 поз., от 19 800 ₽
+- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 57 поз., от 77 300 ₽
+- [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 48 поз., от 7 500 ₽
+- [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 99 поз., от 10 100 ₽
+- [Ноги](https://opt.gymtouch.ru/catalog/c/legs/) — 755 поз., от 7 900 ₽
+- [Ягодичные](https://opt.gymtouch.ru/catalog/c/glute/) — 190 поз., от 41 900 ₽
+- [Руки и плечи](https://opt.gymtouch.ru/catalog/c/arms/) — 274 поз., от 300 ₽
+- [Жимы](https://opt.gymtouch.ru/catalog/c/press/) — 549 поз., от 17 800 ₽
+- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 412 поз., от 8 100 ₽
+- [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 272 поз., от 1 300 ₽
+- [Скамьи](https://opt.gymtouch.ru/catalog/c/bench/) — 193 поз., от 7 400 ₽
+- [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 319 поз., от 3 100 ₽
+- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 137 поз., от 300 ₽
+- [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 41 поз., от 200 ₽
+- [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 115 поз., от 7 400 ₽
+- [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 22 поз., от 1 400 ₽
+- [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 32 поз., от 1 700 ₽
 
 ### Фабрики
 - [Shuyoute (SYT)](https://opt.gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (835 поз.)
