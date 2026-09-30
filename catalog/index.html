@@ -104,9 +104,9 @@ a{color:inherit}
 @media(max-width:700px){.pick{flex-direction:column;align-items:flex-start;gap:9px}.pick button{width:100%}}
 .zpick{font-weight:600}
 .zpick .tag{background:var(--gold);color:#fff;border:none}
-.sim{grid-column:1/-1;border-top:1px solid var(--hair);padding:16px 28px 22px}
+.sim{grid-column:1/-1;border-top:1px solid var(--hair);padding:16px 28px 22px;min-width:0}
 .sim h3{margin:0 0 10px;font-size:13px;font-weight:500;color:var(--graphite);letter-spacing:.04em;text-transform:uppercase}
-.sim__row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.sim__row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;min-width:0;-webkit-overflow-scrolling:touch}
 .sim__i{flex:0 0 132px;cursor:pointer;border:1px solid var(--hair);background:var(--paper);padding:8px;display:flex;flex-direction:column;gap:5px}
 .sim__i:hover{border-color:var(--gold)}
 .sim__i img{width:100%;height:96px;object-fit:contain;background:#f6f6f2}
@@ -139,7 +139,7 @@ a{color:inherit}
 .big small{font-family:var(--f-b);font-size:12px;font-weight:400;color:var(--graphite);display:block;margin-top:4px}
 .brk{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:12.5px;color:var(--graphite);border-top:1px solid var(--hair);padding-top:10px}
 .brk b{color:var(--ink);font-weight:500;font-family:var(--f-m);font-size:12px}
-@media(max-width:760px){.modal__box{grid-template-columns:1fr}}
+@media(max-width:760px){.modal__box{grid-template-columns:minmax(0,1fr)}.modal__box>*{min-width:0}}
 /* подборка */
 .tray{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--ink);color:var(--milk);transform:translateY(110%);transition:transform .3s}
 .tray.on{transform:none}
@@ -290,7 +290,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609300742', { cache: 'no-cache' })
+  fetch('data.json?v=202609300744', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -595,7 +595,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function списокПохожих() {
     if (SIM) return Promise.resolve(SIM);
     if (!SIM_ЖДЁМ) {
-      SIM_ЖДЁМ = fetch('похожие.json?v=202609300742', { cache: 'no-cache' })
+      SIM_ЖДЁМ = fetch('похожие.json?v=202609300744', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (j) { SIM = j; return j; })
         .catch(function () { SIM = {}; return SIM; });
