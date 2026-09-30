@@ -170,7 +170,20 @@ a{color:inherit}
   .grid{grid-template-columns:repeat(2,1fr)}.card .b{padding:10px 10px 12px}.card .nm{font-size:13.5px}.card .dm{font-size:11px}.card .pr b{font-size:16px}.card .zc{font-size:9.5px}
   .card .pr b{white-space:normal}
   .ph{gap:10px;padding:8px 10px}.ph b{font-size:15px}.ph span{font-size:11.5px}
-  .modal{padding:0;align-items:flex-end}.modal__box{max-height:94vh}.modal__pic{min-height:220px}.modal__pic img{max-height:300px}.modal__b{padding:18px 16px 20px}
+  .modal{padding:0;align-items:flex-end}
+  .modal__box{max-height:94vh;overflow-x:hidden}
+  .modal__pic{min-height:0;padding:10px 0}
+  .modal__pic img{max-height:46vh;max-width:100%}
+  .modal__pic.no{min-height:150px}
+  .modal__b{padding:18px 16px 20px;min-width:0;overflow-wrap:anywhere}
+  .modal__b h2{font-size:21px;line-height:1.15}
+  .modal__b .big{font-size:26px}
+  .modal__b .big small{display:block;margin-top:5px;font-size:11px;line-height:1.35}
+  .brk{grid-template-columns:1fr;gap:1px 0}
+  .brk span{margin-top:7px}
+  .brk span:empty{margin-top:0}
+  .brk b{font-size:13px}
+  .spec{grid-template-columns:auto 1fr;gap:4px 10px}
   .tray__in{padding:10px 16px;gap:10px}.tray .lst{flex-basis:100%;order:5;max-height:36px}
 }
 </style>
@@ -277,7 +290,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202609300730', { cache: 'no-cache' })
+  fetch('data.json?v=202609300742', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -582,7 +595,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function списокПохожих() {
     if (SIM) return Promise.resolve(SIM);
     if (!SIM_ЖДЁМ) {
-      SIM_ЖДЁМ = fetch('похожие.json?v=202609300730', { cache: 'no-cache' })
+      SIM_ЖДЁМ = fetch('похожие.json?v=202609300742', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (j) { SIM = j; return j; })
         .catch(function () { SIM = {}; return SIM; });
