@@ -2,11 +2,11 @@
 <html lang="ru">
 <meta charset="utf-8">
 <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"><link rel="apple-touch-icon" href="../img/favicon-180.png">
-<title>Каталог оборудования · GYMTOUCH</title>
+<title>Каталог оборудования · CHINA SPORT SHOW</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Каталог тренажёров и фитнес-оборудования с 11 фабрик Китая: цены в Москве с НДС, фильтры по фабрике, категории и сегменту, поиск по фото. Цена завода + 15 %.">
 <link rel="canonical" href="https://opt.gymtouch.ru/catalog/">
-<meta property="og:title" content="Каталог оборудования · GYMTOUCH"><meta property="og:description" content="2 000+ позиций с 11 фабрик Китая, цены в Москве с НДС. Цена завода + 15 %."><meta property="og:url" content="https://opt.gymtouch.ru/catalog/">
+<meta property="og:title" content="Каталог оборудования · CHINA SPORT SHOW"><meta property="og:description" content="2 000+ позиций с 11 фабрик Китая, цены в Москве с НДС. Цена завода + 15 %."><meta property="og:url" content="https://opt.gymtouch.ru/catalog/">
 <link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 :root{--paper:#EFEFEA;--paper-2:#F6F6F2;--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
@@ -216,7 +216,7 @@ a{color:inherit}
     <p class="note">Фабрики, с которыми работаем напрямую, — под своими именами. Цены пересчитываются по курсу ЦБ при каждом обновлении каталога. Позиции без хорошего снимка стоят в конце списка — фото пришлём по запросу.</p>
     <div class="ph" id="ph"><img id="phImg" alt=""><div><b id="phT">Похожие на ваше фото</b><br><span id="phS"></span></div><button type="button" id="phOff">✕ Сбросить</button></div>
     <div class="pick" id="pick" hidden>
-      <div class="t"><b>Relax Fitness</b> — выбор владельца GYMTOUCH.<br>
+      <div class="t"><b>Relax Fitness</b> — выбор владельца CHINA SPORT SHOW.<br>
         <i>Если нужен топ — берите эту линейку: сборка, обивка и рамы здесь заметно крепче, и мы возим её сами.</i></div>
       <button type="button" id="pickGo">Показать только Relax</button>
     </div>
@@ -242,7 +242,7 @@ a{color:inherit}
 
 <div class="gate" id="gate" hidden>
   <form class="gate__box" id="gateForm" novalidate>
-    <p class="mono" style="color:#9AA0A6"><b style="color:#EDEDE7">GYMTOUCH</b><i>·</i>каталог для клубов</p>
+    <p class="mono" style="color:#9AA0A6"><b style="color:#EDEDE7">CHINA SPORT SHOW</b><i>·</i>каталог для клубов</p>
     <h2>Цены завода<br>с доставкой в Москву</h2>
     <p>Нажмите — откроется наш чат, одно касание «Старт», и кнопка вернёт вас сюда с открытыми ценами на все <span id="gateN"></span> позиций. Вопросы потом — в тот же чат.</p>
     <a class="btn" href="https://t.me/avrorabbot?start=cat" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">✈️ Открыть цены через Telegram</a>
@@ -292,7 +292,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202610011049', { cache: 'no-cache' })
+  fetch('data.json?v=202610011053', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -597,7 +597,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function списокПохожих() {
     if (SIM) return Promise.resolve(SIM);
     if (!SIM_ЖДЁМ) {
-      SIM_ЖДЁМ = fetch('похожие.json?v=202610011049', { cache: 'no-cache' })
+      SIM_ЖДЁМ = fetch('похожие.json?v=202610011053', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (j) { SIM = j; return j; })
         .catch(function () { SIM = {}; return SIM; });
