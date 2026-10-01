@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <meta charset="utf-8">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"><link rel="apple-touch-icon" href="../img/favicon-180.png">
 <title>Каталог оборудования · GYMTOUCH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Каталог тренажёров и фитнес-оборудования с 11 фабрик Китая: цены в Москве с НДС, фильтры по фабрике, категории и сегменту, поиск по фото. Цена завода + 15 %.">
@@ -18,9 +19,10 @@ h1,h2,h3{font-family:var(--f-h);font-weight:600;text-transform:uppercase;margin:
 a{color:inherit}
 .top{position:sticky;top:0;z-index:40;background:rgba(239,239,234,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .top__in{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:18px}
-.brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
-.brand i{width:7px;height:18px;background:var(--gold);display:block}
-.brand span{font-family:var(--f-h);font-weight:600;font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{width:34px;height:34px;display:block;flex:0 0 auto}
+.brand b{display:block;font-family:var(--f-h);font-weight:600;font-size:15px;letter-spacing:.13em;text-transform:uppercase;line-height:1.05}
+.brand b i{display:block;font-style:normal;letter-spacing:.42em;font-size:14px;opacity:.62}
 .top .ttl{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
 .search{margin-left:auto;flex:0 1 380px;display:flex}
 .search input{width:100%;font:15px var(--f-b);padding:9px 12px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink)}
@@ -189,7 +191,7 @@ a{color:inherit}
 </style>
 
 <header class="top"><div class="top__in">
-  <a class="brand" href="../"><i></i><span>Gymtouch</span></a>
+  <a class="brand" href="../"><img src="../img/css-знак.png" alt="CHINA SPORT SHOW"><b>China Sport<i>Show</i></b></a>
   <span class="ttl">Каталог · цена в Москве с НДС</span>
   <div class="search"><input id="q" type="search" placeholder="Поиск: дорожка, жим ногами, реформер, артикул…"><button type="button" class="cam" id="byPhoto" title="Загрузите фото тренажёра — покажем похожие" hidden>📷 По фото</button><input id="phFile" type="file" accept="image/*" hidden></div>
   <a class="back" href="../">← Оборудование</a>
@@ -290,7 +292,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202610010809', { cache: 'no-cache' })
+  fetch('data.json?v=202610011049', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -595,7 +597,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function списокПохожих() {
     if (SIM) return Promise.resolve(SIM);
     if (!SIM_ЖДЁМ) {
-      SIM_ЖДЁМ = fetch('похожие.json?v=202610010809', { cache: 'no-cache' })
+      SIM_ЖДЁМ = fetch('похожие.json?v=202610011049', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (j) { SIM = j; return j; })
         .catch(function () { SIM = {}; return SIM; });
