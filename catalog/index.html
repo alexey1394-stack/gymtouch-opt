@@ -9,8 +9,19 @@
 <meta property="og:title" content="Каталог оборудования · CHINA SPORT SHOW"><meta property="og:description" content="2 000+ позиций с 11 фабрик Китая, цены в Москве с НДС. Цена завода + 15 %."><meta property="og:url" content="https://opt.gymtouch.ru/catalog/">
 <link rel="stylesheet" href="../fonts/fonts.css">
 <style>
-:root{--paper:#EFEFEA;--paper-2:#F6F6F2;--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
-  --rule:rgba(22,24,26,.16);--hair:rgba(22,24,26,.09);--f-h:"Oswald",Impact,"Arial Narrow",sans-serif;--f-b:"Golos Text",-apple-system,"Segoe UI",Roboto,sans-serif;--f-m:"JetBrains Mono",ui-monospace,Menlo,monospace}
+:root{--paper:#EFEFEA;--paper-2:var(--tile);--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
+  --rule:rgba(22,24,26,.16);--hair:rgba(22,24,26,.09);--tile:var(--tile);--muted:var(--muted);--faint:var(--faint);
+  --shade:var(--shade);--deep:var(--deep);--f-h:"Oswald",Impact,"Arial Narrow",sans-serif;--f-b:"Golos Text",-apple-system,"Segoe UI",Roboto,sans-serif;--f-m:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+/* Тёмная тема: вечером и ночью. Переключается скриптом ниже по часам, а если
+   у человека в системе стоит тёмная — уважаем её в любое время суток. */
+:root[data-theme="dark"]{
+  --paper:#101315;--paper-2:#171B1E;--milk:#E8E8E2;--ink:#E8E8E2;--ink-2:#C2C6CA;
+  --graphite:var(--muted);--gold:#C8901F;--gold-2:#E0B45A;
+  --rule:rgba(232,232,226,.18);--hair:rgba(232,232,226,.10);
+  --tile:#171B1E;--muted:#8A9097;--faint:#6C7076;--shade:#14181A;--deep:#0B0E10}
+:root[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+:root[data-theme="dark"] img{filter:brightness(.94)}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--f-h);font-weight:600;text-transform:uppercase;margin:0;line-height:1.02}
@@ -66,9 +77,9 @@ a{color:inherit}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .card{position:relative;background:var(--paper);display:flex;flex-direction:column;cursor:pointer;transition:background .15s}
 .card:hover{background:var(--paper-2)}
-.card .pic{aspect-ratio:1;background:#F6F6F2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .pic{aspect-ratio:1;background:var(--tile);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card .pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}   /* мелкий кадр не растягиваем — иначе пиксели */
-.pic.no{flex-direction:column;gap:8px;color:var(--graphite);text-align:center;padding:18px;background:repeating-linear-gradient(135deg,#F6F6F2,#F6F6F2 12px,#F1F1EC 12px,#F1F1EC 24px)}
+.pic.no{flex-direction:column;gap:8px;color:var(--graphite);text-align:center;padding:18px;background:repeating-linear-gradient(135deg,var(--tile),var(--tile) 12px,var(--shade) 12px,var(--shade) 24px)}
 .pic.no b{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 .pic.no span{font-size:12px;line-height:1.35}
 .card .b{padding:12px 14px 14px;display:grid;gap:4px}
@@ -91,11 +102,11 @@ a{color:inherit}
 .gate[hidden],.more[hidden]{display:none}
 .gate__box{background:var(--ink);color:var(--milk);padding:30px 30px 26px;max-width:440px;width:100%;display:grid;gap:12px}
 .gate__box h2{color:var(--milk);font-size:1.6rem;margin-bottom:4px}
-.gate__box p{margin:0;color:#B9BDC2;font-size:14px}
-.gate__box label{display:grid;gap:6px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9AA0A6}
-.gate__box input:not([type=checkbox]){font:15px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:12px;width:100%}
+.gate__box p{margin:0;color:var(--faint);font-size:14px}
+.gate__box label{display:grid;gap:6px;font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.gate__box input:not([type=checkbox]){font:15px var(--f-b);color:var(--milk);background:var(--deep);border:1px solid rgba(237,237,231,.22);padding:12px;width:100%}
 .gate__box input:focus{outline:0;border-color:var(--gold-2)}
-.agree{display:grid!important;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-family:var(--f-b)!important;font-size:12px!important;letter-spacing:0!important;text-transform:none!important;color:#9AA0A6!important;line-height:1.4;cursor:pointer}
+.agree{display:grid!important;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-family:var(--f-b)!important;font-size:12px!important;letter-spacing:0!important;text-transform:none!important;color:var(--muted)!important;line-height:1.4;cursor:pointer}
 .agree input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--gold-2)}
 .agree a{color:var(--milk)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;background:var(--gold);color:var(--milk);font-family:var(--f-h);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--gold);cursor:pointer;text-decoration:none}
@@ -118,12 +129,12 @@ a{color:inherit}
 .sim__row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;min-width:0;-webkit-overflow-scrolling:touch}
 .sim__i{flex:0 0 132px;cursor:pointer;border:1px solid var(--hair);background:var(--paper);padding:8px;display:flex;flex-direction:column;gap:5px}
 .sim__i:hover{border-color:var(--gold)}
-.sim__i img{width:100%;height:96px;object-fit:contain;background:#f6f6f2}
+.sim__i img{width:100%;height:96px;object-fit:contain;background:var(--tile)}
 .sim__i .nm{font-size:11.5px;line-height:1.25;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:29px}
 .sim__i .pr{font-size:12.5px;font-family:var(--f-m)}
 .sim__i .dl{font-size:11px}
 .sim__i .dl.dn{color:#2e7d32}.sim__i .dl.up{color:var(--graphite)}
-.sim__i .no{height:96px;display:flex;align-items:center;justify-content:center;background:#f6f6f2;color:var(--graphite);font-size:10.5px;text-align:center;padding:6px}
+.sim__i .no{height:96px;display:flex;align-items:center;justify-content:center;background:var(--tile);color:var(--graphite);font-size:10.5px;text-align:center;padding:6px}
 @media(max-width:760px){.sim{padding:14px 16px 18px}.sim__i{flex:0 0 118px}}
 .ozav{border:1px solid var(--hair);background:none;color:var(--ink);font:inherit;font-size:11.5px;padding:2px 8px;border-radius:11px;cursor:pointer;margin-left:2px}
 .ozav:hover{border-color:var(--gold);color:var(--gold)}
@@ -136,7 +147,7 @@ a{color:inherit}
 .zav .ist{color:var(--graphite);font-size:12px;border-top:1px solid var(--hair);padding-top:10px;margin-top:4px}
 @media(max-width:760px){.zav{padding:18px 16px 22px}.zav dl{grid-template-columns:1fr;gap:2px 0}.zav dt{margin-top:8px}}
 .modal__box{background:var(--paper);max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
-.modal__pic{background:#F6F6F2;display:flex;align-items:center;justify-content:center;min-height:360px}
+.modal__pic{background:var(--tile);display:flex;align-items:center;justify-content:center;min-height:360px}
 .modal__pic img{max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain}
 .modal__b{padding:26px 26px 22px;display:grid;gap:12px;align-content:start}
 .modal__b h2{font-size:1.5rem}
@@ -154,14 +165,14 @@ a{color:inherit}
 .tray.on{transform:none}
 .tray__in{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .tray .s{font-family:var(--f-h);font-size:20px}
-.tray .s small{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#9AA0A6;display:block}
-.tray .lst{flex:1;font-size:12.5px;color:#B9BDC2;max-height:44px;overflow:auto}
+.tray .s small{font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block}
+.tray .lst{flex:1;font-size:12.5px;color:var(--faint);max-height:44px;overflow:auto}
 .tray .btn{min-height:44px}
 .tray .clr{background:transparent;border:1px solid rgba(237,237,231,.35);color:var(--milk);font-family:var(--f-m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;cursor:pointer}
-.tray form{display:none;gap:8px;width:100%;flex-wrap:wrap}.tray form .agree{color:#B9BDC2!important}.tray form .agree input{flex:none;width:18px;height:18px;padding:0;min-height:0}
+.tray form{display:none;gap:8px;width:100%;flex-wrap:wrap}.tray form .agree{color:var(--faint)!important}.tray form .agree input{flex:none;width:18px;height:18px;padding:0;min-height:0}
 .tray.ask form{display:flex}.tray.ask .btn.go{display:none}
-.tray form input{font:14px var(--f-b);color:var(--milk);background:#1E2226;border:1px solid rgba(237,237,231,.22);padding:10px 12px;flex:1 1 180px}
-.tray form .st{flex-basis:100%;font-size:12px;color:#9AA0A6}
+.tray form input{font:14px var(--f-b);color:var(--milk);background:var(--deep);border:1px solid rgba(237,237,231,.22);padding:10px 12px;flex:1 1 180px}
+.tray form .st{flex-basis:100%;font-size:12px;color:var(--muted)}
 /* телефон: фильтры — шторкой по кнопке, поиск во всю ширину, товары сразу под шапкой */
 .fltBtn,.side__done,.side__x,.side-bg{display:none}
 @media(max-width:900px){
@@ -196,6 +207,28 @@ a{color:inherit}
   .tray__in{padding:10px 16px;gap:10px}.tray .lst{flex-basis:100%;order:5;max-height:36px}
 }
 </style>
+<script>
+/* Тема по времени суток — слово Алексея 04.10.2026: «вечером тёмный, днём светлый».
+   С 19:00 до 7:00 тёмная, днём светлая. Системная тёмная перебивает время: если у
+   человека ночной режим включён всегда, незачем светить ему белым в полдень.
+   Ставим сразу после стилей, чтобы не мигало, и перепроверяем раз в полчаса. */
+(function () {
+  function нужнаТёмная() {
+    try {
+      if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) return true;
+    } catch (e) {}
+    var ч = new Date().getHours();
+    return ч >= 19 || ч < 7;
+  }
+  function применить() {
+    document.documentElement.setAttribute('data-theme', нужнаТёмная() ? 'dark' : 'light');
+  }
+  применить();
+  setInterval(применить, 1800000);
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', применить); } catch (e) {}
+})();
+</script>
+
 
 <header class="top"><div class="top__in">
   <a class="brand" href="../"><img src="../img/css-знак.png" alt="CHINA SPORT SHOW"><b>China Sport<i>Show</i></b></a>
@@ -249,12 +282,12 @@ a{color:inherit}
 
 <div class="gate" id="gate" hidden>
   <form class="gate__box" id="gateForm" novalidate>
-    <p class="mono" style="color:#9AA0A6"><b style="color:#EDEDE7">CHINA SPORT SHOW</b><i>·</i>каталог для клубов</p>
+    <p class="mono" style="color:var(--muted)"><b style="color:#EDEDE7">CHINA SPORT SHOW</b><i>·</i>каталог для клубов</p>
     <h2>Цены завода<br>с доставкой в Москву</h2>
     <p>Нажмите — откроется наш чат, одно касание «Старт», и кнопка вернёт вас сюда с открытыми ценами на все <span id="gateN"></span> позиций. Вопросы потом — в тот же чат.</p>
     <a class="btn" href="https://t.me/avrorabbot?start=cat" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">✈️ Открыть цены через Telegram</a>
     <a class="btn" href="https://max.ru/id332762072611_1_bot" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;background:#2b2f34;color:#EDEDE7">Открыть цены через MAX</a>
-    <details style="color:#B9BDC2;font-size:13px"><summary style="cursor:pointer">Без мессенджера — по телефону</summary>
+    <details style="color:var(--faint);font-size:13px"><summary style="cursor:pointer">Без мессенджера — по телефону</summary>
       <label style="margin-top:8px">Телефон<input name="contact" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7"></label>
       <label class="agree" style="margin-top:8px"><input type="checkbox" name="agree" value="1"><span>Согласен на обработку персональных данных по <a href="../policy/" target="_blank" rel="noopener">политике</a> ООО «СИАПО»</span></label>
       <button class="btn" type="submit" style="margin-top:8px">Открыть цены</button>
@@ -299,7 +332,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   // Метка сборки в адресе: без неё браузер держит вчерашний data.json, и человек
   // видит старые цены и старые фильтры (29.09.2026: новые метки копий не появились
   // у посетителя, хотя на сервере уже лежали).
-  fetch('data.json?v=202610041537', { cache: 'no-cache' })
+  fetch('data.json?v=202610041818', { cache: 'no-cache' })
     .then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
 
   function init() {
@@ -604,7 +637,7 @@ var PHOTO = {url:'https://functions.yandexcloud.net/d4eba59mt1dj9nb3tbm7'};
   function списокПохожих() {
     if (SIM) return Promise.resolve(SIM);
     if (!SIM_ЖДЁМ) {
-      SIM_ЖДЁМ = fetch('похожие.json?v=202610041537', { cache: 'no-cache' })
+      SIM_ЖДЁМ = fetch('похожие.json?v=202610041818', { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (j) { SIM = j; return j; })
         .catch(function () { SIM = {}; return SIM; });
