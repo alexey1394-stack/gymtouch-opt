@@ -86,8 +86,12 @@ p{margin:0}
 .rule{height:1px;background:var(--rule);border:0;margin:0}
 
 /* ── шапка ─────────────────────────────────────────────── */
-.top{position:sticky;top:0;z-index:60;background:rgba(239,239,234,.92);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top{position:sticky;top:0;z-index:60;background:rgba(22,24,26,.96);
+  backdrop-filter:blur(10px);border-bottom:1px solid rgba(237,237,231,.10)}
+.top .brand b{color:var(--paper)}
+.top .nav a{color:rgba(237,237,231,.70)}
+.top .nav a:hover{color:var(--gold)}
+.top .tel,.top .ttl{color:rgba(237,237,231,.72)}
 .top__in{max-width:var(--wrap);margin:0 auto;padding:14px 28px;display:flex;
   align-items:center;gap:28px}
 .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
