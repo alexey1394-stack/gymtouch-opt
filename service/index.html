@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="ru">
 <meta charset="utf-8">
-<title>Сервис фитнес-оборудования · GYMTOUCH</title>
+<title>Сервис фитнес-оборудования · CHINA SPORT SHOW</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Сервис фитнес-оборудования GYMTOUCH: профилактика раз в месяц, ремонт по заявке из чата, своя страница клуба с состоянием каждой машины.">
+<meta name="description" content="Сервис фитнес-оборудования CHINA SPORT SHOW: профилактика раз в месяц, ремонт по заявке из чата, своя страница клуба с состоянием каждой машины.">
 <link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 :root{--paper:#EFEFEA;--paper-2:#F6F6F2;--milk:#EDEDE7;--ink:#16181A;--ink-2:#3A3E42;--graphite:#6C7076;--gold:#A87512;--gold-2:#C8901F;
@@ -154,7 +154,7 @@ section{padding:88px 0}
 </div></header>
 
 <section class="hero"><div class="wrap">
-  <p class="mono"><b>GYMTOUCH</b><i>·</i>сервисная служба</p>
+  <p class="mono"><b>CHINA SPORT SHOW</b><i>·</i>сервисная служба</p>
   <h1 style="margin-top:14px">Оборудование зала <em>работает</em>.<br>Каждый день.</h1>
   <p class="lead">Плановая профилактика раз в месяц, ремонт по заявке из чата и своя страница клуба,
     где видно каждую машину, каждую заявку и каждый рубль.</p>
@@ -248,7 +248,7 @@ section{padding:88px 0}
 </div></section>
 
 <footer class="foot"><div class="wrap in">
-  <span>GYMTOUCH · сервис фитнес-оборудования · Владимир · Москва</span>
+  <span>CHINA SPORT SHOW · сервис фитнес-оборудования · Владимир · Москва</span>
   <span>ООО «СИАПО», ИНН 6900029331 · <a href="../policy/">Политика обработки персональных данных</a></span>
 </div></footer>
 
@@ -300,14 +300,14 @@ section{padding:88px 0}
       return '<div class="msg club voice"><span class="who">' + who + '</span>▶ <span class="bars">' + bars + '</span> 0:41<span class="t">' + t + '</span></div>';
     }
     var cls = kind === 'club' ? 'msg club' : 'msg';
-    var w = kind === 'club' ? who : '🔧 Сервис GYMTOUCH';
+    var w = kind === 'club' ? who : '🔧 Сервис CHINA SPORT SHOW';
     var b = o.btns ? '<div class="btns">' + o.btns.map(function (x, i) { return '<span' + (i === 1 && o.btns.length === 2 && /планово|Согласовано$/.test(x) ? ' class="on"' : '') + '>' + x + '</span>'; }).join('') + '</div>' : '';
     return '<div class="' + cls + '"><span class="who">' + w + '</span>' + text + pics(o) + b + '<span class="t">' + t + '</span></div>';
   }
   function show(i) {
     clearTimeout(timer); cur = i; step = 0;
     [].forEach.call(tabs.children, function (b, k) { b.classList.toggle('on', k === i); if (k === i) b.classList.remove('new'); });
-    title.textContent = CLUBS[i].n + ' · Сервис GYMTOUCH';
+    title.textContent = CLUBS[i].n + ' · Сервис CHINA SPORT SHOW';
     flow.innerHTML = '';
     next();
   }
