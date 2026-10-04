@@ -6,64 +6,64 @@
 > от 150 до 4 000 м², в России — своя сервисная служба (профилактика и ремонт тренажёров).
 
 ## Каталог: 4332 позиций, 10 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-10-03)
-Интерактивный каталог: https://opt.gymtouch.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
-Статические страницы для чтения: категории https://opt.gymtouch.ru/catalog/c/, фабрики https://opt.gymtouch.ru/catalog/f/, карточка позиции https://opt.gymtouch.ru/catalog/i/<id>/.
+Интерактивный каталог: https://chinasportshow.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
+Статические страницы для чтения: категории https://chinasportshow.ru/catalog/c/, фабрики https://chinasportshow.ru/catalog/f/, карточка позиции https://chinasportshow.ru/catalog/i/<id>/.
 
 ### Категории
-- [Покрытие и маты](https://opt.gymtouch.ru/catalog/c/floor/) — 35 поз., от 2 190 ₽
-- [Аксессуары и детали](https://opt.gymtouch.ru/catalog/c/access/) — 61 поз., от 210 ₽
-- [Беговые дорожки](https://opt.gymtouch.ru/catalog/c/tread/) — 160 поз., от 42 400 ₽
-- [Эллипсы](https://opt.gymtouch.ru/catalog/c/ellip/) — 40 поз., от 76 000 ₽
-- [Гребные, лыжные, аэробайки](https://opt.gymtouch.ru/catalog/c/rowski/) — 47 поз., от 25 700 ₽
-- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
-- [Велотренажёры](https://opt.gymtouch.ru/catalog/c/bike/) — 86 поз., от 21 800 ₽
-- [Лестницы и степперы](https://opt.gymtouch.ru/catalog/c/stair/) — 62 поз., от 86 500 ₽
-- [Реформеры и станции](https://opt.gymtouch.ru/catalog/c/pilates/) — 76 поз., от 7 000 ₽
-- [Турники и брусья](https://opt.gymtouch.ru/catalog/c/dipchin/) — 106 поз., от 9 500 ₽
-- [Ноги](https://opt.gymtouch.ru/catalog/c/legs/) — 822 поз., от 7 200 ₽
-- [Ягодичные](https://opt.gymtouch.ru/catalog/c/glute/) — 207 поз., от 37 800 ₽
-- [Руки и плечи](https://opt.gymtouch.ru/catalog/c/arms/) — 311 поз., от 240 ₽
-- [Жимы](https://opt.gymtouch.ru/catalog/c/press/) — 602 поз., от 17 100 ₽
-- [Тяги](https://opt.gymtouch.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
-- [Пресс и спина](https://opt.gymtouch.ru/catalog/c/core/) — 282 поз., от 8 900 ₽
-- [Скамьи](https://opt.gymtouch.ru/catalog/c/bench/) — 213 поз., от 7 900 ₽
-- [Мультистанции и кроссоверы](https://opt.gymtouch.ru/catalog/c/multi/) — 339 поз., от 2 210 ₽
-- [Гантели, грифы и стойки](https://opt.gymtouch.ru/catalog/c/dumb/) — 157 поз., от 210 ₽
-- [Диски и стеллажи](https://opt.gymtouch.ru/catalog/c/plate/) — 41 поз., от 180 ₽
-- [Рамы, стойки, помосты](https://opt.gymtouch.ru/catalog/c/rack/) — 126 поз., от 4 540 ₽
-- [Функциональный тренинг](https://opt.gymtouch.ru/catalog/c/func/) — 24 поз., от 1 460 ₽
-- [Прочее](https://opt.gymtouch.ru/catalog/c/other/) — 56 поз., от 1 320 ₽
+- [Покрытие и маты](https://chinasportshow.ru/catalog/c/floor/) — 35 поз., от 2 190 ₽
+- [Аксессуары и детали](https://chinasportshow.ru/catalog/c/access/) — 61 поз., от 210 ₽
+- [Беговые дорожки](https://chinasportshow.ru/catalog/c/tread/) — 160 поз., от 42 400 ₽
+- [Эллипсы](https://chinasportshow.ru/catalog/c/ellip/) — 40 поз., от 76 000 ₽
+- [Гребные, лыжные, аэробайки](https://chinasportshow.ru/catalog/c/rowski/) — 47 поз., от 25 700 ₽
+- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
+- [Велотренажёры](https://chinasportshow.ru/catalog/c/bike/) — 86 поз., от 21 800 ₽
+- [Лестницы и степперы](https://chinasportshow.ru/catalog/c/stair/) — 62 поз., от 86 500 ₽
+- [Реформеры и станции](https://chinasportshow.ru/catalog/c/pilates/) — 76 поз., от 7 000 ₽
+- [Турники и брусья](https://chinasportshow.ru/catalog/c/dipchin/) — 106 поз., от 9 500 ₽
+- [Ноги](https://chinasportshow.ru/catalog/c/legs/) — 822 поз., от 7 200 ₽
+- [Ягодичные](https://chinasportshow.ru/catalog/c/glute/) — 207 поз., от 37 800 ₽
+- [Руки и плечи](https://chinasportshow.ru/catalog/c/arms/) — 311 поз., от 240 ₽
+- [Жимы](https://chinasportshow.ru/catalog/c/press/) — 602 поз., от 17 100 ₽
+- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
+- [Пресс и спина](https://chinasportshow.ru/catalog/c/core/) — 282 поз., от 8 900 ₽
+- [Скамьи](https://chinasportshow.ru/catalog/c/bench/) — 213 поз., от 7 900 ₽
+- [Мультистанции и кроссоверы](https://chinasportshow.ru/catalog/c/multi/) — 339 поз., от 2 210 ₽
+- [Гантели, грифы и стойки](https://chinasportshow.ru/catalog/c/dumb/) — 157 поз., от 210 ₽
+- [Диски и стеллажи](https://chinasportshow.ru/catalog/c/plate/) — 41 поз., от 180 ₽
+- [Рамы, стойки, помосты](https://chinasportshow.ru/catalog/c/rack/) — 126 поз., от 4 540 ₽
+- [Функциональный тренинг](https://chinasportshow.ru/catalog/c/func/) — 24 поз., от 1 460 ₽
+- [Прочее](https://chinasportshow.ru/catalog/c/other/) — 56 поз., от 1 320 ₽
 
 ### Фабрики
-- [Shuyoute (SYT)](https://opt.gymtouch.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (911 поз.)
-- [MND Fitness](https://opt.gymtouch.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1252 поз.)
-- [Guwow](https://opt.gymtouch.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (226 поз.)
-- [Juren (JR)](https://opt.gymtouch.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (286 поз.)
-- [Relax Fitness](https://opt.gymtouch.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (599 поз.)
-- [TZ Fitness (Tianzhan)](https://opt.gymtouch.ru/catalog/f/J/): Шаньдун, Дэчжоу · кардио, грузоблочные, нагружаемые, стойки и аксессуары (742 поз.)
-- [Brightway (BRTW)](https://opt.gymtouch.ru/catalog/f/K/): Шаньдун · грузоблочная серия TY (35 поз.)
-- [Langmai](https://opt.gymtouch.ru/catalog/f/M/): Шаньдун, Дэчжоу · кардио: дорожки, степперы-лестницы, эллипсы, велосипеды, гребные (58 поз.)
-- [Rosen (Shandong Rili)](https://opt.gymtouch.ru/catalog/f/N/) — премиум: Шаньдун · грузоблочные и нагружаемые линейки верхнего сегмента, кардио (190 поз.)
-- [Yozoe](https://opt.gymtouch.ru/catalog/f/I/) — премиум: Гуандун · пилатес и йога — оборудование студий (33 поз.)
+- [Shuyoute (SYT)](https://chinasportshow.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (911 поз.)
+- [MND Fitness](https://chinasportshow.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1252 поз.)
+- [Guwow](https://chinasportshow.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (226 поз.)
+- [Juren (JR)](https://chinasportshow.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (286 поз.)
+- [Relax Fitness](https://chinasportshow.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (599 поз.)
+- [TZ Fitness (Tianzhan)](https://chinasportshow.ru/catalog/f/J/): Шаньдун, Дэчжоу · кардио, грузоблочные, нагружаемые, стойки и аксессуары (742 поз.)
+- [Brightway (BRTW)](https://chinasportshow.ru/catalog/f/K/): Шаньдун · грузоблочная серия TY (35 поз.)
+- [Langmai](https://chinasportshow.ru/catalog/f/M/): Шаньдун, Дэчжоу · кардио: дорожки, степперы-лестницы, эллипсы, велосипеды, гребные (58 поз.)
+- [Rosen (Shandong Rili)](https://chinasportshow.ru/catalog/f/N/) — премиум: Шаньдун · грузоблочные и нагружаемые линейки верхнего сегмента, кардио (190 поз.)
+- [Yozoe](https://chinasportshow.ru/catalog/f/I/) — премиум: Гуандун · пилатес и йога — оборудование студий (33 поз.)
 
 ## Полезные страницы
-- [Блог: тренды фитнес-индустрии, выбор оборудования, экономика клуба](https://opt.gymtouch.ru/blog/)
-- [Как купить оборудование из Китая напрямую: 7 шагов](https://opt.gymtouch.ru/kak-kupit/)
-- [Вопросы и ответы: цены, сроки, оплата, сертификаты, сервис](https://opt.gymtouch.ru/faq/)
-- [Сервис тренажёров в клубах](https://opt.gymtouch.ru/service/)
-- [Политика обработки персональных данных](https://opt.gymtouch.ru/policy/)
+- [Блог: тренды фитнес-индустрии, выбор оборудования, экономика клуба](https://chinasportshow.ru/blog/)
+- [Как купить оборудование из Китая напрямую: 7 шагов](https://chinasportshow.ru/kak-kupit/)
+- [Вопросы и ответы: цены, сроки, оплата, сертификаты, сервис](https://chinasportshow.ru/faq/)
+- [Сервис тренажёров в клубах](https://chinasportshow.ru/service/)
+- [Политика обработки персональных данных](https://chinasportshow.ru/policy/)
 
 
-## Блог — https://opt.gymtouch.ru/blog/
-- [Профилактика тренажёров: статья расходов, которая защищает маржу клуба](https://opt.gymtouch.ru/blog/profilaktika-trenazherov-i-marzha/): Маржа фитнеса в России падает к 5 %, а поломки дорожают. Разбираем, почему плановый сервис дешевле ремонта по вызову и как его выстроить.
-- [Выручка растёт, маржа тает: что клубу делать с расходами на оборудование в 2026](https://opt.gymtouch.ru/blog/marzha-kluba-i-oborudovanie-2026/): Выручка клубов выросла на 19 %, а расходы растут вдвое быстрее цен. Разбираем, где в парке тренажёров прячутся деньги и как их вернуть.
-- [Доставка из Китая на максимуме: как считать бюджет оснащения зала этой осенью](https://opt.gymtouch.ru/blog/stavki-iz-kitaya-i-byudzhet-zala/): Контейнер Китай — Москва стоит около 10 000 долларов, с 1 октября ж/д тариф +8,5 %. Что это меняет в смете клуба и когда заказывать.
-- [HYROX в клубе: что это за формат и во что он обходится залу](https://opt.gymtouch.ru/blog/hyrox-v-klube/): Гонку из зала оценили в 600 млн евро, лицензию купили 5 000 клубов. Считаем, какое оборудование нужно для HYROX-зоны и сколько она стоит в Москве.
-- [Силовое вытесняет кардио: что это меняет в планировке зала](https://opt.gymtouch.ru/blog/silovoy-vmesto-kardio/): Мировые продажи силового оборудования выросли на 181 % за десять лет, кардио просело. Разбираем, как перераспределить площадь и бюджет клуба.
-- [Реформер уходит из бутика в массовый клуб: считаем студию пилатеса](https://opt.gymtouch.ru/blog/reformer-v-massy/): Сети США ставят реформеры десятками, абонемент от 45 долларов. Что нужно для студии на 14 станков и сколько это стоит с доставкой в Москву.
+## Блог — https://chinasportshow.ru/blog/
+- [Профилактика тренажёров: статья расходов, которая защищает маржу клуба](https://chinasportshow.ru/blog/profilaktika-trenazherov-i-marzha/): Маржа фитнеса в России падает к 5 %, а поломки дорожают. Разбираем, почему плановый сервис дешевле ремонта по вызову и как его выстроить.
+- [Выручка растёт, маржа тает: что клубу делать с расходами на оборудование в 2026](https://chinasportshow.ru/blog/marzha-kluba-i-oborudovanie-2026/): Выручка клубов выросла на 19 %, а расходы растут вдвое быстрее цен. Разбираем, где в парке тренажёров прячутся деньги и как их вернуть.
+- [Доставка из Китая на максимуме: как считать бюджет оснащения зала этой осенью](https://chinasportshow.ru/blog/stavki-iz-kitaya-i-byudzhet-zala/): Контейнер Китай — Москва стоит около 10 000 долларов, с 1 октября ж/д тариф +8,5 %. Что это меняет в смете клуба и когда заказывать.
+- [HYROX в клубе: что это за формат и во что он обходится залу](https://chinasportshow.ru/blog/hyrox-v-klube/): Гонку из зала оценили в 600 млн евро, лицензию купили 5 000 клубов. Считаем, какое оборудование нужно для HYROX-зоны и сколько она стоит в Москве.
+- [Силовое вытесняет кардио: что это меняет в планировке зала](https://chinasportshow.ru/blog/silovoy-vmesto-kardio/): Мировые продажи силового оборудования выросли на 181 % за десять лет, кардио просело. Разбираем, как перераспределить площадь и бюджет клуба.
+- [Реформер уходит из бутика в массовый клуб: считаем студию пилатеса](https://chinasportshow.ru/blog/reformer-v-massy/): Сети США ставят реформеры десятками, абонемент от 45 долларов. Что нужно для студии на 14 станков и сколько это стоит с доставкой в Москву.
 
 ## Контакты
 - Телефон: 8 (915) 771-69-81
 - MAX: https://max.ru/channel_gymtouch · Telegram-канал: https://t.me/gym_touch · ВКонтакте: https://vk.com/club232494571 · YouTube: https://youtube.com/@gymtouch_official
 - E-mail: info@gymtouch.ru
-- Юрлицо: ООО «СИАПО», ИНН 6900029331. Сайт: https://opt.gymtouch.ru
+- Юрлицо: ООО «СИАПО», ИНН 6900029331. Сайт: https://chinasportshow.ru
