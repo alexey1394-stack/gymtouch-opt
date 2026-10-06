@@ -5,38 +5,38 @@
 > (35 производство + 35 доставка), оплата 87 % / 13 %. Комплектуем контейнер позициями разных фабрик, собираем залы
 > от 150 до 4 000 м², в России — своя сервисная служба (профилактика и ремонт тренажёров).
 
-## Каталог: 4332 позиций, 10 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-10-03)
+## Каталог: 4390 позиций, 10 фабрик, цены в Москве с НДС (по курсу ЦБ на 2026-10-06)
 Интерактивный каталог: https://chinasportshow.ru/catalog/ (фильтры по фабрике, категории, сегменту, цене; поиск по фото).
 Статические страницы для чтения: категории https://chinasportshow.ru/catalog/c/, фабрики https://chinasportshow.ru/catalog/f/, карточка позиции https://chinasportshow.ru/catalog/i/<id>/.
 
 ### Категории
-- [Покрытие и маты](https://chinasportshow.ru/catalog/c/floor/) — 35 поз., от 2 190 ₽
-- [Аксессуары и детали](https://chinasportshow.ru/catalog/c/access/) — 61 поз., от 210 ₽
-- [Беговые дорожки](https://chinasportshow.ru/catalog/c/tread/) — 160 поз., от 42 400 ₽
-- [Эллипсы](https://chinasportshow.ru/catalog/c/ellip/) — 40 поз., от 76 000 ₽
-- [Гребные, лыжные, аэробайки](https://chinasportshow.ru/catalog/c/rowski/) — 47 поз., от 25 700 ₽
-- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
-- [Велотренажёры](https://chinasportshow.ru/catalog/c/bike/) — 86 поз., от 21 800 ₽
-- [Лестницы и степперы](https://chinasportshow.ru/catalog/c/stair/) — 62 поз., от 86 500 ₽
-- [Реформеры и станции](https://chinasportshow.ru/catalog/c/pilates/) — 76 поз., от 7 000 ₽
-- [Турники и брусья](https://chinasportshow.ru/catalog/c/dipchin/) — 106 поз., от 9 500 ₽
-- [Ноги](https://chinasportshow.ru/catalog/c/legs/) — 822 поз., от 7 200 ₽
-- [Ягодичные](https://chinasportshow.ru/catalog/c/glute/) — 207 поз., от 37 800 ₽
+- [Покрытие и маты](https://chinasportshow.ru/catalog/c/floor/) — 45 поз., от 770 ₽
+- [Аксессуары и детали](https://chinasportshow.ru/catalog/c/access/) — 71 поз., от 210 ₽
+- [Беговые дорожки](https://chinasportshow.ru/catalog/c/tread/) — 160 поз., от 43 000 ₽
+- [Эллипсы](https://chinasportshow.ru/catalog/c/ellip/) — 40 поз., от 77 200 ₽
+- [Гребные, лыжные, аэробайки](https://chinasportshow.ru/catalog/c/rowski/) — 47 поз., от 26 100 ₽
+- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 200 ₽
+- [Велотренажёры](https://chinasportshow.ru/catalog/c/bike/) — 86 поз., от 22 200 ₽
+- [Лестницы и степперы](https://chinasportshow.ru/catalog/c/stair/) — 62 поз., от 87 900 ₽
+- [Реформеры и станции](https://chinasportshow.ru/catalog/c/pilates/) — 76 поз., от 7 100 ₽
+- [Турники и брусья](https://chinasportshow.ru/catalog/c/dipchin/) — 106 поз., от 9 700 ₽
+- [Ноги](https://chinasportshow.ru/catalog/c/legs/) — 822 поз., от 7 400 ₽
+- [Ягодичные](https://chinasportshow.ru/catalog/c/glute/) — 207 поз., от 38 400 ₽
 - [Руки и плечи](https://chinasportshow.ru/catalog/c/arms/) — 311 поз., от 240 ₽
-- [Жимы](https://chinasportshow.ru/catalog/c/press/) — 602 поз., от 17 100 ₽
-- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 100 ₽
-- [Пресс и спина](https://chinasportshow.ru/catalog/c/core/) — 282 поз., от 8 900 ₽
-- [Скамьи](https://chinasportshow.ru/catalog/c/bench/) — 213 поз., от 7 900 ₽
-- [Мультистанции и кроссоверы](https://chinasportshow.ru/catalog/c/multi/) — 339 поз., от 2 210 ₽
-- [Гантели, грифы и стойки](https://chinasportshow.ru/catalog/c/dumb/) — 157 поз., от 210 ₽
-- [Диски и стеллажи](https://chinasportshow.ru/catalog/c/plate/) — 41 поз., от 180 ₽
-- [Рамы, стойки, помосты](https://chinasportshow.ru/catalog/c/rack/) — 126 поз., от 4 540 ₽
-- [Функциональный тренинг](https://chinasportshow.ru/catalog/c/func/) — 24 поз., от 1 460 ₽
-- [Прочее](https://chinasportshow.ru/catalog/c/other/) — 56 поз., от 1 320 ₽
+- [Жимы](https://chinasportshow.ru/catalog/c/press/) — 602 поз., от 17 400 ₽
+- [Тяги](https://chinasportshow.ru/catalog/c/row/) — 479 поз., от 7 200 ₽
+- [Пресс и спина](https://chinasportshow.ru/catalog/c/core/) — 282 поз., от 9 000 ₽
+- [Скамьи](https://chinasportshow.ru/catalog/c/bench/) — 213 поз., от 8 000 ₽
+- [Мультистанции и кроссоверы](https://chinasportshow.ru/catalog/c/multi/) — 340 поз., от 2 250 ₽
+- [Гантели, грифы и стойки](https://chinasportshow.ru/catalog/c/dumb/) — 180 поз., от 210 ₽
+- [Диски и стеллажи](https://chinasportshow.ru/catalog/c/plate/) — 43 поз., от 180 ₽
+- [Рамы, стойки, помосты](https://chinasportshow.ru/catalog/c/rack/) — 126 поз., от 4 610 ₽
+- [Функциональный тренинг](https://chinasportshow.ru/catalog/c/func/) — 36 поз., от 1 490 ₽
+- [Прочее](https://chinasportshow.ru/catalog/c/other/) — 56 поз., от 1 340 ₽
 
 ### Фабрики
 - [Shuyoute (SYT)](https://chinasportshow.ru/catalog/f/A/): Шаньдун · коммерческое кардио, грузоблочные, свободный вес, пилатес (911 поз.)
-- [MND Fitness](https://chinasportshow.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1252 поз.)
+- [MND Fitness](https://chinasportshow.ru/catalog/f/B/): Шаньдун · грузоблочные и нагружаемые машины, кардио, аксессуары (1310 поз.)
 - [Guwow](https://chinasportshow.ru/catalog/f/C/): Шаньдун · коммерческое кардио и грузоблочные, полная линейка (226 поз.)
 - [Juren (JR)](https://chinasportshow.ru/catalog/f/D/): Шаньдун · грузоблочные и нагружаемые машины, свободный вес (286 поз.)
 - [Relax Fitness](https://chinasportshow.ru/catalog/f/H/) — премиум: Шаньдун · грузоблочные линейки, кардио (599 поз.)
